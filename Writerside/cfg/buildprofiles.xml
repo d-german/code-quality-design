@@ -10,7 +10,5 @@
         </variables>
     </build-profile>
 
-    <!-- Override the default footer by providing an empty footer -->
-    <footer></footer>
 
 </buildprofiles>
