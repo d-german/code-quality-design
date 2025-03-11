@@ -6,6 +6,6 @@
                  name="Code Quality Design" start-page="index.md">
 
     <toc-element topic="index.md"/>
-    <toc-element topic="page2.md"/>
     <toc-element topic="page1.md"/>
+    <toc-element topic="page2.md"/>
 </instance-profile>
