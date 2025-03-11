@@ -1,0 +1,44 @@
+name: Build documentation
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+env:
+  INSTANCE: 'Writerside/cqd'      # Using your project folder and instance ID from writerside.cfg and instance-profile
+  DOCKER_VERSION: '243.22562'      # Use the current Docker builder version
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact: ${{ steps.define-ids.outputs.artifact }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Define instance ID and artifact name
+        id: define-ids
+        run: |
+          # Extract the instance ID (e.g., from "Writerside/cqd", get "cqd")
+          INSTANCE_ID=${INSTANCE#*/}
+          # Convert the instance id to uppercase (cqd -> CQD)
+          INSTANCE_ID_UPPER=$(echo "$INSTANCE_ID" | tr '[:lower:]' '[:upper:]')
+          # Construct the artifact name based on the instance id
+          ARTIFACT="webHelp${INSTANCE_ID_UPPER}2-all.zip"
+          echo "artifact=$ARTIFACT" >> $GITHUB_OUTPUT
+
+      - name: Build docs using Writerside Docker builder
+        uses: JetBrains/writerside-github-action@v4
+        with:
+          instance: ${{ env.INSTANCE }}
+          docker-version: ${{ env.DOCKER_VERSION }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: artifacts/${{ steps.define-ids.outputs.artifact }}
