@@ -5,6 +5,11 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   INSTANCE: 'Writerside/cqd'      # Using your project folder and instance ID from writerside.cfg and instance-profile
   DOCKER_VERSION: '243.22562'      # Use the current Docker builder version
