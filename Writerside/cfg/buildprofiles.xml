@@ -9,6 +9,8 @@
             <noindex-content>true</noindex-content>
         </variables>
     </build-profile>
-
+    <footer>
+        <copyright>2025</copyright>
+    </footer>
 
 </buildprofiles>
