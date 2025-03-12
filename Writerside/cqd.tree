@@ -6,6 +6,7 @@
                  name="Code Quality Design" start-page="index.md">
 
     <toc-element topic="index.md">
+        <toc-element topic="Motivation-for-Good-Design.md"/>
         <toc-element topic="Object-Oriented-Programming.md">
             <toc-element topic="Pillars-of-OOP-Encapsulation-Abstraction.md">
                 <toc-element topic="Minimize-Accessibility-of-Classes-and-Members.md"/>
@@ -13,4 +14,5 @@
         </toc-element>
     </toc-element>
     <toc-element topic="OOP-Design-Quotes.md"/>
+    <toc-element topic="References.md"/>
 </instance-profile>
