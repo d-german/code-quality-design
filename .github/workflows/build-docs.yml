@@ -19,7 +19,7 @@ env:
   ALGOLIA_APP_NAME: '4HUKNT1XIU'         # e.g., 4A9KTXZ1GZ
   ALGOLIA_INDEX_NAME: 'code_quality_docs'   # e.g., code_quality_docs
   CONFIG_JSON_PRODUCT: 'cqd'             # Matches your instance or web-path
-  CONFIG_JSON_VERSION: 'main'             # Or 'main', or another version label
+  #CONFIG_JSON_VERSION: 'main'             # Or 'main', or another version label
 
 jobs:
   build:
