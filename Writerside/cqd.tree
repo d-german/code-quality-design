@@ -13,6 +13,7 @@
                     <toc-element topic="Minimize-Accessibility-of-Classes-and-Members.md"/>
                 </toc-element>
                 <toc-element topic="Inheritance.md"/>
+                <toc-element topic="Polymorphism.md"/>
             </toc-element>
         </toc-element>
     </toc-element>
