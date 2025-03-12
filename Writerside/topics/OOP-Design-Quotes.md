@@ -1,4 +1,4 @@
-# OOP/Design Quotes
+# My Favorite Quotes
 
 The fact remains: Good design is testable, and design that isn’t testable is bad. (Feathers 139)
 
