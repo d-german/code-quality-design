@@ -5,6 +5,10 @@
 
     <variables>
         <resizable-sidebar>true</resizable-sidebar>
+        <algolia-id>4HUKNT1XIU</algolia-id>
+        <algolia-index>code_quality_docs</algolia-index>
+        <algolia-api-key>fa81dc3f7cba7efdb24093857d481070</algolia-api-key>
+        <algolia-show-logo>true</algolia-show-logo>
     </variables>
     <build-profile instance="cqd">
         <variables>
