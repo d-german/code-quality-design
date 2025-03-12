@@ -71,11 +71,8 @@ N1 .. Base
 
 ### Multiple Inheritance
 
-If you have an example of multiple inheritance in your design, assume you have made a mistake and then prove
-otherwise. (Riel 134)  
-The major disadvantage with multiple inheritance is that it often reduces understanding of class hierarchy. (Jacobson
-
-67)
+If you have an example of multiple inheritance in your design, assume you have made a mistake and then prove otherwise. (Riel 134)  
+The major disadvantage with multiple inheritance is that it often reduces understanding of class hierarchy. (Jacobson 67)
 
 #### When is multiple inheritance valid?
 
