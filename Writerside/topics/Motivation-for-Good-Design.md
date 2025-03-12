@@ -10,6 +10,10 @@ Assume that a system initially has a certain software entropy. Experience shows 
 
 When we design a system with the intention of it being maintainable, we try to give it the lowest software entropy possible from the beginning. This is one of the aims of system development. (Jacobson 69,70)
 
+![A system's entropy and how it increases at different speeds
+dependent on the starting entropy.](software-entropy.png)
+
+
 ## The Law of Change (Max Kanat-Alexander)
 
 The longer your program exists, the more probable it is that any piece of it will have to change.
