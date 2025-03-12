@@ -12,11 +12,10 @@
     </variables>
     <build-profile instance="cqd">
         <variables>
-            <noindex-content>true</noindex-content>
+            <noindex-content>false</noindex-content>
         </variables>
     </build-profile>
     <footer>
-        <copyright>2025</copyright>
     </footer>
 
 </buildprofiles>
