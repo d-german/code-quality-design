@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="15c32d3a">
+        <description>Created after removal of "Topic title" from Code Quality Design</description>
+        <accepts>page1.html</accepts>
+    </rule>
+    <rule id="37b28f40">
+        <description>Created after removal of "Page 2 Title" from Code Quality Design</description>
+        <accepts>page2.html</accepts>
+    </rule>
+</rules>
