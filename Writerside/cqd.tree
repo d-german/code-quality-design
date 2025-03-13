@@ -17,8 +17,13 @@
                 <toc-element topic="Composition.md"/>
             </toc-element>
         </toc-element>
-    </toc-element>
-    <toc-element topic="OOP-Design-Quotes.md"/>
-    <toc-element topic="References.md">
+        <toc-element topic="OOP-Design-Quotes.md"/>
+        <toc-element topic="Glossary.md">
+            <toc-element topic="Ambient-data.md"/>
+            <toc-element topic="Cognitive-Complexity.md"/>
+            <toc-element topic="Cyclomatic-Complexity.md"/>
+            <toc-element topic="Dependency-Injection-DI.md"/>
+        </toc-element>
+        <toc-element topic="References.md"/>
     </toc-element>
 </instance-profile>
