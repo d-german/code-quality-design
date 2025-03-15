@@ -20,6 +20,7 @@
         <toc-element topic="Program-to-an-interface-not-an-Implementation-GOF-18.md"/>
         <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
         <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel.md"/>
+        <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel-updated.md"/>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
             <toc-element topic="Ambient-data.md"/>
