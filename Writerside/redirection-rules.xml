@@ -14,4 +14,9 @@
         <description>Created after removal of "Page 2 Title" from Code Quality Design</description>
         <accepts>page2.html</accepts>
     </rule>
+    <rule id="24ea7cd7">
+        <description>Created after removal of "Some Object-Oriented Design Heuristics - Riel" from Code Quality Design
+        </description>
+        <accepts>Some-Object-Oriented-Design-Heuristics-Riel.html</accepts>
+    </rule>
 </rules>
