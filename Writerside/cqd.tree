@@ -20,8 +20,9 @@
             <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel-updated.md"/>
             <toc-element topic="Program-to-an-interface-not-an-Implementation-GOF-18.md"/>
             <toc-element topic="Abstract-Classes-vs-Interfaces.md"/>
+            <toc-element topic="Stable-vs-Volatile-Dependencies.md"/>
+            <toc-element topic="Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md"/>
         </toc-element>
-        <toc-element topic="Stable-vs-Volatile-Dependencies.md"/>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
             <toc-element topic="Ambient-data.md"/>
