@@ -16,6 +16,7 @@
                 <toc-element topic="Polymorphism.md"/>
                 <toc-element topic="Composition.md"/>
             </toc-element>
+            <toc-element topic="SOLID-Design-Principles.md"/>
             <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
             <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel-updated.md"/>
             <toc-element topic="Program-to-an-interface-not-an-Implementation-GOF-18.md"/>
