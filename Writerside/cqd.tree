@@ -38,6 +38,9 @@
             <toc-element topic="Explicit-case-analysis-switch-if-else-statement.md"/>
             <toc-element topic="Big-Ball-of-Mud.md"/>
         </toc-element>
+        <toc-element topic="Functional-Programming.md">
+            <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
+        </toc-element>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
             <toc-element topic="Ambient-data.md"/>
