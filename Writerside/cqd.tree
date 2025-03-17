@@ -33,6 +33,7 @@
             </toc-element>
             <toc-element topic="Using-the-new-keyword.md"/>
             <toc-element topic="Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md"/>
+            <toc-element topic="Explicit-case-analysis-switch-if-else-statement.md"/>
         </toc-element>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
