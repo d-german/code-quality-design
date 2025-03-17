@@ -19,7 +19,9 @@
             <toc-element topic="SOLID-Design-Principles.md">
                 <toc-element topic="Single-Responsibility-Principle-SRP.md"/>
                 <toc-element topic="Open-Closed-Principle-OCP.md"/>
-                <toc-element topic="Liskov-Substitution-Principle-LSP.md"/>
+                <toc-element topic="Liskov-Substitution-Principle-LSP.md">
+                    <toc-element topic="Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md"/>
+                </toc-element>
                 <toc-element topic="Interface-Segregation-Principle-ISP.md"/>
                 <toc-element topic="Dependency-Inversion-Principle-DIP.md"/>
             </toc-element>
