@@ -1,10 +1,10 @@
 # Functional in the Small and Object-Oriented in the Large
 
-This article is motivated by Eric Normand's book Grokking Simplicity: Taming complex software with functional thinking
+This article is motivated by Eric Normand's book _Grokking Simplicity: Taming complex software with functional thinking_
 . (Normand 2021) Even though I’m an object-oriented developer, I understand the benefits of functional programming and
-want to use it in some parts of my code. This is called "functional in the small and OO in the large". (Buonanno 2017)
+want to use it in some parts of my code. **This is called "functional in the small and OO in the large". (Buonanno 2017)
 This is a design philosophy that suggests using functional programming techniques within the methods of object-oriented
-objects, but still using an overall object-oriented design for the larger structure of the program. This article is a
+objects, but still using an overall object-oriented design for the larger structure of the program.** This article is a
 simple introduction to functional programming and how it's used in our C# code.
 
 ---
@@ -19,16 +19,15 @@ return a value and not to produce side effects.
 Functional programming is often reduced to the idea of *"No side effects!"*, but this is an oversimplification.
 Functional programming is not just about avoiding side effects, but rather controlling and managing them.
 
+<note>
 The management of state is a key difference between functional programming and object-oriented programming. Class
 instance variables can be considered "global" to the class, and the methods of the class can change their values. (TBD)
 This is a frequent practice in object-oriented programming. In functional programming, altering the state of global
 variables is discouraged. This is why I recommended making class methods static, when possible, to express that they do
 not alter any "global" variables.
 
-#### Example: BankAccount
-
-```c#
-public class BankAccount
+<code-block lang="c#">
+    public class BankAccount
 {
     private decimal _balance; // "global" variable
 
@@ -47,10 +46,10 @@ public class BankAccount
     {
         return principal * interest / 100; // No side effects
     }
-}
-```
 
----
+}
+</code-block>
+</note>
 
 ## Actions, Calculations, and Data
 
@@ -58,20 +57,20 @@ All code can be divided into **actions**, **calculations**, and **data**.
 
 ### Actions
 
-- Also known as impure functions or functions that cause side effects.
-- Actions depend on *when* they are called or *how many times* they are called.
+- Also known as impure functions or functions that cause _side effects_.
+- Actions depend on **when** they are called or **how many times** they are called.
 - We must be extra careful when using them.
 
 **Examples:**  
-SendEmail(to, from, subject, body), SaveUserDb(user), GetCurrentTime()
+`SendEmail(to, from, subject, body)`, `SaveUserDb(user)`, `GetCurrentTime()`
 
-Functional programmers try to avoid unnecessary side effects. They spend a lot of effort refactoring **Actions** into *
-*Calculations**.
+Functional programmers try to avoid unnecessary side effects. They spend a lot of effort refactoring **Actions** into
+**Calculations**.
 
 ### Calculations
 
 - Also known as pure functions. They do **not** cause side effects.
-- **Examples:** Sum(numbers), StringLength(name)
+- **Examples:** `Sum(numbers)`, `StringLength(name)`
 
 It does not matter when you call `Sum` or `StringLength`; it will give you the correct answer any time, and it doesn't
 matter how many times you call it. It won't influence the rest of the program or the outside world.
@@ -105,8 +104,7 @@ Functional programmers often prefer to use *immutable* data:
 **Techniques**:
 
 - **Copy-on-write**: create a new copy of the data before modifying it, so the original remains unchanged.
-- **Defensive copying**: make a copy of data you want to keep so it can be safely used or modified without affecting the
-  original.
+- **Defensive copying**: make a copy of data before sharing it externally, sending the copy to clients while preserving our original data intact.
 
 Calculations and Data are much easier to work with than Actions. Generally, functional programmers prefer data over
 calculations, and calculations over actions.
@@ -140,10 +138,10 @@ var modifiedArray = originalArray.Add(4);           // [1, 2, 3, 4]
 #### Example: buildErrorResponse
 
 ```C#
-private FullTextSearchResponse BuildErrorResponse(string errorMessage)
+private WeatherForecast BuildErrorResponse(string errorMessage)
 {
-    _logger.LogError("FullTextSearch Error: {ErrorMessage}", errorMessage);
-    return new FullTextSearchResponse { IsError = true, ErrorMessage = errorMessage };
+    _logger.LogError("Weather Service Error: {ErrorMessage}", errorMessage);
+    return new WeatherForecast { IsError = true, ErrorMessage = errorMessage };
 }
 ````
 
@@ -151,24 +149,24 @@ This method is an **Action** because `_logger.LogError()` causes a side effect. 
 logging out of this method:
 
 ```C#
-private FullTextSearchResponse BuildErrorResponse(string errorMessage)
+private WeatherForecast BuildErrorResponse(string errorMessage)
 {
-    return new FullTextSearchResponse { IsError = true, ErrorMessage = errorMessage };
+    return new WeatherForecast { IsError = true, ErrorMessage = errorMessage };
 }
 ````
 
-Now it looks like a **Calculation**, but if `FullTextSearchResponse` is mutable, then it’s still an Action! Mutable data
+Now it looks like a **Calculation**, but if `WeatherForecast` is mutable, then it’s still an Action! Mutable data
 can cause implicit side effects.
 
 #### Example: Immutable Data
 
 ```C#
-public record FullTextSearchResponse
+public record WeatherForecast
 {
     public bool IsError { get; init; }
     public string? ErrorMessage { get; init; }
-    public IImmutableList<IHealthcareDocument> Documents { get; init; }
-        = ImmutableArray<IHealthcareDocument>.Empty;
+    public IImmutableList<WeatherData> Forecasts { get; init; }
+        = ImmutableArray<WeatherData>.Empty;
 }
 ````
 
