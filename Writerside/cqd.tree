@@ -41,6 +41,7 @@
         <toc-element topic="Functional-Programming.md">
             <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
             <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
+            <toc-element topic="Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md"/>
         </toc-element>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
