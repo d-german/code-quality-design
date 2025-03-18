@@ -104,7 +104,8 @@ Functional programmers often prefer to use *immutable* data:
 **Techniques**:
 
 - **Copy-on-write**: create a new copy of the data before modifying it, so the original remains unchanged.
-- **Defensive copying**: make a copy of data before sharing it externally, sending the copy to clients while preserving our original data intact.
+- **Defensive copying**: make a copy of data before sharing it externally, sending the copy to clients while preserving
+  our original data intact.
 
 Calculations and Data are much easier to work with than Actions. Generally, functional programmers prefer data over
 calculations, and calculations over actions.
@@ -242,12 +243,87 @@ They replace loops as the workhorse of the functional programmer.
 
 ### Deriving Map()
 
-We want to create new collections from an existing one:
+Let's say we have a collection of integers, and we want to create two new collections based on it:
 
-- Add 2 to each number.
-- Convert each number to a string.
+A new collection of integers with each item increased by 2.
 
-Eager approach (two separate methods) vs. a generic approach using **Map**:
+A new collection of strings by converting each integer in the original collection to a string.
+
+<tabs group="map-examples">
+    <tab id="map-add2" title="Add 2 to Each Number" group-key="add2">
+<code-block lang="c#">
+<![CDATA[
+IEnumerable<int> Add2(IEnumerable<int> numbers)
+{
+    List<int> result = new List<int>();
+
+    foreach (var number in numbers)
+    {
+        result.Add(number + 2);
+    }
+
+    return result;
+}
+]]>
+</code-block>
+    </tab>
+    <tab id="map-tostring" title="Map Number to String" group-key="tostring">
+<code-block lang="c#">
+<![CDATA[
+IEnumerable<string> IntToString(IEnumerable<int> numbers)
+{
+    List<string> result = new List<string>();
+
+    foreach (var number in numbers)
+    {
+        result.Add(number.ToString());
+    }
+
+    return result;
+}
+]]>
+</code-block>
+    </tab>
+</tabs>
+
+The only difference between the two functions lies in how new elements are generated in the collection. Using functional
+techniques and C# generics we can remove the repetitive boiler-plate code.
+
+```C#
+public static IEnumerable<TResult> Map<TResult, TSource>(
+    this IEnumerable<TSource> items,
+    Func<TSource, TResult> func)
+{
+    var result = new List<TResult>();
+
+    foreach (var item in items)
+    {
+        result.Add(func(item));
+    }
+
+    return result;
+}
+```
+
+Usage:
+
+```C#
+var numbers = new[] { 1, 2, 3 };
+var numbersPlus2 = numbers.Map(x => x + 2);
+var strings = numbers.Map(x => x.ToString());
+Assert.That(numbersPlus2, Is.EqualTo(new[] { 3, 4, 5 }));
+Assert.That(strings, Is.EqualTo(new[] { "1", "2", "3" }));
+```
+
+The `Map` method is a generic function that takes an input collection of elements of type `TSource` and returns a new
+collection of elements of type `TResult`. The method uses a delegate `Func<TSource, TResult>` that defines the
+transformation or mapping from `TSource` to `TResult`.
+
+#### Eager versus Lazy evaluation
+
+The `Map()` method uses eager evaluation, meaning that a new collection is created, and the entire source collection is
+iterated through, even if only a few items are needed. This can cause performance problems when working with large
+collections.
 
 ```C#
 public static IEnumerable<TResult> Map<TResult, TSource>(
@@ -261,19 +337,26 @@ public static IEnumerable<TResult> Map<TResult, TSource>(
 }
 ````
 
-Usage:
+The `Map()` method is now a lazy evaluation version using yield return. This returns items one at a time as requested,
+instead of all at once as in eager evaluation. It's more efficient as it only processes needed items. The code is
+simpler because the compiler handles much of the work. A foreach statement can be used to retrieve items from the
+method. Lazy `Map()` Extension Method
+<note>
 
-```C#
-var numbers = new[] { 1, 2, 3 };
-var numbersPlus2 = numbers.Map(x => x + 2);
-var strings = numbers.Map(x => x.ToString());
-Assert.That(numbersPlus2, Is.EqualTo(new[] { 3, 4, 5 }));
-Assert.That(strings, Is.EqualTo(new[] { "1", "2", "3" }));
-````
+Lazy evaluation is a concept used in functional programming, Deferred execution is a type of lazy evaluation used in
+.NET's LINQ, where a query is run only when its results are needed, instead of right away.
 
+</note>
+
+<note>
+
+The `Map()` implementation is a simplified version of the .NET `System.Linq.Select()` method. This article uses
+functional
+programming terms and provides examples, but it's worth noting that many of these examples already exist in .NET.
+</note>
 ### Deriving Filter()
 
-Eager approach:
+Eager `LessThan5` method
 
 ```C#
 IEnumerable<int> LessThan5(IEnumerable<int> numbers)
@@ -287,7 +370,7 @@ IEnumerable<int> LessThan5(IEnumerable<int> numbers)
 }
 ```
 
-Generic approach:
+Lazy and Generic Filter Extension Method
 
 ```C#
 public static IEnumerable<TSource> Filter<TSource>(
@@ -302,7 +385,7 @@ public static IEnumerable<TSource> Filter<TSource>(
 }
 ````
 
-**Chaining**:
+Because `Map()` and `Filter()` return `IEnumerable<T>` we can chain them together.
 
 ```C#
 var numbers = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -316,6 +399,60 @@ foreach (var number in numberLessThan5Plus2)
 ````
 
 ### Deriving Reduce()
+
+The Reduce() method in functional programming condenses a collection of items into a single result by iteratively
+applying an operation to each item and passing the result to the next iteration. The result is obtained by repeating
+this process until only one value remains. This technique can be used for operations such as addition, multiplication,
+or custom operations.
+
+Let's add up all numbers in a list or translate a point in the x direction by using numbers in the list, reducing the
+collection to one item.
+
+<tabs group="reduce">
+    <tab id="sum-reduce" title="Sum all numbers" group-key="sum">
+<code-block lang="c#">
+<![CDATA[
+var ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int Total(IEnumerable<int> numbers)
+{
+    var result = 0;
+    foreach (var number in numbers)
+    {
+        result += number;
+    }
+    return result;
+}
+var total = Total(ints);
+Assert.That(total, Is.EqualTo(55));
+]]>
+</code-block>
+    </tab>
+    <tab id="point-reduce" title="Translate X coordinates" group-key="point">
+<code-block lang="c#">
+<![CDATA[
+var ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+Point TranslateX(IEnumerable<int> numbers)
+{
+    var result = new Point(0,0);
+    foreach (var number in numbers)
+    {
+       result = result with {X = result.X + number};
+    }
+    return result;
+}
+var finalPoint = TranslateX(ints);
+Assert.That(finalPoint.X, Is.EqualTo(55));
+]]>
+</code-block>
+    </tab>
+</tabs>
+
+In these two examples, the only differences are the way the initial value is set `var result = 0;` or
+`var result = new Point(0,0);`  and the calculation that
+updates the value on each iteration of the foreach loop `result += number;` or
+`result = result with {X = result.X + number};`. We use the previous value and the current element of
+the collection to compute a new value. To make this process generic, we can consider creating a single generic method
+that accepts an initial seed value and a calculation function to perform the updates.
 
 **Reduce** combines values in a collection into a single result.
 
@@ -347,35 +484,5 @@ var finalPoint = ints.Reduce(
 );
 Assert.That(finalPoint.X, Is.EqualTo(55));
 ````
-
-`Reduce` in LINQ is typically **Aggregate()**, and other LINQ methods like `Sum()`, `Max()`, `Min()`, `Count()`, and
-`First()` are specialized reduce operations.
-
-### Eager vs. Lazy Evaluation
-
-- **Eager**: processes the entire collection immediately.
-- **Lazy**: processes items only when needed (`yield return` in C#).
-
-LINQ uses *deferred execution*, meaning queries run only when their results are enumerated.
-
 ---
 
-## Summary Conclusion
-
-This article highlights several aspects of functional programming, such as:
-
-- Side effects (actions vs. calculations)
-- Immutability of data
-- First-class objects
-- Higher-order functions
-- The Map(), Filter(), and Reduce() patterns
-- Deferred execution in LINQ
-
-### Key Takeaways
-
-1. **Distinguish data classes (DTOs) from normal classes** and make them immutable when possible.
-2. **Express intentions clearly** by using constants, read-only variables, or static methods.
-3. **Be mindful of side-effect-causing methods** and consider refactoring them to keep actions distinct from
-   calculations.
-4. **Understand the value of LINQ methods** like `Select()`, `Where()`, and `Aggregate()`, and be aware of deferred
-   execution.
