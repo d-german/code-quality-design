@@ -1,7 +1,7 @@
 # Functional in the Small and Object-Oriented in the Large
 
-This article is motivated by Eric Normand's book **Grokking Simplicity: Taming complex software with functional thinking
-**. (Normand 2021) Even though I’m an object-oriented developer, I understand the benefits of functional programming and
+This article is motivated by Eric Normand's book Grokking Simplicity: Taming complex software with functional thinking
+. (Normand 2021) Even though I’m an object-oriented developer, I understand the benefits of functional programming and
 want to use it in some parts of my code. This is called "functional in the small and OO in the large". (Buonanno 2017)
 This is a design philosophy that suggests using functional programming techniques within the methods of object-oriented
 objects, but still using an overall object-oriented design for the larger structure of the program. This article is a
