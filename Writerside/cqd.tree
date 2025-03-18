@@ -39,6 +39,7 @@
             <toc-element topic="Big-Ball-of-Mud.md"/>
         </toc-element>
         <toc-element topic="Functional-Programming.md">
+            <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
             <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
         </toc-element>
         <toc-element topic="OOP-Design-Quotes.md"/>
