@@ -14,6 +14,10 @@ Core OOP concepts including SOLID principles, inheritance vs composition, and mo
 
 Explore functional paradigms and how they complement object-oriented approaches.
 
+### [Concurrency](Concurrency.md)
+
+Introduction to multithreaded programming, asynchronous operations, and parallel programming.
+
 ### [Glossary](Glossary.md)
 
 Definitions of key terms and concepts used throughout this documentation.

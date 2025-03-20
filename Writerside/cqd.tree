@@ -45,6 +45,8 @@
             <toc-element topic="Introduction-to-Maybe-T.md"/>
             <toc-element topic="Higher-Order-Function-Examples.md"/>
         </toc-element>
+        <toc-element topic="Concurrency.md"/>
+        <toc-element topic="Difference-between-const-and-static-readonly.md"/>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
             <toc-element topic="Ambient-data.md"/>
