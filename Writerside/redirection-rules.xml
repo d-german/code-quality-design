@@ -19,4 +19,8 @@
         </description>
         <accepts>Some-Object-Oriented-Design-Heuristics-Riel.html</accepts>
     </rule>
+    <rule id="6c5e368b">
+        <description>Created after removal of "Testing" from Code Quality Design</description>
+        <accepts>Testing.html</accepts>
+    </rule>
 </rules>
