@@ -174,6 +174,8 @@ After I'm finished with creating the **Testing Considerations** and **Tests** br
 
 ![](HCM viewer URL.png)
 
+![](test-scenarios.png)
+
 ### Back in the Garmin Days
 
 ![](garmin1.png)
