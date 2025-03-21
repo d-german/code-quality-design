@@ -32,3 +32,4 @@
 - **The Pragmatic Programmer: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)** – David Thomas, Andrew Hunt (2020)
 - **The Object-Oriented Thought Process (Fifth Edition)** – Matt Weisfeld (2019)
 - **Grokking Simplicity: Taming Complex Software with Functional Thinking** – Eric Normand (2021)
+- **Object Design Style Guide: Powerful techniques for creating flexible, readable, and maintainable object-oriented code in any OO language, from Python to PHP by Matthias Noback** (2020)
