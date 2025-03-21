@@ -51,6 +51,7 @@
             <toc-element topic="Understanding-Threads-in-Programming-A-Restaurant-Analogy.md"/>
         </toc-element>
         <toc-element topic="Testing.md">
+            <toc-element topic="Finding-Test-Cases.md"/>
             <toc-element topic="Code-Coverage.md"/>
             <toc-element topic="How-do-we-write-a-test-for-a-private-method.md"/>
         </toc-element>
