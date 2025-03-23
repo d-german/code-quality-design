@@ -28,6 +28,7 @@
             <toc-element toc-title="Design Patterns">
                 <toc-element topic="The-Facade-Pattern-with-the-Single-Responsibility-Principle.md"/>
                 <toc-element topic="Decorator-Pattern.md"/>
+                <toc-element topic="Strategy-Pattern-Implementation-for-JSON-Processing.md"/>
             </toc-element>
             <toc-element topic="ETC-Principle.md"/>
             <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
