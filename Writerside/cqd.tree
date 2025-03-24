@@ -64,12 +64,17 @@
             <toc-element topic="How-do-we-write-a-test-for-a-private-method.md"/>
         </toc-element>
         <toc-element topic="Difference-between-const-and-static-readonly.md"/>
+        <toc-element topic="Design-Relationships.md"/>
         <toc-element topic="OOP-Design-Quotes.md"/>
         <toc-element topic="Glossary.md">
+            <toc-element topic="Interception.md"/>
             <toc-element topic="Ambient-data.md"/>
             <toc-element topic="Cognitive-Complexity.md"/>
             <toc-element topic="Cyclomatic-Complexity.md"/>
             <toc-element topic="Dependency-Injection-DI.md"/>
+            <toc-element topic="Cohesion.md"/>
+            <toc-element topic="Coupling.md"/>
+            <toc-element topic="Modularity-Module.md"/>
         </toc-element>
         <toc-element topic="References.md"/>
     </toc-element>
