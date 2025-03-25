@@ -29,6 +29,7 @@
                 <toc-element topic="The-Facade-Pattern-with-the-Single-Responsibility-Principle.md"/>
                 <toc-element topic="Decorator-Pattern.md"/>
                 <toc-element topic="Strategy-Pattern-Implementation-for-JSON-Processing.md"/>
+                <toc-element topic="Seam-Interface.md"/>
             </toc-element>
             <toc-element topic="ETC-Principle.md"/>
             <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
@@ -66,15 +67,22 @@
         <toc-element topic="Difference-between-const-and-static-readonly.md"/>
         <toc-element topic="Design-Relationships.md"/>
         <toc-element topic="OOP-Design-Quotes.md"/>
+        <toc-element toc-title="Coding Horror Examples">
+            <toc-element topic="High-Complexity.md"/>
+        </toc-element>
         <toc-element topic="Glossary.md">
-            <toc-element topic="Interception.md"/>
             <toc-element topic="Ambient-data.md"/>
             <toc-element topic="Cognitive-Complexity.md"/>
-            <toc-element topic="Cyclomatic-Complexity.md"/>
-            <toc-element topic="Dependency-Injection-DI.md"/>
             <toc-element topic="Cohesion.md"/>
+            <toc-element topic="Composition-Root.md"/>
             <toc-element topic="Coupling.md"/>
+            <toc-element topic="Cyclomatic-Complexity.md"/>
+            <toc-element topic="DTO-Data-Transfer-Object.md"/>
+            <toc-element topic="Dependency-Injection-DI.md"/>
+            <toc-element topic="Interception.md"/>
+            <toc-element topic="Inversion-of-Control-IoC.md"/>
             <toc-element topic="Modularity-Module.md"/>
+            <toc-element topic="POCO-Plain-Old-CLR-Objects.md"/>
         </toc-element>
         <toc-element topic="References.md"/>
     </toc-element>

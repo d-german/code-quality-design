@@ -23,4 +23,8 @@
         <description>Created after removal of "Testing" from Code Quality Design</description>
         <accepts>Testing.html</accepts>
     </rule>
+    <rule id="3c84f3c7">
+        <description>Created after removal of "bla" from Code Quality Design</description>
+        <accepts>bla.html</accepts>
+    </rule>
 </rules>
