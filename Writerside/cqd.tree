@@ -7,15 +7,20 @@
 
     <toc-element topic="index.md">
         <toc-element topic="Motivation-for-Good-Design.md"/>
-        <toc-element topic="Object-Oriented-Programming.md">
-            <toc-element topic="Pillars-of-OOP.md">
-                <toc-element topic="Pillars-of-OOP-Encapsulation-Abstraction.md">
-                    <toc-element topic="Minimize-Accessibility-of-Classes-and-Members.md"/>
-                </toc-element>
-                <toc-element topic="Inheritance.md"/>
-                <toc-element topic="Polymorphism.md"/>
-                <toc-element topic="Composition.md"/>
+    </toc-element>
+
+    <toc-element topic="Object-Oriented-Programming.md">
+        <toc-element topic="Pillars-of-OOP.md">
+            <toc-element topic="Pillars-of-OOP-Encapsulation-Abstraction.md">
+                <toc-element topic="Minimize-Accessibility-of-Classes-and-Members.md"/>
             </toc-element>
+            <toc-element topic="Inheritance.md"/>
+            <toc-element topic="Polymorphism.md"/>
+            <toc-element topic="Composition.md"/>
+            <toc-element topic="Abstract-Classes-vs-Interfaces.md"/>
+        </toc-element>
+
+        <toc-element toc-title="Core Design Principles">
             <toc-element topic="SOLID-Design-Principles.md">
                 <toc-element topic="Single-Responsibility-Principle-SRP.md"/>
                 <toc-element topic="Open-Closed-Principle-OCP.md"/>
@@ -25,65 +30,81 @@
                 <toc-element topic="Interface-Segregation-Principle-ISP.md"/>
                 <toc-element topic="Dependency-Inversion-Principle-DIP.md"/>
             </toc-element>
-            <toc-element toc-title="Design Patterns">
-                <toc-element topic="The-Facade-Pattern-with-the-Single-Responsibility-Principle.md"/>
-                <toc-element topic="Decorator-Pattern.md"/>
-                <toc-element topic="Strategy-Pattern-Implementation-for-JSON-Processing.md"/>
-                <toc-element topic="Seam-Interface.md"/>
-            </toc-element>
-            <toc-element topic="ETC-Principle.md"/>
             <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
-            <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel-updated.md"/>
             <toc-element topic="Program-to-an-interface-not-an-Implementation-GOF-18.md"/>
-            <toc-element topic="Abstract-Classes-vs-Interfaces.md"/>
-            <toc-element topic="Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md"/>
-            <toc-element topic="Stable-vs-Volatile-Dependencies.md">
-            </toc-element>
+            <toc-element topic="ETC-Principle.md"/>
+        </toc-element>
+
+        <toc-element toc-title="Design Patterns">
+            <toc-element topic="The-Facade-Pattern-with-the-Single-Responsibility-Principle.md"/>
+            <toc-element topic="Decorator-Pattern.md"/>
+            <toc-element topic="Strategy-Pattern-Implementation-for-JSON-Processing.md"/>
+        </toc-element>
+
+        <toc-element toc-title="Dependencies and Coupling">
+            <toc-element topic="Stable-vs-Volatile-Dependencies.md"/>
             <toc-element topic="Using-the-new-keyword.md"/>
-            <toc-element topic="Empty-MD-Topic.md"/>
+            <toc-element topic="Design-Relationships.md"/>
             <toc-element topic="Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md"/>
-            <toc-element topic="Explicit-case-analysis-switch-if-else-statement.md"/>
-            <toc-element topic="Self-Validating-Value-Objects-in-C.md"/>
-            <toc-element topic="Big-Ball-of-Mud.md"/>
+        </toc-element>
+
+        <toc-element toc-title="Implementation Techniques & Heuristics">
+            <toc-element topic="Some-Object-Oriented-Design-Heuristics-Riel-updated.md"/>
+            <toc-element topic="Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md"/>
             <toc-element topic="Static-Methods.md"/>
-            <toc-element topic="Using-Exceptions-for-Control-Flow.md"/>
+            <toc-element topic="Self-Validating-Value-Objects-in-C.md"/>
         </toc-element>
-        <toc-element topic="Functional-Programming.md">
-            <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
-            <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
-            <toc-element topic="Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md"/>
-            <toc-element topic="Introduction-to-Maybe-T.md"/>
-            <toc-element topic="Higher-Order-Function-Examples.md"/>
-        </toc-element>
-        <toc-element topic="Concurrency.md">
-            <toc-element topic="Understanding-the-Thread-Pool-in-NET.md"/>
-            <toc-element topic="Understanding-Threads-in-Programming-A-Restaurant-Analogy.md"/>
-        </toc-element>
-        <toc-element topic="Testing.md">
-            <toc-element topic="Finding-Test-Cases.md"/>
-            <toc-element topic="Code-Coverage.md"/>
-            <toc-element topic="How-do-we-write-a-test-for-a-private-method.md"/>
-        </toc-element>
+    </toc-element>
+
+    <toc-element topic="Functional-Programming.md">
+        <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
+        <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
+        <toc-element topic="Introduction-to-Maybe-T.md"/>
+        <toc-element topic="Higher-Order-Function-Examples.md"/>
+        <toc-element topic="Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md"/>
+    </toc-element>
+
+    <toc-element topic="Concurrency.md">
+        <toc-element topic="Understanding-Threads-in-Programming-A-Restaurant-Analogy.md"/>
+        <toc-element topic="Understanding-the-Thread-Pool-in-NET.md"/>
+    </toc-element>
+
+    <toc-element topic="Testing.md">
+        <toc-element topic="Finding-Test-Cases.md"/>
+        <toc-element topic="Code-Coverage.md"/>
+        <toc-element topic="How-do-we-write-a-test-for-a-private-method.md"/>
+        <toc-element topic="Seam-Interface.md"/>
+    </toc-element>
+
+    <toc-element toc-title="Anti-Patterns and Code Smells">
+        <toc-element topic="Big-Ball-of-Mud.md"/>
+        <toc-element topic="Using-Exceptions-for-Control-Flow.md"/>
+        <toc-element topic="High-Complexity.md"/>
+        <toc-element topic="Explicit-case-analysis-switch-if-else-statement.md"/>
+    </toc-element>
+
+    <toc-element toc-title="Language Specifics (C#/.NET)">
         <toc-element topic="Difference-between-const-and-static-readonly.md"/>
-        <toc-element topic="Design-Relationships.md"/>
+    </toc-element>
+
+    <toc-element topic="Glossary.md">
+        <toc-element topic="Ambient-data.md"/>
+        <toc-element topic="Cognitive-Complexity.md"/>
+        <toc-element topic="Cohesion.md"/>
+        <toc-element topic="Composition-Root.md"/>
+        <toc-element topic="Coupling.md"/>
+        <toc-element topic="Cyclomatic-Complexity.md"/>
+        <toc-element topic="DTO-Data-Transfer-Object.md"/>
+        <toc-element topic="Dependency-Injection-DI.md"/>
+        <toc-element topic="Interception.md"/>
+        <toc-element topic="Inversion-of-Control-IoC.md"/>
+        <toc-element topic="Modularity-Module.md"/>
+        <toc-element topic="POCO-Plain-Old-CLR-Objects.md"/>
+    </toc-element>
+
+    <toc-element toc-title="Appendices">
         <toc-element topic="OOP-Design-Quotes.md"/>
-        <toc-element toc-title="Coding Horror Examples">
-            <toc-element topic="High-Complexity.md"/>
-        </toc-element>
-        <toc-element topic="Glossary.md">
-            <toc-element topic="Ambient-data.md"/>
-            <toc-element topic="Cognitive-Complexity.md"/>
-            <toc-element topic="Cohesion.md"/>
-            <toc-element topic="Composition-Root.md"/>
-            <toc-element topic="Coupling.md"/>
-            <toc-element topic="Cyclomatic-Complexity.md"/>
-            <toc-element topic="DTO-Data-Transfer-Object.md"/>
-            <toc-element topic="Dependency-Injection-DI.md"/>
-            <toc-element topic="Interception.md"/>
-            <toc-element topic="Inversion-of-Control-IoC.md"/>
-            <toc-element topic="Modularity-Module.md"/>
-            <toc-element topic="POCO-Plain-Old-CLR-Objects.md"/>
-        </toc-element>
         <toc-element topic="References.md"/>
     </toc-element>
+
 </instance-profile>
