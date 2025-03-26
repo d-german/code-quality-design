@@ -152,3 +152,6 @@ For more details on cyclomatic complexity in LINQ, see:
 
 This transition from imperative to functional programming highlights how modern programming paradigms can lead to
 cleaner, more maintainable, and expressive code.
+
+
+See Prefer Dictionary to Switch Statement

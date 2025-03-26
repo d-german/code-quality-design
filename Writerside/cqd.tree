@@ -49,6 +49,8 @@
         </toc-element>
 
         <toc-element toc-title="Implementation Techniques and Heuristics">
+            <toc-element topic="Using-SelectMany.md"/>
+            <toc-element topic="Prefer-Dictionary-over-Switch-Statement.md"/>
             <toc-element
                     topic="Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md"/>
             <toc-element topic="Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md"/>
@@ -87,6 +89,7 @@
     </toc-element>
 
     <toc-element toc-title="Language Specifics (C#/.NET)">
+        <toc-element topic="Maximizing-Performance-and-Readability-with-const-Variables-in-C.md"/>
         <toc-element topic="Difference-between-const-and-static-readonly.md"/>
     </toc-element>
 
