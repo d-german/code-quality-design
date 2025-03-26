@@ -233,10 +233,7 @@ A linked list implementation of a Stack is particularly efficient for push and p
 only involve manipulating the head of the list. No element shifting is required, unlike with array-based
 implementations.
 
-An array-based Stack implementation, while possible, would need to:
-
-- Handle array capacity limitations
-- Implement resizing logic when the array fills up
-- Manage the memory overhead of maintaining potentially unused array space
+Similar to Queue, an array-based implementation of Stack would face the same challenges with pre-allocated size and
+array resizing.
 
 
