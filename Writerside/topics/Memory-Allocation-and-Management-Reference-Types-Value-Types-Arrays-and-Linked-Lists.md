@@ -215,8 +215,28 @@ allocations. This helps improve performance by reducing the frequency and cost o
 
 ![Queue](linkedlist2.png)
 
+When implementing a Queue using a linked list, adding elements to the back (enqueue) and removing from the front (
+dequeue) are highly efficient O(1) operations. This is because the linked list maintains references to both the front
+and back nodes, allowing direct access for these operations.
+
+While a Queue could be implemented using an array, this approach presents challenges:
+
+- The array requires pre-allocated size
+- Dequeuing elements from the front would require shifting all remaining elements forward
+- Array resizing becomes necessary when capacity is reached
+
 ## Stack: Last In, First Out (LIFO)
 
 ![Stack](linkedlist3.png)
+
+A linked list implementation of a Stack is particularly efficient for push and pop operations, both being O(1), as they
+only involve manipulating the head of the list. No element shifting is required, unlike with array-based
+implementations.
+
+An array-based Stack implementation, while possible, would need to:
+
+- Handle array capacity limitations
+- Implement resizing logic when the array fills up
+- Manage the memory overhead of maintaining potentially unused array space
 
 
