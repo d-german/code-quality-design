@@ -21,6 +21,7 @@
         </toc-element>
 
         <toc-element toc-title="Core Design Principles">
+            <toc-element topic="Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md"/>
             <toc-element topic="SOLID-Design-Principles.md">
                 <toc-element topic="Single-Responsibility-Principle-SRP.md"/>
                 <toc-element topic="Open-Closed-Principle-OCP.md"/>
@@ -28,8 +29,10 @@
                     <toc-element topic="Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md"/>
                 </toc-element>
                 <toc-element topic="Interface-Segregation-Principle-ISP.md"/>
-                <toc-element topic="Dependency-Inversion-Principle-DIP.md"/>
+                <toc-element topic="Dependency-Inversion-Principle-DIP.md">
+                </toc-element>
             </toc-element>
+            <toc-element topic="The-Dependency-Rule.md"/>
             <toc-element topic="Prefer-Composition-over-Class-Inheritance.md"/>
             <toc-element topic="Program-to-an-interface-not-an-Implementation-GOF-18.md"/>
             <toc-element topic="ETC-Principle.md"/>
