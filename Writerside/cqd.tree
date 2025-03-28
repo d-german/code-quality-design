@@ -94,6 +94,10 @@
             <toc-element topic="Code-Coverage.md"/>
             <toc-element topic="How-do-we-write-a-test-for-a-private-method.md"/>
             <toc-element topic="Seam-Interface.md"/>
+            <toc-element topic="Comparing-Objects-for-Equality-in-C-Using-JSON-Serialization.md"/>
+        </toc-element>
+        <toc-element toc-title="Python">
+            <toc-element topic="Immutable-DTOs-in-Python.md"/>
         </toc-element>
         <toc-element toc-title="Glossary">
             <toc-element topic="Ambient-data.md"/>
