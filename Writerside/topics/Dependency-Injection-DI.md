@@ -19,3 +19,13 @@ If you ensure that your interfaces generalize—that is, that they correctly abs
 When used correctly, interfaces provide your code with the extension points that make it adaptive.
 
 McLean Hall, Gary
+
+---
+See Also:
+- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Composition Root](Composition-Root.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)
+- [Seam Interface](Seam-Interface.md)

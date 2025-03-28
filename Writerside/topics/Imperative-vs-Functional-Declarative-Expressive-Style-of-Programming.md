@@ -154,4 +154,11 @@ This transition from imperative to functional programming highlights how modern 
 cleaner, more maintainable, and expressive code.
 
 
-See Prefer Dictionary to Switch Statement
+---
+See Also:
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md)
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md)
+- [Using SelectMany](Using-SelectMany.md)
+- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
+- [Cyclomatic Complexity](Cyclomatic-Complexity.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (immutability)

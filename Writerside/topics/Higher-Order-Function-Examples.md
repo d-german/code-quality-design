@@ -137,3 +137,11 @@ In this article, we explored several functional programming techniques in C#:
 
 These approaches promote more declarative, concise, and maintainable code compared to traditional imperative loops,
 reducing repetition and minimizing errors.
+
+---
+See Also:
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [Function composition and method chaining](Function-composition-and-method-chaining.md)
+- [Partial Application Example](Partial-Application-Example.md)
+- [Find What Is Varying and Encapsulate It (Shalloway 123)](Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md) (mentions delegates)

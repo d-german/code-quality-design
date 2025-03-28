@@ -200,3 +200,10 @@ This article explored a generic implementation of `Maybe<T>` in C#, demonstratin
   improve code maintainability.
 
 This approach provides a robust framework for managing variable outcomes in a predictable and composable manner.
+
+---
+See Also:
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md)
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md) (Bind/BindAsync are HOFs)
+- [Using Exceptions for Control Flow](Using-Exceptions-for-Control-Flow.md) (Maybe/Result as alternative)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)

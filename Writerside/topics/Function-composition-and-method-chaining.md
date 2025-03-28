@@ -68,3 +68,10 @@ that when you use LINQ to work with lists, you can get a lot done with only a fe
 a functional API, designed with composition in mind.
 
 *This information came from Buonanno 102-104*
+
+---
+See Also:
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md)
+- [Using SelectMany](Using-SelectMany.md) (LINQ example)

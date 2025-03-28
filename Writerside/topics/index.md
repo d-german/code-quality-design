@@ -14,7 +14,3 @@ extensively, but understanding when and why to use composition instead is crucia
 software.
 
 Many ideas here come from books and articles I have read (you will see the sources mentioned). 
-
-
-
-

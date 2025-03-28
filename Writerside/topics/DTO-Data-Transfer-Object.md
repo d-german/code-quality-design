@@ -52,4 +52,15 @@ parameter order confusion during initialization and provides better code clarity
 properties make the code more self-documenting and less error-prone, especially when dealing with multiple string
 parameters that could easily be transposed.
 
-See Stable vs Volatile Dependencies
+---
+See Also:
+
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Avoiding Liskov Substitution Principal Violations in Type Hierarchies](Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md) (
+  uses DTO example)
+- [Comparing Objects for Equality in C# Using JSON Serialization](Comparing-Objects-for-Equality-in-C-Using-JSON-Serialization.md) (
+  good for DTOs)
+- [Immutable DTOs in Python](Immutable-DTOs-in-Python.md)
+- [Self-Validating Value Objects in C#](Self-Validating-Value-Objects-in-C.md) (related concept)

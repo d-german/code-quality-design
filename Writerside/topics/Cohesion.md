@@ -36,5 +36,10 @@ This is a foundational design principle. For example:
 
 ![](cohesion.png)
 
-**See also**:  
-*Coupling*, *Modularity*, *Module*, *SRP*, *ISP*
+---
+See Also:
+- [Coupling](Coupling.md)
+- [Modularity, Module](Modularity-Module.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

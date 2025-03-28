@@ -101,3 +101,11 @@ A) The war didn’t start in 1939.
 B) The United States didn’t join the war after the attack on Pearl Harbor.  
 C) Adolf Hitler wasn’t the leader of Nazi Germany during the war.  
 D) The atomic bombs weren’t dropped on Hiroshima and Nagasaki to end the war. *(Correct Answer)*
+
+---
+See Also:
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions splitting boolean param functions)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

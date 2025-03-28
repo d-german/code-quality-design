@@ -47,8 +47,6 @@
                         topic="Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md"/>
             </toc-element>
             <toc-element toc-title="Implementation Techniques and Heuristics">
-                <toc-element topic="Using-SelectMany.md"/>
-                <toc-element topic="Prefer-Dictionary-over-Switch-Statement.md"/>
                 <toc-element
                         topic="Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md"/>
                 <toc-element topic="Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md"/>
@@ -60,6 +58,8 @@
         <toc-element toc-title="Functional Programming">
             <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
             <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
+            <toc-element topic="Prefer-Dictionary-over-Switch-Statement.md"/>
+            <toc-element topic="Using-SelectMany.md"/>
             <toc-element topic="Introduction-to-Maybe-T.md"/>
             <toc-element topic="Higher-Order-Function-Examples.md"/>
             <toc-element topic="Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md"/>

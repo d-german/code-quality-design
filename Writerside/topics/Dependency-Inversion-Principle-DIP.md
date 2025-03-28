@@ -2,7 +2,8 @@
 
 Program to an Interface, Not an Implementation (GOF 18)
 
-By interface, we mean either an interface like in C# or Java or an abstract class. (See **Abstract Classes vs Interfaces**
+By interface, we mean either an interface like in C# or Java or an abstract class. (See **Abstract Classes vs Interfaces
+**
 )
 
 **Abstractions should not depend on details. Details should depend upon abstractions.**
@@ -62,5 +63,17 @@ because there is no such thing as a `Shape` object (Shape is an abstract class).
 or a triangle masquerading as a shape. (Riel 95)
 
 ---
+See Also:
 
-See **Using the new keyword**, **Stable vs Volatile Dependencies**.
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [Using the new keyword](Using-the-new-keyword.md)
+- [Coupling](Coupling.md)
+- [The Dependency Rule](The-Dependency-Rule.md)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md)
+- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
+- [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)
+- [How do we write a test for a private method](How-do-we-write-a-test-for-a-private-method.md) (mentions DIP via
+  interfaces)

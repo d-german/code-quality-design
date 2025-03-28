@@ -16,3 +16,10 @@ uniquely named modules. These modules can be methods (functions), classes, inter
 ## Non-Modular Toy Design
 
 ![](non-module.png)
+
+---
+See Also:
+- [Cohesion](Cohesion.md)
+- [Coupling](Coupling.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)

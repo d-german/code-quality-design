@@ -230,3 +230,15 @@ _edit notes_
 If your public interface contains more than a few members (don’t know how many) and they belong together (high cohesion), then represent them as an **abstract class**. If the members do not relate well (low cohesion), then we should divide them into multiple smaller **interfaces**.
 
 **Beginning with C# 8.0 on .NET Core 3.0, you can define an implementation when you declare a member of an interface.** The most common scenario is to safely add members to an interface already released and used by innumerable clients. This includes static fields and methods and excludes instance fields. You can provide a body to interface methods, but the method does not have access to any instance fields.
+
+---
+See Also:
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
+- [Inheritance](Inheritance.md)
+- [Polymorphism](Polymorphism.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)

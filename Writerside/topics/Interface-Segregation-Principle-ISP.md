@@ -126,4 +126,10 @@ public class MultiFunctionalCar : IDrive, IFly
 
 ---
 
-See **Abstract Classes vs Interfaces**
+---
+See Also:
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Cohesion](Cohesion.md) (Fat interfaces often lack cohesion)
+- [Evolving Configuration Interfaces From Boolean Flags to Expressive Design](Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md) (mentions ISP)

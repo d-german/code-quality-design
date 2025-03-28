@@ -132,3 +132,12 @@ Switch statements can be problematic because they:
 - Often indicate misplaced responsibilities.
 
 When possible, consider using polymorphism to replace switch statements, unless the set of possible values is both limited and stable (as in the logging example).
+
+---
+See Also:
+- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Polymorphism](Polymorphism.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (type sniffing violates LSP)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions refactoring switch)

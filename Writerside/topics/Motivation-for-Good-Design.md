@@ -27,3 +27,10 @@ This is why we need good design.
 The best design is the one that allows for the most change in the environment with the least change in the software.
 
 It is important to design for evolution, to structure a program to evolve through changes in requirements and technology. (Coplien 189)
+
+---
+See Also:
+- [ETC Principle](ETC-Principle.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [OOP Design Quotes](OOP-Design-Quotes.md)
+- [Big Ball of Mud](Big-Ball-of-Mud.md) (consequence of poor design/entropy)

@@ -33,4 +33,7 @@ the constant to be accessed directly from the class name, without the need to cr
 It's important to note that `const` variables are implicitly static and their values are shared among all instances of
 the class, and therefore only one copy is stored in memory.
 
-See Difference between const and static readonly
+---
+See Also:
+- [Difference between const and static readonly](Difference-between-const-and-static-readonly.md)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions const)

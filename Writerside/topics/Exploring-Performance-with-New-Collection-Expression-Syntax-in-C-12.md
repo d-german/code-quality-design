@@ -56,8 +56,8 @@ span[1] = 2;
 
 **Benchmark Result:**
 
-| Method             | Mean    | Allocated |
-| :----------------- | :------ | :-------- |
+| Method             | Mean     | Allocated |
+|:-------------------|:---------|:----------|
 | Traditional Syntax | 20.17 ns | 72 B      |
 | New C# 12 Syntax   | 17.26 ns | 72 B      |
 
@@ -121,7 +121,7 @@ for (int index2 = 0; index2 < numArray.Length; ++index2)
 **Benchmark Result:**
 
 | Method             | Mean     | Allocated  |
-| :----------------- | :------- | :--------- |
+|:-------------------|:---------|:-----------|
 | Traditional Syntax | 572.2 us | 1024.48 KB |
 | New C# 12 Syntax   | 127.6 us | 390.72 KB  |
 
@@ -151,3 +151,13 @@ collections created from existing collections (using the spread `..` operator). 
 but also the memory efficiency, making it a preferable choice in scenarios where performance is a key concern. While the
 benefit is less noticeable with small, literal collections, it becomes substantial with larger datasets, demonstrating
 the efficiency of modern C# capabilities in handling complex and large-scale data.
+
+---
+See Also:
+
+- [Memory Allocation and Management](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md) (
+  mentions `Span<T>`)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (
+  declarative style)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (
+  collections focus)

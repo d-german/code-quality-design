@@ -44,3 +44,9 @@ test input of 0 would have revealed the fault since it meets all three criteria.
 ---
 
 *This is because √0 = 0, but `MySqrt(0)` returns -1 instead of 0.*
+
+---
+See Also:
+
+- [Finding Test Cases](Finding-Test-Cases.md)
+- [Code Review Checklist](Code-Review-Checklist.md)

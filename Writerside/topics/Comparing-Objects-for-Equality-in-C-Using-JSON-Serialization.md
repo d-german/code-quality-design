@@ -166,3 +166,10 @@ To test the equality of the *serializable state* of the two records, including t
 `AssertAreEqualByJson` method is used. It compares the JSON representations of the records, providing a reliable way to
 compare the *data content* of two objects, especially when they contain reference-type members like collections,
 assuming JSON serialization accurately reflects the desired state for comparison.
+
+---
+See Also:
+
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)

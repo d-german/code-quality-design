@@ -140,3 +140,13 @@ classDiagram
 C# avoids the diamond problem by not allowing multiple inheritance of classes. However, it does allow multiple inheritance of interfaces.
 
 
+---
+See Also:
+- [Composition](Composition.md)
+- [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
+- [Polymorphism](Polymorphism.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Pillars of OOP](Pillars-of-OOP.md)
+- [Design Relationships](Design-Relationships.md)
+- [The Dependency Rule](The-Dependency-Rule.md) (mentions inheritance as strongest relationship)

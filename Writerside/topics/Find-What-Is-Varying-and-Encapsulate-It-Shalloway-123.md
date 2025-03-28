@@ -72,3 +72,13 @@ consequences from code changes and more flexibility in your systems! (Freeman 9)
   See: The Open/Closed Principle (OCP),
   the Liskov Substitution Principle (LSP) and
   the Dependency Inversion Principle (DIP).
+---
+See Also:
+- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)
+- [Polymorphism](Polymorphism.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md) (using delegates/Func)
+- [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md) (encapsulates algorithms)

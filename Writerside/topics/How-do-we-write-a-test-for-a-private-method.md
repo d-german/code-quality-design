@@ -141,5 +141,11 @@ design of the class and make the method more testable. In the case of the `RuleP
 multiple responsibilities and violated the Single Responsibility Principle. By moving the term tokenization
 responsibility to a separate class, the design became clearer, and the methods could be tested directly.
 
-See: **Stable vs Volatile Dependencies**, **Single Responsibility Principle (SRP)**, **Dependency Inversion Principle (
-DIP)**
+---
+See Also:
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions private methods)
+- [Seam Interface](Seam-Interface.md) (related testing technique)
+

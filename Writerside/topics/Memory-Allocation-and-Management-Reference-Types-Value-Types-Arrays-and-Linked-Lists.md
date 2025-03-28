@@ -237,3 +237,7 @@ Similar to Queue, an array-based implementation of Stack would face the same cha
 array resizing.
 
 
+---
+See Also:
+- [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (mentions Span<T>)
+- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (struct performance)

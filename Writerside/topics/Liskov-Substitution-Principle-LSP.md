@@ -116,3 +116,14 @@ public class SquareRootDerived : SquareRootBase
 *What is wanted here is something like the following substitution property: If for each object o1 of type S there is
 an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is
 substituted for o2 then S is a subtype of T. (Liskov)
+
+---
+See Also:
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Avoiding Liskov Substitution Principal Violations in Type Hierarchies](Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md) (detailed example)
+- [Polymorphism](Polymorphism.md)
+- [Inheritance](Inheritance.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md) (LSP violation symptom)
+- [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md) (Stack/List example)

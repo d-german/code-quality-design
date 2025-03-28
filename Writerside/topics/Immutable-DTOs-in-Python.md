@@ -38,3 +38,9 @@ class Student:
 #                    grade_point=3.8, status=Status.ACTIVE)
 # student1.first_name = "Janet"  # This would raise FrozenInstanceError
 ```
+
+---
+See Also:
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md) (general concept)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (C# equivalent)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (immutability principle)

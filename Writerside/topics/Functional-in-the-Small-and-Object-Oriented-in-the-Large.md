@@ -486,3 +486,12 @@ Assert.That(finalPoint.X, Is.EqualTo(55));
 ````
 ---
 
+---
+See Also:
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md)
+- [Function composition and method chaining](Function-composition-and-method-chaining.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Defensive Copying in C# Example](Defensive-Copying-in-C-Example.md)
+- [Using SelectMany](Using-SelectMany.md) (related to Map/Filter/Reduce)
+- [Static Methods](Static-Methods.md) (mentioned as avoiding side effects on instance state)

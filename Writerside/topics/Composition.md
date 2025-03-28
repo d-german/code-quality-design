@@ -26,3 +26,11 @@ those objects are included as object fields, the new object is known as a compou
 
 Composition can be combined with polymorphism to compose your object out of other objects, whose type (interface) you
 know, but not the actual class (implementation).
+
+---
+See Also:
+- [Inheritance](Inheritance.md)
+- [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
+- [Polymorphism](Polymorphism.md)
+- [Pillars of OOP](Pillars-of-OOP.md)
+- [Design Relationships](Design-Relationships.md)

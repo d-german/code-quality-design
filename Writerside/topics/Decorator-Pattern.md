@@ -268,3 +268,11 @@ By using decorators, we've maintained the integrity of our original facade imple
 capability to handle read-only form controls and properly render text areas with anchor links.
 
 
+---
+See Also:
+- [The Facade Pattern with the Single Responsibility Principle](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Composition](Composition.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md) (for how decorators are wired)
+- [Interception](Interception.md)

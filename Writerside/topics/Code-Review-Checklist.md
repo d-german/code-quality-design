@@ -49,3 +49,20 @@ Based on team discussions of *Clean Code* by Robert C. Martin
 *   Are we using immutable collections when possible?
 
 Note this was authored by a coworker named Josie
+
+---
+See Also:
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Cohesion](Cohesion.md)
+- [Coupling](Coupling.md)
+<!--- [DRY Principle](Empty-MD-Topic.md)  TODO add dry article -->
+- [Code Coverage](Code-Coverage.md)
+- [Static Methods](Static-Methods.md)
+- [Difference between const and static readonly](Difference-between-const-and-static-readonly.md)
+- [Maximizing Performance and Readability with const Variables in C#](Maximizing-Performance-and-Readability-with-const-Variables-in-C.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md)
+- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [var keyword](var-keyword.md)
+- [Using Required Members in C# 11](Using-Required-Members-in-C-11.md)

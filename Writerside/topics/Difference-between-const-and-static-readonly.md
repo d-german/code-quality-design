@@ -122,3 +122,9 @@ Both `static readonly` and `const` are useful for declaring constants in C#, but
     - The value needs to be determined at runtime.
     - You are working with complex types or reference types.
     - You need the flexibility of runtime initialization despite a small initial overhead.
+
+---
+See Also:
+- [Maximizing Performance and Readability with const Variables in C#](Maximizing-Performance-and-Readability-with-const-Variables-in-C.md)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions const/readonly)
+- [Static Methods](Static-Methods.md) (related 'static' concept)

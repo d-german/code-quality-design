@@ -82,3 +82,9 @@ In this `ProblemDetailsResult<T>` example:
 7.  This newly created and modified `detailsCopy` is returned and cached by the `Lazy<T>`. Subsequent accesses to `ProblemDetails` return this cached copy.
 
 This ensures that the `ProblemDetails` object exposed by the `ProblemDetailsResult<T>` is a distinct instance from the one initially provided, protecting the internal state and adding context without modifying the original object.
+
+---
+See Also:
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (discusses immutability techniques)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)
