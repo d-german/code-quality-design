@@ -63,7 +63,7 @@
         </toc-element>
     </toc-element>
 
-    <toc-element topic="Functional-Programming.md">
+    <toc-element toc-title="Functional Programming">
         <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
         <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
         <toc-element topic="Introduction-to-Maybe-T.md"/>
