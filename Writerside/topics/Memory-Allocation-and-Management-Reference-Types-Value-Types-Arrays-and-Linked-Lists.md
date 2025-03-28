@@ -239,5 +239,5 @@ array resizing.
 
 ---
 See Also:
-- [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (mentions Span<T>)
+- [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (mentions `Span<T>`)
 - [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (struct performance)

@@ -14,6 +14,5 @@ See Also:
 - [Cognitive Complexity](Cognitive-Complexity.md)
 - [High Complexity](High-Complexity.md) <!-- Example -->
 - [Code Review Checklist](Code-Review-Checklist.md)
-- [Testing](Testing.md)
 - [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (
   mentions CC reduction)
