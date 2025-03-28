@@ -33,4 +33,8 @@ Public Class Person
 End Class
 ```
 
-See Stable vs Volatile Dependencies
+---
+See Also:
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md) (often implemented as POCOs)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md) (POCOs are often stable)
+

@@ -43,6 +43,12 @@ form of `MyDocumentDataService`, you can test the `GetData()` method in isolatio
 of the interface. This approach allows you to test the classes that depend on the document data service without relying
 on the real implementation and its complex dependencies.
 
-See Dependency Injection, Inversion of Control (IoC), and Dependency Inversion Principle (DIP).
+---
+See Also:
+- [Dependency Injection (DI)](Dependency-Injection-DI.md)
+- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md) (Seams help manage volatile dependencies)
 
 

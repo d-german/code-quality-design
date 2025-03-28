@@ -18,3 +18,16 @@ Clearly, some new code must be written. But how much old code will have to chang
 If class A should be protected from changes in class B, then class B should depend on class A.
 
 See **Coupling**.
+
+---
+See Also:
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (enabler for OCP)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md) (mechanism for OCP)
+- [Polymorphism](Polymorphism.md) (mechanism for OCP)
+- [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md) (demonstrates OCP)
+- [Decorator Pattern](Decorator-Pattern.md) (demonstrates OCP)
+- [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md) (often violates OCP)
+- [Coupling](Coupling.md) (OCP aims for looser coupling)

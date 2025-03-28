@@ -124,3 +124,10 @@ maintaining a single responsibility—orchestrating the search-and-highlight wor
 The Facade Pattern, complemented by the Single Responsibility Principle, is a powerful tool in a developer's arsenal for
 creating maintainable and user-friendly software. By abstracting complex interactions into a single, coherent API,
 developers can provide clear, concise, and effective solutions.
+
+---
+See Also:
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Decorator Pattern](Decorator-Pattern.md) (builds upon the Facade example)
+- [Composition](Composition.md) (Facade uses composition)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md) (Facade dependencies injected)

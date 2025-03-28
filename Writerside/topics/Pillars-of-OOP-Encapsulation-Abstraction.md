@@ -21,3 +21,9 @@ Abstraction refers to information hiding.
 - **Public method signatures should remain stable.**
     - Changing them requires updating all dependencies.
 
+---
+See Also:
+- [Pillars of OOP](Pillars-of-OOP.md)
+- [Minimize Accessibility of Classes and Members](Minimize-Accessibility-of-Classes-and-Members.md)
+- [Some Object-Oriented Design Heuristics - Riel updated](Some-Object-Oriented-Design-Heuristics-Riel-updated.md) (Heuristics 2.1, 2.2, 2.5, 2.6, 5.3)
+- [Find What Is Varying and Encapsulate It (Shalloway 123)](Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md)

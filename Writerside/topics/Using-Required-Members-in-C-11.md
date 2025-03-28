@@ -74,3 +74,11 @@ error-resistant way to handle mandatory properties, particularly when
 using object initializers. This enhancement improves code readability and
 maintainability, especially important for non-native English speakers
 and in large, complex projects.
+
+---
+See Also:
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (records often use `required`)
+- [Self-Validating Value Objects in C#](Self-Validating-Value-Objects-in-C.md) (uses `required`)
+- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (uses `required`)
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions `init`)
+

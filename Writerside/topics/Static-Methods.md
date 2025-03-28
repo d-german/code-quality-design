@@ -14,3 +14,9 @@ directly from the class name.
    instance methods.
 5. Can be called directly from the class name: You don't need to create an object to call static methods, which is
    convenient and neat.
+
+---
+See Also:
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions static methods)
+- [Difference between const and static readonly](Difference-between-const-and-static-readonly.md) (related `static` keyword)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (pure functions often map to static methods)

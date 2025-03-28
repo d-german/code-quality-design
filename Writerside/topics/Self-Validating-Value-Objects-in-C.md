@@ -124,11 +124,13 @@ public void CreatingSearchQueryWithShortStringThrowsException()
 ---
 
 Wrapping values inside new objects called value objects isn't just useful for avoiding repeated validation logic. As
-soon as you notice that a method accepts a primitive-type value (`string`, `int`, etc.), you should consider introducing a
+soon as you notice that a method accepts a primitive-type value (`string`, `int`, etc.), you should consider introducing
+a
 class for it. The guiding question for deciding whether to do this is, "Would any `string`, `int`, etc., be
 acceptable here?" If the answer is no, introduce a new class for the concept.
 
-You should consider the value object class itself to be a type, just like `string`, `int`, etc., are types. By introducing
+You should consider the value object class itself to be a type, just like `string`, `int`, etc., are types. By
+introducing
 more objects to represent domain concepts, you're effectively extending the type system. Your language's compiler or
 runtime will be able to support you much better, because it can do type-checking for you and make sure that only the
 right types end up being used when passing method arguments and returning values.
@@ -198,3 +200,13 @@ validation logic but also enriches the application's type system. By encapsulati
 these objects, you ensure that only valid data is processed, leading to code that is more expressive, easier to
 understand, and less prone to errors. This approach extends the type system, allowing the compiler and runtime to
 enforce domain rules and making the application more robust and maintainable.
+
+---
+See Also:
+
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md) (Related concept, though value objects add validation)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md) (Value objects are often stable)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Using Required Members in C# 11](Using-Required-Members-in-C-11.md)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (
+  Immutability)

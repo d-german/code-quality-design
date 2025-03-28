@@ -64,3 +64,16 @@ public static class PersonExtensions
     }
 }
 ```
+
+---
+See Also:
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Using the new keyword](Using-the-new-keyword.md)
+- [The Dependency Rule](The-Dependency-Rule.md)
+- [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md) (Manages dependencies, especially volatile ones)
+- [How do we write a test for a private method](How-do-we-write-a-test-for-a-private-method.md) (Mentions volatile dependencies)
+- [Seam Interface](Seam-Interface.md) (Technique for managing volatile dependencies)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (Separating behavior via extension methods)

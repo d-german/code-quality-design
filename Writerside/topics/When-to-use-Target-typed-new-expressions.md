@@ -69,3 +69,8 @@ code clarity. Explicitly stating the type names in complex initializations
 like this is preferable for maintainability.
 
 note: The author of this article Is a fellow coworker named Drew.
+
+---
+See Also:
+- [var keyword](var-keyword.md) (Related type inference concept)
+- [Code Review Checklist](Code-Review-Checklist.md) <!-- Could add a check for overuse of new() -->

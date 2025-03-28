@@ -92,10 +92,13 @@ Note that **Example3** no longer depends on the concrete `VolatileDependency` cl
 In summary, **Dependency Inversion**, **Dependency Injection**, and **Inversion of Control** are distinct but related concepts, and we can explain them in terms of the **SOLID** design principles.
 
 ---
-
-See **Stable vs Volatile Dependences**, **SOLID**, **Using the new keyword**, **Composition Root**, **Composition**, **Inversion of Control**.
-
-
-
-
-
+See Also:
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md)
+- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [Using the new keyword](Using-the-new-keyword.md)
+- [Composition Root](Composition-Root.md)

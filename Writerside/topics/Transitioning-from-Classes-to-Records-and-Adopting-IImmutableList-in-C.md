@@ -157,3 +157,11 @@ immutability but also enhances overall design stability. The performance differe
 `ImmutableList<T>` arise from their data structure choices rather than their immutable nature.
 
 ---
+See Also:
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (immutability)
+- [Defensive Copying in C# Example](Defensive-Copying-in-C-Example.md) (related immutability technique)
+- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (structs vs classes/records)
+- [Comparing Objects for Equality in C# Using JSON Serialization](Comparing-Objects-for-Equality-in-C-Using-JSON-Serialization.md) (mentions record equality)
+- [Self-Validating Value Objects in C#](Self-Validating-Value-Objects-in-C.md) (uses records)
+- [Avoiding Liskov Substitution Principal Violations in Type Hierarchies](Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md) (uses records)

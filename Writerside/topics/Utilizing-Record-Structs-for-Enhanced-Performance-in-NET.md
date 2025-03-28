@@ -41,3 +41,10 @@ This optimization, albeit small on a per-instance basis, can accumulate
 significantly in high-throughput systems, reducing memory pressure on the
 garbage collector. Choose `record struct` when value-type semantics and
 performance are critical for small, immutable data holders.
+
+---
+See Also:
+- [Memory Allocation and Management](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md) (Structs can be used for DTOs)
+- [Self-Validating Value Objects in C#](Self-Validating-Value-Objects-in-C.md) (Value objects often benefit from struct performance)

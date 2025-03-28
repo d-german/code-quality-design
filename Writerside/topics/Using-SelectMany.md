@@ -60,5 +60,8 @@ var list2 = new List<int> { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
 
 Debug.Assert(list1.SequenceEqual(list2));
 ```
-
-See: Imperative vs Functional (Declarative, Expressive) Style of Programming
+---
+See Also:
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (Map/Filter/Reduce)
+- [Function composition and method chaining](Function-composition-and-method-chaining.md)

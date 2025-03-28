@@ -48,3 +48,8 @@ then the performance when calling methods like `First()` could be much
 slower (fetching all data first) although the code compiles and looks
 correct. Using `var` here would correctly infer `IQueryable<CaseTable>`
 if that's what the LINQ provider returns.
+
+---
+See Also:
+- [Code Review Checklist](Code-Review-Checklist.md) (mentions var consistency)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (LINQ examples often use var)

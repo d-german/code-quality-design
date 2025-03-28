@@ -142,3 +142,13 @@ JSON processors without modifying existing code. Adding support for a new JSON f
 
 The core processing logic in `UserPreferencesService` remains unchanged, reducing the risk of introducing bugs while
 enhancing the system's capability.
+
+---
+See Also:
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Dependency Injection (DI)](Dependency-Injection-DI.md)
+- [Polymorphism](Polymorphism.md)
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md) (Strategy pattern is an alternative)
+- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md) (Another alternative)
+- [Find What Is Varying and Encapsulate It (Shalloway 123)](Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md) (Strategy encapsulates varying algorithms)

@@ -471,3 +471,7 @@ you could return an error code or a result object, making the test straightforwa
 
 Exceptions should be reserved for truly exceptional circumstances that prevent the normal operation of your application,
 not for handling expected error conditions that can be anticipated and managed through return values or result objects.
+
+---
+See Also:
+- [Introduction to Maybe T](Introduction-to-Maybe-T.md) (Result object alternative)

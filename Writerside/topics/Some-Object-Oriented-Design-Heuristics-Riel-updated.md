@@ -360,3 +360,13 @@ end note
 @enduml
 ```
 
+---
+See Also:
+- [Some Object-Oriented Design Heuristics - Riel updated](Some-Object-Oriented-Design-Heuristics-Riel-updated.md) <!-- Prefer linking to the updated one -->
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Cohesion](Cohesion.md)
+- [Coupling](Coupling.md)
+- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)
+- [Inheritance](Inheritance.md)
+- [Composition](Composition.md)
+- [Polymorphism](Polymorphism.md)

@@ -107,3 +107,10 @@ All three ways work. But I like the dictionary better. Here's why:
    speed difference is small, but the dictionary works better for large lists.
 
 See Open Closed Principle (OCP), Imperative vs Functional (Declarative, Expressive) Style of Programming
+
+---
+See Also:
+- [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
+- [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md) (another way to replace switch/if)

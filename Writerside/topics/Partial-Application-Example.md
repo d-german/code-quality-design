@@ -218,3 +218,9 @@ The `WebApplicationBuilderExtensions` class now inlines the base path
 directly within the `LoadJson` method. Configuration files are iterated
 through using an `ImmutableHashSet<string>`, and the `LoadJson` method
 is called for each file, simplifying the code.
+
+---
+See Also:
+- [Higher-Order Function Examples](Higher-Order-Function-Examples.md)
+- [Function composition and method chaining](Function-composition-and-method-chaining.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)

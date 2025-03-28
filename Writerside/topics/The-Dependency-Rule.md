@@ -147,4 +147,12 @@ arrow crosses the border of a component the direction is always in the direction
 *![](dependency-rule5.png){style="block"}*
 This is not the correct design since a dependency arrow is crossing from a HL to a LL component.
 
-See [Coupling], [Inheritance]
+---
+See Also:
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md) (related to levels/change rate)
+- [Coupling](Coupling.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [Big Ball of Mud](Big-Ball-of-Mud.md) (result of violating dependency rules)
+- [Inheritance](Inheritance.md) (mentioned as strongest dependency)
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md) (used for boundary crossing)

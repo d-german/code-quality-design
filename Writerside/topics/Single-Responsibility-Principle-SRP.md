@@ -45,7 +45,13 @@ use it at the lowest levels. But it is not one of the SOLID principles—it is n
 
 > **Facade Pattern:** Provide a unified interface to a set of interfaces in a subsystem. (GOF 185)
 
-Relates to the **Interface Segregation Principle (ISP)**.
-
 ---
-See **Cohesion**.
+See Also:
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Cohesion](Cohesion.md) (High cohesion often aligns with SRP)
+- [Coupling](Coupling.md) (Violating SRP can increase coupling)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md) (Related principle of separation)
+- [The Facade Pattern with the Single Responsibility Principle](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md) (Facade as solution)
+- [How do we write a test for a private method](How-do-we-write-a-test-for-a-private-method.md) (SRP violation leads to testing issues)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md) (SRP helps enable OCP)
+- [The Dependency Rule](The-Dependency-Rule.md) (Separating by change rate/actor aligns with SRP)

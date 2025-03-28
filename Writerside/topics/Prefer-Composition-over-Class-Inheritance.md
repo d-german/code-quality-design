@@ -74,3 +74,14 @@ Stack *-- List : contains
 
 By using composition, the `Stack` class hides the full public interface of the `List` and exposes only those methods
 that are applicable to a stack's LIFO behaviour.
+
+---
+See Also:
+
+- [Composition](Composition.md)
+- [Inheritance](Inheritance.md)
+- [Cohesion](Cohesion.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (violation in Stack-is-a-List)
+- [Design Relationships](Design-Relationships.md)
+- [Some Object-Oriented Design Heuristics - Riel updated](Some-Object-Oriented-Design-Heuristics-Riel-updated.md) (
+  Heuristic 5.18 relates)

@@ -129,3 +129,8 @@ to a thread from the .NET thread pool, preventing it from blocking the main or U
 Remember, this technique should be used as a fallback when dealing with libraries that do not provide async methods for
 I/O-bound tasks. The async/await pattern should always be your first choice, as it offers superior application
 performance and resource management.
+
+---
+See Also:
+- [Concurrency](Concurrency.md)
+- [Understanding Threads in Programming: A Restaurant Analogy](Understanding-Threads-in-Programming-A-Restaurant-Analogy.md)
