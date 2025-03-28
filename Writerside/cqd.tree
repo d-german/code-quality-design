@@ -7,6 +7,7 @@
 
     <toc-element topic="index.md">
         <toc-element topic="Motivation-for-Good-Design.md"/>
+        <toc-element topic="Code-Review-Checklist.md"/>
     </toc-element>
 
     <toc-element toc-title="Object Oriented Programming">
@@ -96,6 +97,10 @@
     </toc-element>
 
     <toc-element toc-title="Language Specifics (C#/.NET)">
+        <toc-element topic="Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md"/>
+        <toc-element topic="Using-Required-Members-in-C-11.md"/>
+        <toc-element topic="var-keyword.md"/>
+        <toc-element topic="When-to-use-Target-typed-new-expressions.md"/>
         <toc-element topic="Maximizing-Performance-and-Readability-with-const-Variables-in-C.md"/>
         <toc-element topic="Difference-between-const-and-static-readonly.md"/>
     </toc-element>
