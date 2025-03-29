@@ -10,8 +10,8 @@
         <algolia-api-key>fa81dc3f7cba7efdb24093857d481070</algolia-api-key>
         <algolia-show-logo>true</algolia-show-logo>
         <analytics-head-script-file>ga-head.html</analytics-head-script-file>
-        <!-- Override default Algolia query parameters to remove version filtering -->
-        <algolia-query-params>{"facetFilters": ["product:cqd"]}</algolia-query-params>
+<!--        &lt;!&ndash; Override default Algolia query parameters to remove version filtering &ndash;&gt;-->
+<!--        <algolia-query-params>{"facetFilters": ["product:cqd"]}</algolia-query-params>-->
     </variables>
     <build-profile instance="cqd">
         <variables>
