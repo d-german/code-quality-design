@@ -38,6 +38,7 @@ Many ideas here come from books and articles I have read (you will see the sourc
                 * [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
                 * [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
             * [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
+                * [Inheritance vs. Composition: A House of Cards and Legos Analogy](Inheritance-vs-Composition-Analogy.md)
             * [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
             * [ETC Principle](ETC-Principle.md)
         * Design Patterns
