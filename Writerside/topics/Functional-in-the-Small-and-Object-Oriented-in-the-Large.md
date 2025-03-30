@@ -495,3 +495,4 @@ See Also:
 - [Defensive Copying in C# Example](Defensive-Copying-in-C-Example.md)
 - [Using SelectMany](Using-SelectMany.md) (related to Map/Filter/Reduce)
 - [Static Methods](Static-Methods.md) (mentioned as avoiding side effects on instance state)
+- [DRY Principle](DRY-Principle.md)

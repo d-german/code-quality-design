@@ -37,8 +37,24 @@ consolidating such methods, eliminating the duplication by introducing a utility
 code and dependencies. Moreover, given that the method is unlikely to require future changes, the duplication is
 considered acceptable.
 
-
 ```typescript
-static readonly isSuccessful = (statusCode: number) => statusCode >= 200 && statusCode < 300;
-
+static readonly
+isSuccessful = (statusCode: number) =>
+    statusCode >= 200 && statusCode < 300;
 ```
+
+---
+See Also:
+
+- [Code Review Checklist](Code-Review-Checklist.md) (Explicitly mentions DRY)
+- [Motivation for Good Design](Motivation-for-Good-Design.md) (DRY improves maintainability/reduces entropy)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md) (Extracting responsibilities often
+  reduces duplication within a module)
+- [Cohesion](Cohesion.md) (Grouping related items avoids scattering logic, related to DRY)
+- [Find What Is Varying and Encapsulate It (Shalloway 123)](Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md) (
+  Encapsulation techniques are key tools for achieving DRY)
+- [OOP Design Quotes](OOP-Design-Quotes.md) (Includes quotes about duplication)
+- [Explicit case analysis switch if else statement](Explicit-case-analysis-switch-if-else-statement.md) (Highlights
+  duplication as a problem with switches)
+
+

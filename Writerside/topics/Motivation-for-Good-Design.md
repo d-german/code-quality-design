@@ -56,6 +56,7 @@ technology. (Coplien 189)
 See Also:
 
 - [ETC Principle](ETC-Principle.md)
+- [DRY Principle](DRY-Principle.md)
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [OOP Design Quotes](OOP-Design-Quotes.md)
 - [Big Ball of Mud](Big-Ball-of-Mud.md) (consequence of poor design/entropy)

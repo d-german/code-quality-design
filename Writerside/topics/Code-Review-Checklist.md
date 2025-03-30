@@ -55,7 +55,7 @@ See Also:
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [Cohesion](Cohesion.md)
 - [Coupling](Coupling.md)
-<!--- [DRY Principle](Empty-MD-Topic.md)  TODO add dry article -->
+- [DRY Principle](DRY-Principle.md)
 - [Code Coverage](Code-Coverage.md)
 - [Static Methods](Static-Methods.md)
 - [Difference between const and static readonly](Difference-between-const-and-static-readonly.md)

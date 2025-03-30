@@ -77,6 +77,7 @@ Course, 3rd Edition Eric Matthes 2023)
 ---
 See Also:
 - [Motivation for Good Design](Motivation-for-Good-Design.md)
+- [DRY Principle](DRY-Principle.md)
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
 - [The Dependency Rule](The-Dependency-Rule.md)

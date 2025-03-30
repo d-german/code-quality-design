@@ -145,3 +145,4 @@ See Also:
 - [Function composition and method chaining](Function-composition-and-method-chaining.md)
 - [Partial Application Example](Partial-Application-Example.md)
 - [Find What Is Varying and Encapsulate It (Shalloway 123)](Find-What-Is-Varying-and-Encapsulate-It-Shalloway-123.md) (mentions delegates)
+- [DRY Principle](DRY-Principle.md)
