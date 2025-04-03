@@ -21,7 +21,6 @@ composition—that is, assembling behaviors instead of inheriting them. (GOF 20)
 ### Implementation Inheritance
 
 - Derived classes inherit data and behavior (implementation) from the base class.
-- In languages like C++, this is approximated using private inheritance.
 - Implementation inheritance can degenerate into a “like-a” relationship when the derived class violates Liskov’s
   substitution principle. (Coplien 206, 237)
 - When inheritance is used as “is-a,” software reuse is an incidental benefit.
@@ -36,7 +35,7 @@ composition—that is, assembling behaviors instead of inheriting them. (GOF 20)
 
 ## Design Guidelines
 
-- Prefer composition over class inheritance (GOF 20) to avoid tightly coupled dependencies.
+- Prefer composition over class (implementation) inheritance (GOF 20) to avoid tightly coupled dependencies.
 - **Guidelines for Inheritance:**
     - Use the protected access specifier carefully:
         - All fields in a base class should be private; do not use protected data. (Riel 82)
@@ -95,8 +94,7 @@ N1 .. Base
 
 ## Multiple Inheritance and the Diamond Problem
 
-Multiple inheritance is generally discouraged because it often reduces understanding of the class hierarchy. (Jacobson
-67) If you have an example of multiple inheritance in your design, assume you have made a mistake and then prove
+Multiple inheritance is generally discouraged because it often reduces understanding of the class hierarchy. (Jacobson 67) If you have an example of multiple inheritance in your design, assume you have made a mistake and then prove
 otherwise. (Riel 134)
 
 ### Valid Cases for Multiple Inheritance
