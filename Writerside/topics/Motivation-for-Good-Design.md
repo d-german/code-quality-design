@@ -21,7 +21,9 @@ than in the precise structure of a wall (a low-entropy state).** Randomness favo
 Software is similar. Without the deliberate energy spent on applying design principles and refactoring (like carefully
 stacking bricks), code naturally drifts towards complexity and disorganization (the pile). **There are far more ways to
 write messy code than clean code.** Achieving and maintaining a low-entropy, well-designed system requires continuous,
-conscious effort; it doesn't happen by chance. 
+conscious effort; it doesn't happen by chance.
+
+**See [](High-Complexity.md) for example code that is high in entropy.**
 
 A program that is used will be modified. When a program is modified, its complexity (entropy) will increase, provided
 that one does not actively work against this. (Jacobson 69,70)
