@@ -9,6 +9,7 @@
         <algolia-index>code_quality_docs</algolia-index>
         <algolia-api-key>fa81dc3f7cba7efdb24093857d481070</algolia-api-key>
         <algolia-show-logo>true</algolia-show-logo>
+        <code-soft-wrap>true</code-soft-wrap>
         <analytics-head-script-file>ga-head.html</analytics-head-script-file>
 <!--        &lt;!&ndash; Override default Algolia query parameters to remove version filtering &ndash;&gt;-->
 <!--        <algolia-query-params>{"facetFilters": ["product:cqd"]}</algolia-query-params>-->
