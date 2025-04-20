@@ -55,7 +55,7 @@ class Loan {
 Use cases specifies the input to be provided by the user, the output to be returned to the user, and the processing
 steps involved in producing that output.
 
-<img src="usecase.png" width="512"/>
+<img src="usecase.png" width="512" alt=""/>
 
 ## Relationship Between Entities and Use Cases
 
