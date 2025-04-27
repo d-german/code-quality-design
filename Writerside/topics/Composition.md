@@ -24,11 +24,16 @@ those objects are included as object fields, the new object is known as a compou
 
 ![Composition](composition.png)
 
-Composition can be combined with polymorphism to compose your object out of other objects, whose type (interface) you
-know, but not the actual class (implementation).
+Composition can be powerfully combined with polymorphism. This means an object can contain parts referenced by their
+abstract type (like an interface or an abstract base class) instead of their specific concrete implementation. For
+instance, a `Car` might use an `IEngine` interface to interact with its engine. This allows different engine
+implementations (a `V6Engine`, an `ElectricMotor`) to be swapped in or out, as long as they satisfy the `IEngine`
+contract, without needing to change the `Car` class itself. The `Car` interacts with whatever engine part it holds using
+the common interface methods defined by `IEngine`.
 
 ---
 See Also:
+
 - [Inheritance](Inheritance.md)
 - [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
 - [Polymorphism](Polymorphism.md)
