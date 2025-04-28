@@ -11,8 +11,7 @@ Classes that follow the Open-Closed Principle (OCP)
 and the Dependency Inversion Principle (DIP)
 tend to be loosely coupled.
 
-
-![](cohesion.png)
+<img src="coupling.png" width="512" alt=""/>
 
 ---
 See Also:

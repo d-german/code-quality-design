@@ -34,7 +34,7 @@ This is a foundational design principle. For example:
 
 ---
 
-![](cohesion.png)
+<img src="cohesion.png" width="512"/>
 
 ---
 See Also:
