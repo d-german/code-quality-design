@@ -11,7 +11,7 @@ structure.
 
 For example, Neal worked with a client project whose structure appears here:
 
-![Architecture Coupling Visualization](big-ball-of-mud.png)
+<img alt="Architecture Coupling Visualization" src="big-ball-of-mud.png" width="512"/>
 
 The client (whose name is withheld for obvious reasons) created a Java-based web application as quickly as possible over
 several years. The technical visualization shows their architectural coupling: each dot on the perimeter of the circle
