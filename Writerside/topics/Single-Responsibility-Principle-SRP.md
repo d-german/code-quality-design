@@ -25,7 +25,7 @@ use it at the lowest levels. But it is not one of the SOLID principles—it is n
 
 ## Example SRP Violation
 
-![](srp-violation.png)
+<img src="srp-violation.png" width="512" alt=""/>
 
 - The `calculatePay()` method is specified by the accounting department, which reports to the CFO.
 - The `reportHours()` method is specified and used by the human resources department, which reports to the COO.
@@ -35,13 +35,13 @@ use it at the lowest levels. But it is not one of the SOLID principles—it is n
 
 ## One Possible Solution
 
-![](srp-possible-solution.png)
+<img src="srp-possible-solution.png" width="512" alt=""/>
 
 ---
 
 ## Another Possible Solution Uses the Facade Pattern
 
-![](srp-possible-solution-facade.png)
+<img src="srp-possible-solution-facade.png" width="512" alt=""/>
 
 > **Facade Pattern:** Provide a unified interface to a set of interfaces in a subsystem. (GOF 185)
 
