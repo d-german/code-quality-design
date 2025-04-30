@@ -1,7 +1,9 @@
 # Open Closed Principle (OCP)
 
+## Overview
 A software module should be open for extension but closed for modification. (Martin, 2002: 99)
 
+## Core Concepts
 The OCP is at the heart of many of the claims made for OOD. (Martin, 2002: 125)
 
 The gist is that for software systems to be easy to change, they must be designed to allow the behavior of those systems
@@ -15,8 +17,7 @@ Clearly, some new code must be written. But how much old code will have to chang
 - How? By properly separating the things that change for different reasons (SRP), and then organizing the dependencies
   between those things properly (DIP). (Martin, 2017: 70)
 
-### OCP Examples
-
+## Implementation Examples
 ```C#
 public class AreaCalculator
 {
@@ -51,3 +52,4 @@ See Also:
 - [Decorator Pattern](Decorator-Pattern.md) (demonstrates OCP)
 - [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md) (often violates OCP)
 - [Coupling](Coupling.md) (OCP aims for looser coupling)
+`
