@@ -43,7 +43,7 @@ use it at the lowest levels. But it is not one of the SOLID principles—it is n
 
 <img src="srp-possible-solution-facade.png" width="512" alt=""/>
 
-> **Facade Pattern:** Provide a unified interface to a set of interfaces in a subsystem. (GOF 185)
+> **Facade Pattern: ** Provide a unified interface to a set of interfaces in a subsystem. (GOF 185)
 
 A Facade's public interface may appear to serve multiple actors, but its single responsibility is
 coordination—delegating work to specialized classes rather than implementing complex logic itself. Its adherence to SRP
