@@ -44,6 +44,14 @@ The article states that SRP is based on likely patterns of change. What does thi
 *   [ ] SRP primarily relates to optimizing code performance.
 *   [ ] SRP means grouping code based on functional similarity alone.
 
+**Question 6:**
+According to the article, how can a Facade pattern adhere to SRP despite having methods that appear to serve multiple actors?
+
+*   [ ] It cannot—Facade patterns inherently violate SRP.
+*   [ ] By making all methods static to remove state.
+*   [x] Its single responsibility is coordination—delegating to specialized classes rather than implementing complex logic itself.
+*   [ ] By limiting the number of methods to fewer than five.
+
 ## Free Response Questions
 
 **Short Answer Question 1:**
