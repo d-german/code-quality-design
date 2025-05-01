@@ -1,32 +1,68 @@
 <!-- cfg/search-hit-fix.html -->
 <script>
     (function () {
-        const bad = /\s*:\s*undefined\s*$/;          // text to remove
+        /* ---------------------------------------------------------------
+           1 / 2   CLEAN TITLES – remove the useless “: undefined” suffix
+        ----------------------------------------------------------------*/
+        const BAD_SUFFIX = /\s*:\s*undefined\s*$/;
 
-        /** remove ": undefined" from one title element */
-        function clean(el) {
+        /** Strip the bad suffix from one <h4 class="quick-search__title"> */
+        function cleanTitle(el) {
             if (!el || !el.textContent) return;
-            if (bad.test(el.textContent))
-                el.textContent = el.textContent.replace(bad, '');
+            if (BAD_SUFFIX.test(el.textContent))
+                el.textContent = el.textContent.replace(BAD_SUFFIX, '');
         }
 
-        /** run once, then watch for new hits */
-        function init() {
-            // 1 clean any titles already in the list
-            document.querySelectorAll('.quick-search__title').forEach(clean);
+        /* ----------------------------------------------------------------
+           2 / 2   ADVANCED SEARCH – always pass ?q=<current term>
+        -----------------------------------------------------------------*/
+        /** Wire the “Advanced search” button inside a quick-search panel */
+        function wireAdvancedLink(panel) {
+            const input = panel.querySelector('input[type="search"]');
+            const link  = panel.querySelector('.quick-search__advanced-link');
+            if (!input || !link) return;
 
-            // 2 keep cleaning as new results arrive
-            const obs = new MutationObserver(ms =>
-                ms.forEach(m =>
-                    m.addedNodes.forEach(n =>
-                        n.querySelectorAll?.('.quick-search__title').forEach(clean)
-                    )
+            const updateHref = () =>
+                (link.href = `search.html?q=${encodeURIComponent(input.value.trim())}`);
+
+            updateHref();                // set once for the first value
+            input.addEventListener('input', updateHref);  // update while typing
+        }
+
+        /* ---------------------------------------------------------------
+           Initialise once the DOM is ready
+        ----------------------------------------------------------------*/
+        function init() {
+            /* clean any titles already rendered */
+            document.querySelectorAll('.quick-search__title').forEach(cleanTitle);
+
+            /* observe DOM mutations to:
+               – clean new result titles
+               – (re)wire the Advanced-search link when the panel appears
+            */
+            const obs = new MutationObserver(muts =>
+                muts.forEach(m =>
+                    m.addedNodes.forEach(n => {
+                        n.querySelectorAll?.('.quick-search__title').forEach(cleanTitle);
+                        if (n.classList?.contains('quick-search')) wireAdvancedLink(n);
+                    })
                 )
             );
-            obs.observe(document.body, {childList: true, subtree: true});
+            obs.observe(document.body, { childList: true, subtree: true });
+
+            /* also handle the panel that is already open (if any) */
+            const panelNow = document.querySelector('.quick-search');
+            if (panelNow) wireAdvancedLink(panelNow);
+
+            /* Writerside raises this when the panel opens; use it as a backup */
+            document.addEventListener('DocSearch:autocomplete:afterOpen', e => {
+                const p = e?.detail?.autocomplete?.state?.context?.panel?.el
+                    || document.querySelector('.quick-search');
+                if (p) wireAdvancedLink(p);
+            });
         }
 
-        // run when DOM is ready
+        /* run when DOM is ready */
         if (document.readyState === 'loading')
             document.addEventListener('DOMContentLoaded', init);
         else
