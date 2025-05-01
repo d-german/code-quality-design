@@ -1,69 +1,64 @@
 <!-- cfg/search-hit-fix.html -->
 <style>
-    /* ───────────────────────────────────────────────────────────────
-       1. REMOVE “powered-by” FOOTER
-       ────────────────────────────────────────────────────────────── */
-    .app__footer { display: none !important; }
+    /* ───────── 1. remove “powered-by” footer ───────── */
+    .app__footer{display:none!important}
 
-    /* ───────────────────────────────────────────────────────────────
-       2. HIDE  -  Quick-search header + all Advanced-search buttons
-       ────────────────────────────────────────────────────────────── */
-    .quick-search__results-header,          /* your build               */
-    [data-test="full-search-button"],       /* your button variant      */
-    .quick-search__advanced-link,           /* Writerside ≤6            */
-    .DocSearch-SeeAllResults,               /* Writerside 7             */
-    button[aria-label="See all results"] {  /* fallback                 */
-        display: none !important;
+    /* ───────── 2. hide results-header & advanced button ───────── */
+    .quick-search__results-header,
+    [data-test="full-search-button"],
+    .quick-search__advanced-link,
+    .DocSearch-SeeAllResults,
+    button[aria-label="See all results"]{
+        display:none!important
     }
 </style>
 
 <script>
-    /* ───────────────────────────────────────────────────────────────
-       QUICK-SEARCH PATCHES
-       – strip “ : undefined” from hit titles
-       – replace placeholder text in the search box
-       ───────────────────────────────────────────────────────────── */
     (function () {
-        const BAD_SUFFIX      = /\s*:\s*undefined\s*$/;
-        const NEW_PLACEHOLDER = 'Search docs…';          // ← set your label here
-        const INPUT_SEL       =
-            '.quick-search input[type="search"], ' +   /* Writerside 6 */
-            '.DocSearch-Search-Input';                 /* Writerside 7 */
+        /* ───────── config ───────── */
+        const SEARCH_PLACEHOLDER = 'Search docs…';     // ← change text here
+        const INPUT_SEL = '.quick-search input[type="search"],.DocSearch-Search-Input';
+        const BAD = /\s*:\s*undefined\s*$/;
 
-        /* --- helpers ------------------------------------------------- */
-        function tidyTitle(el) {
-            if (el && BAD_SUFFIX.test(el.textContent))
-                el.textContent = el.textContent.replace(BAD_SUFFIX, '');
+        /* ───────── helper: clean a title ───────── */
+        const clean = el =>
+            el && BAD.test(el.textContent) &&
+            (el.textContent = el.textContent.replace(BAD,''));
+
+        /* ───────── helper: enforce placeholder & watch it ───────── */
+        function patchInput(inp){
+            if(!inp) return;
+            inp.placeholder = SEARCH_PLACEHOLDER;
+
+            /* keep it patched even if Writerside rewrites later */
+            new MutationObserver(ms=>{
+                ms.forEach(m=>{
+                    if(m.attributeName==='placeholder' && inp.placeholder!==SEARCH_PLACEHOLDER)
+                        inp.placeholder = SEARCH_PLACEHOLDER;
+                });
+            }).observe(inp,{attributes:true,attributeFilter:['placeholder']});
         }
 
-        function setPlaceholder(input) {
-            if (input && input.placeholder !== NEW_PLACEHOLDER)
-                input.placeholder = NEW_PLACEHOLDER;
+        /* ───────── run once and observe DOM ───────── */
+        function init(){
+            /* existing elements */
+            document.querySelectorAll('.quick-search__title').forEach(clean);
+            document.querySelectorAll(INPUT_SEL).forEach(patchInput);
+
+            /* future elements */
+            new MutationObserver(ms=>
+                ms.forEach(m=>m.addedNodes.forEach(n=>{
+                    n.querySelectorAll?.('.quick-search__title').forEach(clean);
+                    n.querySelectorAll?.(INPUT_SEL).forEach(patchInput);
+                    /* if the added node itself is an input/title */
+                    if(n.matches?.('.quick-search__title')) clean(n);
+                    if(n.matches?.(INPUT_SEL)) patchInput(n);
+                }))
+            ).observe(document.body,{childList:true,subtree:true});
         }
 
-        /* --- run once and keep tidy ---------------------------------- */
-        function init() {
-            /* 1. clean any titles already present */
-            document.querySelectorAll('.quick-search__title').forEach(tidyTitle);
-
-            /* 2. fix existing search input(s) */
-            document.querySelectorAll(INPUT_SEL).forEach(setPlaceholder);
-
-            /* 3. observe future mutations */
-            new MutationObserver(mutList =>
-                mutList.forEach(mut =>
-                    mut.addedNodes.forEach(node => {
-                        node.querySelectorAll?.('.quick-search__title')
-                            .forEach(tidyTitle);
-                        node.querySelectorAll?.(INPUT_SEL)
-                            .forEach(setPlaceholder);
-                    })
-                )
-            ).observe(document.body, { childList: true, subtree: true });
-        }
-
-        document.readyState === 'loading'
-            ? document.addEventListener('DOMContentLoaded', init)
+        document.readyState==='loading'
+            ? document.addEventListener('DOMContentLoaded',init)
             : init();
     })();
 </script>
