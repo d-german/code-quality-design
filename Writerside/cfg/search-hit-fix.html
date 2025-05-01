@@ -1,26 +1,30 @@
-<!-- injected via <include-in-head> -->
+<!-- Injected into <head> by <include-in-head> -->
 <script>
-    /*  Wait until the Algolia panel is inserted, then
-        strip trailing ": undefined" from each hit title.
-    -----------------------------------------------------*/
+    /*
+     * Remove trailing “: undefined” from every
+     * <h4 class="quick-search__title">…</h4> that appears
+     * in Writerside’s quick-search dropdown.
+     */
     (function () {
+        const bad = /\s*:\s*undefined\s*$/;            // pattern to drop
+
         function clean(node) {
-            if (!node) return;
-            const bad = ': undefined';
-            node.querySelectorAll('.DocSearch-Hit-title').forEach(el => {
-                if (el.textContent.trim().endsWith(bad)) {
-                    el.textContent = el.textContent.replace(bad, '');
-                }
-            });
+            if (!node || !node.textContent) return;
+            const txt = node.textContent;
+            if (bad.test(txt)) node.textContent = txt.replace(bad, '');
         }
 
-        // Observe DOM mutations so it works for every new search
-        const obs = new MutationObserver(m => {
-            m.forEach(rec => rec.addedNodes.forEach(clean));
-        });
-        obs.observe(document.body, {childList: true, subtree: true});
+        // 1. Clean titles already in the DOM
+        document.querySelectorAll('.quick-search__title').forEach(clean);
 
-        // also run once on page load (e.g. if search is already open)
-        clean(document.body);
+        // 2. Watch for new results added after each keystroke
+        const obs = new MutationObserver(mutations =>
+            mutations.forEach(m =>
+                m.addedNodes.forEach(n =>
+                    n.querySelectorAll?.('.quick-search__title').forEach(clean)
+                )
+            )
+        );
+        obs.observe(document.body, { childList: true, subtree: true });
     })();
 </script>
