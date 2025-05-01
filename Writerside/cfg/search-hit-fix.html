@@ -1,0 +1,26 @@
+<!-- injected via <include-in-head> -->
+<script>
+    /*  Wait until the Algolia panel is inserted, then
+        strip trailing ": undefined" from each hit title.
+    -----------------------------------------------------*/
+    (function () {
+        function clean(node) {
+            if (!node) return;
+            const bad = ': undefined';
+            node.querySelectorAll('.DocSearch-Hit-title').forEach(el => {
+                if (el.textContent.trim().endsWith(bad)) {
+                    el.textContent = el.textContent.replace(bad, '');
+                }
+            });
+        }
+
+        // Observe DOM mutations so it works for every new search
+        const obs = new MutationObserver(m => {
+            m.forEach(rec => rec.addedNodes.forEach(clean));
+        });
+        obs.observe(document.body, {childList: true, subtree: true});
+
+        // also run once on page load (e.g. if search is already open)
+        clean(document.body);
+    })();
+</script>
