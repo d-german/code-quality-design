@@ -1,45 +1,63 @@
 <!-- cfg/search-hit-fix.html -->
 <style>
     /* ───────────────────────────────────────────────────────────────
-       1.  REMOVE Writerside “powered-by” FOOTER
+       1. REMOVE “powered-by” FOOTER
        ────────────────────────────────────────────────────────────── */
     .app__footer { display: none !important; }
 
     /* ───────────────────────────────────────────────────────────────
-       2.  HIDE THE ADVANCED-SEARCH BUTTON COMPLETELY
-           Covers all known class / data-attr variants in Writerside 6–7
+       2. HIDE  -  Quick-search header + all Advanced-search buttons
        ────────────────────────────────────────────────────────────── */
-    [data-test="full-search-button"],
-    .quick-search__results-header,   /* your current build             */
-    .quick-search__advanced-link,          /* Writerside ≤6                  */
-    .DocSearch-SeeAllResults,              /* Writerside 7                   */
-    button[aria-label="See all results"] { /* future fallback                */
+    .quick-search__results-header,          /* your build               */
+    [data-test="full-search-button"],       /* your button variant      */
+    .quick-search__advanced-link,           /* Writerside ≤6            */
+    .DocSearch-SeeAllResults,               /* Writerside 7             */
+    button[aria-label="See all results"] {  /* fallback                 */
         display: none !important;
     }
 </style>
 
 <script>
     /* ───────────────────────────────────────────────────────────────
-         QUICK-SEARCH TITLE CLEAN-UP  (strip trailing “: undefined”)
+       QUICK-SEARCH PATCHES
+       – strip “ : undefined” from hit titles
+       – replace placeholder text in the search box
        ───────────────────────────────────────────────────────────── */
     (function () {
-        const BAD = /\s*:\s*undefined\s*$/;
+        const BAD_SUFFIX      = /\s*:\s*undefined\s*$/;
+        const NEW_PLACEHOLDER = 'Search docs…';          // ← set your label here
+        const INPUT_SEL       =
+            '.quick-search input[type="search"], ' +   /* Writerside 6 */
+            '.DocSearch-Search-Input';                 /* Writerside 7 */
 
-        function tidy(el) {
-            if (el && BAD.test(el.textContent))
-                el.textContent = el.textContent.replace(BAD, '');
+        /* --- helpers ------------------------------------------------- */
+        function tidyTitle(el) {
+            if (el && BAD_SUFFIX.test(el.textContent))
+                el.textContent = el.textContent.replace(BAD_SUFFIX, '');
         }
 
-        function init() {
-            /* clean titles already present */
-            document.querySelectorAll('.quick-search__title').forEach(tidy);
+        function setPlaceholder(input) {
+            if (input && input.placeholder !== NEW_PLACEHOLDER)
+                input.placeholder = NEW_PLACEHOLDER;
+        }
 
-            /* keep cleaning as new results arrive */
-            new MutationObserver(ms =>
-                ms.forEach(m =>
-                    m.addedNodes.forEach(n =>
-                        n.querySelectorAll?.('.quick-search__title').forEach(tidy)
-                    )
+        /* --- run once and keep tidy ---------------------------------- */
+        function init() {
+            /* 1. clean any titles already present */
+            document.querySelectorAll('.quick-search__title').forEach(tidyTitle);
+
+            /* 2. fix existing search input(s) */
+            document.querySelectorAll(INPUT_SEL).forEach(setPlaceholder);
+
+            /* 3. observe future mutations */
+            new MutationObserver(mutList =>
+                mutList.forEach(mut =>
+                    mut.addedNodes.forEach(node => {
+                        node.querySelectorAll?.('.quick-search__title')
+                            .forEach(tidyTitle);
+                        node.querySelectorAll?.(INPUT_SEL)
+                            .forEach(setPlaceholder);
+                    })
                 )
             ).observe(document.body, { childList: true, subtree: true });
         }
