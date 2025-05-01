@@ -1,30 +1,38 @@
-<!-- Injected into <head> by <include-in-head> -->
+<!-- cfg/search-hit-fix.html -->
 <script>
-    /*
-     * Remove trailing “: undefined” from every
-     * <h4 class="quick-search__title">…</h4> that appears
-     * in Writerside’s quick-search dropdown.
-     */
     (function () {
-        const bad = /\s*:\s*undefined\s*$/;            // pattern to drop
+        const bad = /\s*:\s*undefined\s*$/;          // text to remove
 
-        function clean(node) {
-            if (!node || !node.textContent) return;
-            const txt = node.textContent;
-            if (bad.test(txt)) node.textContent = txt.replace(bad, '');
+        /** remove ": undefined" from one title element */
+        function clean(el) {
+            if (!el || !el.textContent) return;
+            if (bad.test(el.textContent))
+                el.textContent = el.textContent.replace(bad, '');
         }
 
-        // 1. Clean titles already in the DOM
-        document.querySelectorAll('.quick-search__title').forEach(clean);
+        /** run once, then watch for new hits */
+        function init() {
+            // 1 clean any titles already in the list
+            document.querySelectorAll('.quick-search__title').forEach(clean);
 
-        // 2. Watch for new results added after each keystroke
-        const obs = new MutationObserver(mutations =>
-            mutations.forEach(m =>
-                m.addedNodes.forEach(n =>
-                    n.querySelectorAll?.('.quick-search__title').forEach(clean)
+            // 2 keep cleaning as new results arrive
+            const obs = new MutationObserver(ms =>
+                ms.forEach(m =>
+                    m.addedNodes.forEach(n =>
+                        n.querySelectorAll?.('.quick-search__title').forEach(clean)
+                    )
                 )
-            )
-        );
-        obs.observe(document.body, { childList: true, subtree: true });
+            );
+            obs.observe(document.body, {childList: true, subtree: true});
+
+            /* TEMP test-only line — remove after you see it pop up */
+            alert('search-hit-fix loaded');
+        }
+
+        // run when DOM is ready
+        if (document.readyState === 'loading')
+            document.addEventListener('DOMContentLoaded', init);
+        else
+            init();
     })();
 </script>
