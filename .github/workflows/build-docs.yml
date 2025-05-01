@@ -13,7 +13,8 @@ permissions:
 env:
   # Writerside-specific
   INSTANCE: 'Writerside/cqd'
-  DOCKER_VERSION: '243.22562'
+  # DOCKER_VERSION: '243.22562'
+  DOCKER_VERSION: '2025.04.8412'
 
   # Algolia-specific
   ALGOLIA_APP_NAME: '4HUKNT1XIU'         # e.g., 4A9KTXZ1GZ
