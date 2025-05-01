@@ -1,5 +1,4 @@
-/* static/custom.css */
-/* Hide the trailing dash and the word “undefined” when a record has no subtitle */
-.SearchHit_subtitle:empty {
+.SearchHit_subtitle {
+    /* remove the line entirely */
     display: none;
 }
