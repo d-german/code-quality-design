@@ -1,67 +1,67 @@
 <!-- cfg/search-hit-fix.html -->
 <style>
-    /*  HIDE THE FOOTER  --------------------------------------------------------
-        Writerside wraps its powered-by block in <div class="app__footer …">.
-        Setting display:none removes it on every page.                        */
+    /* ────────────────────────────────────────────────────────────────
+       1. HIDE THE FOOTER
+       ─────────────────────────────────────────────────────────────── */
     .app__footer { display: none !important; }
 </style>
 
 <script>
     (function () {
-        /* ---------------------------------------------------------------
-           1 / 3   CLEAN QUICK-SEARCH TITLES (“: undefined” issue)
-        ----------------------------------------------------------------*/
-        const BAD_SUFFIX = /\s*:\s*undefined\s*$/;
+        /* ───────────────────────────────────────────────────────────────
+             2.  QUICK-SEARCH TITLE CLEAN-UP  (remove “: undefined”)
+           ───────────────────────────────────────────────────────────── */
+        const BAD = /\s*:\s*undefined\s*$/;
 
         function cleanTitle(el) {
-            if (!el || !el.textContent) return;
-            if (BAD_SUFFIX.test(el.textContent))
-                el.textContent = el.textContent.replace(BAD_SUFFIX, '');
+            if (el && BAD.test(el.textContent))
+                el.textContent = el.textContent.replace(BAD, '');
         }
 
-        /* ---------------------------------------------------------------
-           2 / 3   ADVANCED SEARCH – carry ?q=<current term>
-        ----------------------------------------------------------------*/
-        function wireAdvancedLink(panel) {
-            const input = panel.querySelector('input[type="search"]');
-            const link  = panel.querySelector('.quick-search__advanced-link');
-            if (!input || !link) return;
+        /* ───────────────────────────────────────────────────────────────
+             3.  ADVANCED SEARCH  –   always open search.html?q=<term>
+           ───────────────────────────────────────────────────────────── */
+        const ADV_QUERY_PAGE = 'search.html';
 
-            const update = () =>
-                (link.href = `search.html?q=${encodeURIComponent(input.value.trim())}`);
-
-            update();                       // set once
-            input.addEventListener('input', update);   // keep in sync
+        /** Returns the <input type=search> inside the quick-search dialog. */
+        function searchBox() {
+            return document.querySelector(
+                '.quick-search input[type="search"], ' +                /* Writerside 6.x */
+                '.DocSearch-Search-Input'                               /* Writerside 7.x */
+            );
         }
 
-        /* ---------------------------------------------------------------
-           3 / 3   INSTALL everything once the DOM is ready
-        ----------------------------------------------------------------*/
+        /** Global click hijack for the Advanced-search action. */
+        document.addEventListener('click', e => {
+            // Button is a <a> in Writerside ≤6, a <button> in ≥7; catch both
+            const adv = e.target.closest(
+                '.quick-search__advanced-link, ' +                       /* ≤6 */
+                '[data-test="advanced-search-link"], ' +                 /* ≤6 */
+                '.DocSearch-SeeAllResults, ' +                           /* ≥7 */
+                'button[aria-label="See all results"]'                   /* fallback */
+            );
+            if (!adv) return;                // click was something else
+
+            e.preventDefault();              // stop Writerside’s default handler
+            const term = (searchBox()?.value || '').trim();
+            const url  = ADV_QUERY_PAGE + (term ? '?q=' + encodeURIComponent(term) : '');
+            window.location.href = url;      // navigate
+        });
+
+        /* ───────────────────────────────────────────────────────────────
+             4.  OBSERVE CHANGES  –  keep cleaning new titles that appear
+           ───────────────────────────────────────────────────────────── */
         function init() {
-            /* clean titles already present */
             document.querySelectorAll('.quick-search__title').forEach(cleanTitle);
 
-            /* observe mutations: clean new titles + (re)wire advanced link */
             const obs = new MutationObserver(ms =>
                 ms.forEach(m =>
-                    m.addedNodes.forEach(n => {
-                        n.querySelectorAll?.('.quick-search__title').forEach(cleanTitle);
-                        if (n.classList?.contains('quick-search')) wireAdvancedLink(n);
-                    })
+                    m.addedNodes.forEach(node =>
+                        node.querySelectorAll?.('.quick-search__title').forEach(cleanTitle)
+                    )
                 )
             );
-            obs.observe(document.body, {childList: true, subtree: true});
-
-            /* handle a panel that is already open */
-            const openPanel = document.querySelector('.quick-search');
-            if (openPanel) wireAdvancedLink(openPanel);
-
-            /* Writerside fires this event whenever quick-search opens */
-            document.addEventListener('DocSearch:autocomplete:afterOpen', e => {
-                const p = e?.detail?.autocomplete?.state?.context?.panel?.el
-                    || document.querySelector('.quick-search');
-                if (p) wireAdvancedLink(p);
-            });
+            obs.observe(document.body, { childList: true, subtree: true });
         }
 
         if (document.readyState === 'loading')
