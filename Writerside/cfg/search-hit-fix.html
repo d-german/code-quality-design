@@ -1,7 +1,7 @@
 <!-- cfg/search-hit-fix.html -->
 <style>
     /* ────────────────────────────────────────────────────────────────
-       1. HIDE THE FOOTER
+       1. REMOVE THE FOOTER
        ─────────────────────────────────────────────────────────────── */
     .app__footer { display: none !important; }
 </style>
@@ -9,64 +9,61 @@
 <script>
     (function () {
         /* ───────────────────────────────────────────────────────────────
-             2.  QUICK-SEARCH TITLE CLEAN-UP  (remove “: undefined”)
-           ───────────────────────────────────────────────────────────── */
+             2. QUICK-SEARCH TITLES  – strip “: undefined”
+        ──────────────────────────────────────────────────────────────── */
         const BAD = /\s*:\s*undefined\s*$/;
-
         function cleanTitle(el) {
             if (el && BAD.test(el.textContent))
                 el.textContent = el.textContent.replace(BAD, '');
         }
 
         /* ───────────────────────────────────────────────────────────────
-             3.  ADVANCED SEARCH  –   always open search.html?q=<term>
-           ───────────────────────────────────────────────────────────── */
-        const ADV_QUERY_PAGE = 'search.html';
+             3. ADVANCED SEARCH  – works with data-test="full-search-button"
+        ──────────────────────────────────────────────────────────────── */
+        const ADV_PAGE = 'search.html';
 
-        /** Returns the <input type=search> inside the quick-search dialog. */
-        function searchBox() {
-            return document.querySelector(
-                '.quick-search input[type="search"], ' +                /* Writerside 6.x */
-                '.DocSearch-Search-Input'                               /* Writerside 7.x */
+        /** current quick-search input (6 .x and 7 .x) */
+        const box = () =>
+            document.querySelector(
+                '.quick-search input[type="search"],' +  /* Writerside 6 */
+                '.DocSearch-Search-Input'                /* Writerside 7 */
             );
-        }
 
-        /** Global click hijack for the Advanced-search action. */
+        /** intercept clicks on the Advanced-search button */
         document.addEventListener('click', e => {
-            // Button is a <a> in Writerside ≤6, a <button> in ≥7; catch both
             const adv = e.target.closest(
-                '.quick-search__advanced-link, ' +                       /* ≤6 */
-                '[data-test="advanced-search-link"], ' +                 /* ≤6 */
-                '.DocSearch-SeeAllResults, ' +                           /* ≥7 */
-                'button[aria-label="See all results"]'                   /* fallback */
+                '[data-test="full-search-button"],' +      /* ← your build */
+                '.quick-search__advanced-link,' +          /* old 6.x */
+                '[data-test="advanced-search-link"],' +    /* old 6.x */
+                '.DocSearch-SeeAllResults,' +              /* 7.x */
+                'button[aria-label="See all results"]'     /* fallback */
             );
-            if (!adv) return;                // click was something else
+            if (!adv) return;          /* click was elsewhere */
 
-            e.preventDefault();              // stop Writerside’s default handler
-            const term = (searchBox()?.value || '').trim();
-            const url  = ADV_QUERY_PAGE + (term ? '?q=' + encodeURIComponent(term) : '');
-            window.location.href = url;      // navigate
+            e.preventDefault();        /* cancel Writerside’s handler */
+            const term = (box()?.value || '').trim();
+            const url  = term ? `${ADV_PAGE}?q=${encodeURIComponent(term)}`
+                : ADV_PAGE;
+            window.location.href = url;
         });
 
         /* ───────────────────────────────────────────────────────────────
-             4.  OBSERVE CHANGES  –  keep cleaning new titles that appear
-           ───────────────────────────────────────────────────────────── */
+             4. OBSERVE DOM – clean new titles that appear
+        ──────────────────────────────────────────────────────────────── */
         function init() {
             document.querySelectorAll('.quick-search__title').forEach(cleanTitle);
 
-            const obs = new MutationObserver(ms =>
+            new MutationObserver(ms =>
                 ms.forEach(m =>
-                    m.addedNodes.forEach(node =>
-                        node.querySelectorAll?.('.quick-search__title').forEach(cleanTitle)
+                    m.addedNodes.forEach(n =>
+                        n.querySelectorAll?.('.quick-search__title').forEach(cleanTitle)
                     )
                 )
-            );
-            obs.observe(document.body, { childList: true, subtree: true });
+            ).observe(document.body, { childList: true, subtree: true });
         }
 
-        if (document.readyState === 'loading')
-            document.addEventListener('DOMContentLoaded', init);
-        else
-            init();
+        document.readyState === 'loading'
+            ? document.addEventListener('DOMContentLoaded', init)
+            : init();
     })();
 </script>
