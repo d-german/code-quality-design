@@ -1,60 +1,62 @@
 <!-- cfg/search-hit-fix.html -->
+<style>
+    /*  HIDE THE FOOTER  --------------------------------------------------------
+        Writerside wraps its powered-by block in <div class="app__footer …">.
+        Setting display:none removes it on every page.                        */
+    .app__footer { display: none !important; }
+</style>
+
 <script>
     (function () {
         /* ---------------------------------------------------------------
-           1 / 2   CLEAN TITLES – remove the useless “: undefined” suffix
+           1 / 3   CLEAN QUICK-SEARCH TITLES (“: undefined” issue)
         ----------------------------------------------------------------*/
         const BAD_SUFFIX = /\s*:\s*undefined\s*$/;
 
-        /** Strip the bad suffix from one <h4 class="quick-search__title"> */
         function cleanTitle(el) {
             if (!el || !el.textContent) return;
             if (BAD_SUFFIX.test(el.textContent))
                 el.textContent = el.textContent.replace(BAD_SUFFIX, '');
         }
 
-        /* ----------------------------------------------------------------
-           2 / 2   ADVANCED SEARCH – always pass ?q=<current term>
-        -----------------------------------------------------------------*/
-        /** Wire the “Advanced search” button inside a quick-search panel */
+        /* ---------------------------------------------------------------
+           2 / 3   ADVANCED SEARCH – carry ?q=<current term>
+        ----------------------------------------------------------------*/
         function wireAdvancedLink(panel) {
             const input = panel.querySelector('input[type="search"]');
             const link  = panel.querySelector('.quick-search__advanced-link');
             if (!input || !link) return;
 
-            const updateHref = () =>
+            const update = () =>
                 (link.href = `search.html?q=${encodeURIComponent(input.value.trim())}`);
 
-            updateHref();                // set once for the first value
-            input.addEventListener('input', updateHref);  // update while typing
+            update();                       // set once
+            input.addEventListener('input', update);   // keep in sync
         }
 
         /* ---------------------------------------------------------------
-           Initialise once the DOM is ready
+           3 / 3   INSTALL everything once the DOM is ready
         ----------------------------------------------------------------*/
         function init() {
-            /* clean any titles already rendered */
+            /* clean titles already present */
             document.querySelectorAll('.quick-search__title').forEach(cleanTitle);
 
-            /* observe DOM mutations to:
-               – clean new result titles
-               – (re)wire the Advanced-search link when the panel appears
-            */
-            const obs = new MutationObserver(muts =>
-                muts.forEach(m =>
+            /* observe mutations: clean new titles + (re)wire advanced link */
+            const obs = new MutationObserver(ms =>
+                ms.forEach(m =>
                     m.addedNodes.forEach(n => {
                         n.querySelectorAll?.('.quick-search__title').forEach(cleanTitle);
                         if (n.classList?.contains('quick-search')) wireAdvancedLink(n);
                     })
                 )
             );
-            obs.observe(document.body, { childList: true, subtree: true });
+            obs.observe(document.body, {childList: true, subtree: true});
 
-            /* also handle the panel that is already open (if any) */
-            const panelNow = document.querySelector('.quick-search');
-            if (panelNow) wireAdvancedLink(panelNow);
+            /* handle a panel that is already open */
+            const openPanel = document.querySelector('.quick-search');
+            if (openPanel) wireAdvancedLink(openPanel);
 
-            /* Writerside raises this when the panel opens; use it as a backup */
+            /* Writerside fires this event whenever quick-search opens */
             document.addEventListener('DocSearch:autocomplete:afterOpen', e => {
                 const p = e?.detail?.autocomplete?.state?.context?.panel?.el
                     || document.querySelector('.quick-search');
@@ -62,7 +64,6 @@
             });
         }
 
-        /* run when DOM is ready */
         if (document.readyState === 'loading')
             document.addEventListener('DOMContentLoaded', init);
         else
