@@ -1,7 +1,7 @@
 <!-- cfg/search-hit-fix.html -->
 <style>
     /* ────────────────────────────────────────────────────────────────
-       1. REMOVE THE FOOTER
+       1.  HIDE THE FOOTER
        ─────────────────────────────────────────────────────────────── */
     .app__footer { display: none !important; }
 </style>
@@ -9,8 +9,8 @@
 <script>
     (function () {
         /* ───────────────────────────────────────────────────────────────
-             2. QUICK-SEARCH TITLES  – strip “: undefined”
-        ──────────────────────────────────────────────────────────────── */
+             2.  QUICK-SEARCH TITLE CLEAN-UP  (remove “: undefined”)
+        ─────────────────────────────────────────────────────────────── */
         const BAD = /\s*:\s*undefined\s*$/;
         function cleanTitle(el) {
             if (el && BAD.test(el.textContent))
@@ -18,52 +18,58 @@
         }
 
         /* ───────────────────────────────────────────────────────────────
-             3. ADVANCED SEARCH  – works with data-test="full-search-button"
-        ──────────────────────────────────────────────────────────────── */
-        const ADV_PAGE = 'search.html';
+             3.  ADVANCED SEARCH  –  open …/index.html?s=full&q=TERM
+             (button has data-test="full-search-button")
+        ─────────────────────────────────────────────────────────────── */
+        const BUTTON_SELECTOR =
+            '[data-test="full-search-button"],' +       /* your button        */
+            '.quick-search__advanced-link,' +           /* Writerside ≤6       */
+            '.DocSearch-SeeAllResults,' +               /* Writerside 7        */
+            'button[aria-label="See all results"]';     /* fallback            */
 
-        /** current quick-search input (6 .x and 7 .x) */
+        /** Return the quick-search input element (6.x or 7.x). */
         const box = () =>
             document.querySelector(
-                '.quick-search input[type="search"],' +  /* Writerside 6 */
-                '.DocSearch-Search-Input'                /* Writerside 7 */
+                '.quick-search input[type="search"], ' +  /* 6.x */
+                '.DocSearch-Search-Input'                 /* 7.x */
             );
 
-        /** intercept clicks on the Advanced-search button */
+        /** Base URL “…/<instance>/index.html” */
+        function rootIndex() {
+            return window.location.pathname.replace(/[^/]*$/, 'index.html');
+        }
+
+        /* Intercept every click on the Advanced-search button. */
         document.addEventListener('click', e => {
-            const adv = e.target.closest(
-                '[data-test="full-search-button"],' +      /* ← your build */
-                '.quick-search__advanced-link,' +          /* old 6.x */
-                '[data-test="advanced-search-link"],' +    /* old 6.x */
-                '.DocSearch-SeeAllResults,' +              /* 7.x */
-                'button[aria-label="See all results"]'     /* fallback */
-            );
-            if (!adv) return;          /* click was elsewhere */
+            const btn = e.target.closest(BUTTON_SELECTOR);
+            if (!btn) return;           // some other click
 
-            e.preventDefault();        /* cancel Writerside’s handler */
+            e.preventDefault();         // cancel Writerside’s handler
             const term = (box()?.value || '').trim();
-            const url  = term ? `${ADV_PAGE}?q=${encodeURIComponent(term)}`
-                : ADV_PAGE;
+            const url  = rootIndex() +
+                (term ? `?s=full&q=${encodeURIComponent(term)}` : '?s=full');
             window.location.href = url;
         });
 
         /* ───────────────────────────────────────────────────────────────
-             4. OBSERVE DOM – clean new titles that appear
-        ──────────────────────────────────────────────────────────────── */
+             4.  OBSERVE DOM  –  keep cleaning titles that appear later
+        ─────────────────────────────────────────────────────────────── */
         function init() {
             document.querySelectorAll('.quick-search__title').forEach(cleanTitle);
 
-            new MutationObserver(ms =>
-                ms.forEach(m =>
+            const obs = new MutationObserver(muts =>
+                muts.forEach(m =>
                     m.addedNodes.forEach(n =>
                         n.querySelectorAll?.('.quick-search__title').forEach(cleanTitle)
                     )
                 )
-            ).observe(document.body, { childList: true, subtree: true });
+            );
+            obs.observe(document.body, { childList: true, subtree: true });
         }
 
-        document.readyState === 'loading'
-            ? document.addEventListener('DOMContentLoaded', init)
-            : init();
+        if (document.readyState === 'loading')
+            document.addEventListener('DOMContentLoaded', init);
+        else
+            init();
     })();
 </script>
