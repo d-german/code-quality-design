@@ -13,7 +13,7 @@ Imagine building with a deck of playing cards. You can create impressive,
 tall structures by carefully balancing cards on top of each other. This is
 similar to building a deep inheritance hierarchy.
 
-![](Houseofcards.png)
+<img src="Houseofcards.png" width="512"/>
 
 * **The Benefit:** You get height (reuse) quickly by leveraging the
   structure below. A `Manager` "is-a" `Employee`, inheriting common
@@ -44,7 +44,7 @@ Now, imagine building with Lego bricks. Each brick is a self-contained unit
 with standard connection points (studs and tubes). You connect bricks to
 create larger structures.
 
-![](lego-house.png)
+<img src="lego-house.png" width="512"/>
 
 * **The Benefit:** The structure is modular and flexible.
     * **Modularity:** Each Lego brick represents a distinct responsibility
@@ -73,8 +73,8 @@ would you? Doing so destroys the flexibility that makes them useful, locking
 you into a single, rigid design. If you wanted to change *anything*, you'd
 likely have to break the structure apart.
 
-Using composition in software but depending directly on **concrete, volatile
-classes** is analogous to building with glued-together Lego bricks. Just as
+Using composition in software but depending directly on [**concrete, volatile
+classes**](Stable-vs-Volatile-Dependencies.md) is analogous to building with glued-together Lego bricks. Just as
 glue makes the physical structure rigid and difficult (or impossible) to change
 without breaking it, depending directly on specific, changeable
 implementations creates tight coupling in your code.
