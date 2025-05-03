@@ -4,7 +4,7 @@ This principle advises software designers to avoid depending on things that they
 
 We should not force clients to depend upon methods that they do not use.
 
-**AKA:** Interface Pollution or Fat Interface
+**AKA:** Interface Pollution or Fat Interface (2002 Martin 235)
 
 When a class is large, rarely do all of its clients use all of its methods. Often we can see different groupings of
 methods that particular clients use. If we create an interface for each of these groupings and have the large class
@@ -120,16 +120,24 @@ public class MultiFunctionalCar : IDrive, IFly
         Console.WriteLine("Fly a multifunctional car");
     }
 }
-
-
 ```
 
 ---
 
----
+## Relationship Between ISP and SRP
+
+A fat interface with low cohesion forces any implementer to include many different behaviors, which breaks
+the Single Responsibility Principle. The main exception is a
+pure [**Facade**](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md): it simply delegates each group of
+behavior to
+a dedicated helper, so each class still has only one reason to change.
+
 See Also:
+
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
 - [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
 - [Cohesion](Cohesion.md) (Fat interfaces often lack cohesion)
-- [Evolving Configuration Interfaces From Boolean Flags to Expressive Design](Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md) (mentions ISP)
+- [Evolving Configuration Interfaces From Boolean Flags to Expressive Design](Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md) (
+  mentions ISP)
+- [Facade Pattern](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md)
