@@ -40,7 +40,7 @@ The DIP is the hallmark of good OOD; if we do not invert the dependencies, it is
 
 The dashed lines represent the flow of control. Notice that in the first diagram, `Main` calls the `Draw` method of
 `Circle`. In order for `Main` to call `Draw`, it must somehow mention `Circle` as a source code dependency, which is
-depicted using the red lines. In C it is accomplished with `#include`, in Java with an `import` statement, and in C#
+depicted using the dashed lines. In C it is accomplished with `#include`, in Java with an `import` statement, and in C#
 with a `using` statement.
 
 Notice that in the first diagram the dependency arrow and the flow of control arrow point in the same direction, which
