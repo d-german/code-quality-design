@@ -3,7 +3,9 @@
     /* ───────────────────────────────────────────────────────────────
        1.  REMOVE Writerside “powered-by” FOOTER
        ────────────────────────────────────────────────────────────── */
-    .app__footer { display: none !important; }
+    .app__footer {
+        display: none !important;
+    }
 
     /* ───────────────────────────────────────────────────────────────
        2.  HIDE quick-search header & any Advanced-search button
@@ -12,7 +14,9 @@
     [data-test="full-search-button"],
     .quick-search__advanced-link,
     .DocSearch-SeeAllResults,
-    button[aria-label="See all results"] { display: none !important; }
+    button[aria-label="See all results"] {
+        display: none !important;
+    }
 
     /* ───────────────────────────────────────────────────────────────
        3.  VISUALLY HIDE the placeholder in case the attribute flashes
@@ -21,15 +25,25 @@
         color: transparent !important;
         opacity: 0 !important;
     }
+
+    /* ───────────────────────────────────────────────────────────────
+4.  HIDE search-copyright div
+────────────────────────────────────────────────────────────── */
+    [data-test="search-copyright"],
+    .search-copyright,
+    .DocSearch-Logo,
+    .DocSearch-PoweredBy {
+        display: none !important;
+    }
 </style>
 
 <script>
     /* keep everything inside one IIFE */
     (function () {
         /* ───── config ───── */
-        const INPUT_SEL       = '[data-test-id="search-input"]';
-        const NEW_PLACEHOLDER = 'Type to search…';
-        const BAD_SUFFIX      = /\s*:\s*undefined\s*$/;
+        const INPUT_SEL = '[data-test-id="search-input"]';
+        const NEW_PLACEHOLDER = '';
+        const BAD_SUFFIX = /\s*:\s*undefined\s*$/;
 
         /* ───── helpers ───── */
         function tidyTitle(el) {
@@ -54,10 +68,10 @@
                         inp.placeholder = NEW_PLACEHOLDER;
                     }
                 })
-            ).observe(inp, { attributes: true, attributeFilter: ['placeholder'] });
+            ).observe(inp, {attributes: true, attributeFilter: ['placeholder']});
         }
 
-        /* ───── initialise once the DOM is ready ───── */
+        /* ───── initialize once the DOM is ready ───── */
         function init() {
             /* clean any titles already rendered */
             document.querySelectorAll('.quick-search__title').forEach(tidyTitle);
@@ -76,7 +90,7 @@
                         if (node.matches?.(INPUT_SEL)) patchInput(node);
                     })
                 )
-            ).observe(document.body, { childList: true, subtree: true });
+            ).observe(document.body, {childList: true, subtree: true});
         }
 
         document.readyState === 'loading'
