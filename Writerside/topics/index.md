@@ -43,7 +43,7 @@ Many ideas here come from books and articles I have read (you will see the sourc
             *   [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
                 *   [Inheritance vs Composition Analogy](Inheritance-vs-Composition-Analogy.md)
         *   Design Patterns
-            *   [The Facade Pattern with the Single Responsibility Principle](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md)
+            *   [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
             *   [Decorator Pattern](Decorator-Pattern.md)
             *   [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md)
         *   Dependencies and Coupling

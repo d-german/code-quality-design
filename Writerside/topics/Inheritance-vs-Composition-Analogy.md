@@ -15,10 +15,10 @@ similar to building a deep inheritance hierarchy.
 
 <img src="Houseofcards.png" width="512"/>
 
-* **The Benefit:** You get height (reuse) quickly by leveraging the
+* **The Benefit: ** You get height (reuse) quickly by leveraging the
   structure below. A `Manager` "is-a" `Employee`, inheriting common
   properties and behaviors.
-* **The Problem:** The structure is inherently fragile and tightly coupled.
+* **The Problem: ** The structure is inherently fragile and tightly coupled.
     * **Fragility:** Nudge a card at the bottom, and the entire structure
       above it might collapse. Similarly, changing a base class (even with
       `protected` members) can unintentionally break derived classes
@@ -44,7 +44,7 @@ Now, imagine building with Lego bricks. Each brick is a self-contained unit
 with standard connection points (studs and tubes). You connect bricks to
 create larger structures.
 
-<img src="lego-house.png" width="512"/>
+<img src="lego-house.png" width="512" alt=""/>
 
 * **The Benefit:** The structure is modular and flexible.
     * **Modularity:** Each Lego brick represents a distinct responsibility

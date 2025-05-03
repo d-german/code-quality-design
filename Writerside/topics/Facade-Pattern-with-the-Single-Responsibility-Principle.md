@@ -1,4 +1,4 @@
-# The Facade Pattern with the Single Responsibility Principle
+# Facade Pattern with the Single Responsibility Principle
 
 ## Introduction
 

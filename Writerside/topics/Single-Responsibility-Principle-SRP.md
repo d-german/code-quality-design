@@ -57,7 +57,7 @@ See Also:
 - [Cohesion](Cohesion.md) (High cohesion often aligns with SRP)
 - [Coupling](Coupling.md) (Violating SRP can increase coupling)
 - [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md) (Related principle of separation)
-- [The Facade Pattern with the Single Responsibility Principle](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md) (
+- [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md) (
   Facade as solution)
 - [How do we write a test for a private method](How-do-we-write-a-test-for-a-private-method.md) (SRP violation leads to
   testing issues)

@@ -128,7 +128,7 @@ public class MultiFunctionalCar : IDrive, IFly
 
 A fat interface with low cohesion forces any implementer to include many different behaviors, which breaks
 the Single Responsibility Principle. The main exception is a
-pure [**Facade**](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md): it simply delegates each group of
+pure [**Facade**](Facade-Pattern-with-the-Single-Responsibility-Principle.md): it simply delegates each group of
 behavior to
 a dedicated helper, so each class still has only one reason to change.
 
@@ -140,4 +140,4 @@ See Also:
 - [Cohesion](Cohesion.md) (Fat interfaces often lack cohesion)
 - [Evolving Configuration Interfaces From Boolean Flags to Expressive Design](Evolving-Configuration-Interfaces-From-Boolean-Flags-to-Expressive-Design.md) (
   mentions ISP)
-- [Facade Pattern](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md)
+- [Facade Pattern](Facade-Pattern-with-the-Single-Responsibility-Principle.md)

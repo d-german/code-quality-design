@@ -270,7 +270,7 @@ capability to handle read-only form controls and properly render text areas with
 
 ---
 See Also:
-- [The Facade Pattern with the Single Responsibility Principle](The-Facade-Pattern-with-the-Single-Responsibility-Principle.md)
+- [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
 - [Composition](Composition.md)
 - [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
