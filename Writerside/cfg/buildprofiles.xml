@@ -9,7 +9,7 @@
         <algolia-index>code_quality_docs</algolia-index>
         <algolia-api-key>fa81dc3f7cba7efdb24093857d481070</algolia-api-key>
         <algolia-show-logo>true</algolia-show-logo>
-        <code-soft-wrap>true</code-soft-wrap>
+        <code-soft-wrap>false</code-soft-wrap>
         <analytics-head-script-file>ga-head.html</analytics-head-script-file>
         <include-in-head>search-hit-fix.html</include-in-head>
 <!--        &lt;!&ndash; Override default Algolia query parameters to remove version filtering &ndash;&gt;-->
