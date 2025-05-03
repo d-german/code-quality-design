@@ -1,6 +1,7 @@
 # Decorator Pattern
 
-Recall the facade pattern we discussed earlier? It provides a simplified interface to a complex subsystem.
+[Recall the facade pattern we discussed earlier](Facade-Pattern-with-the-Single-Responsibility-Principle.md)? It
+provides a simplified interface to a complex subsystem.
 
 ```PlantUML
 @startuml
@@ -270,6 +271,7 @@ capability to handle read-only form controls and properly render text areas with
 
 ---
 See Also:
+
 - [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
 - [Composition](Composition.md)
