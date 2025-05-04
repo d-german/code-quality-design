@@ -13,7 +13,7 @@ Another example is our use of simple DTOs (Data Transfer Objects):
 > to this is that, aside from a few exceptions, you can consider an appearance of the `new` keyword to be a code smell. (
 > McLean Hall, 83)
 
-This leads to a second point. Using the `new` keyword could violate the **SRP**. (TBD find a reference for this.)
+This leads to a second point. Using the `new` keyword could violate the **SRP**. [See: Constructor That Does Real Work](https://rydercsblog.wordpress.com/2017/12/10/programming-flaw-constructor-that-does-real-work/#:~:text=,want%20to%20create%20all%20an)
 
 Creating objects can be complex. An object may depend on several other objects. Manually creating instances of
 everything and passing them to classes that aggregate their functionality, and repeating until you’re finished, is a
