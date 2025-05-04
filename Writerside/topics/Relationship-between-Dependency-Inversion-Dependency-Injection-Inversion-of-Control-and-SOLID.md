@@ -1,4 +1,4 @@
-# Relationship between Dependency Inversion, Dependency Injection, Inversion of Control and SOLID
+# Relationship between Dependency Inversion, Dependency Injection, Inversion of Control, and SOLID
 
 `Example1` class contains (composition) a stable and a volatile dependency.
 
@@ -52,7 +52,10 @@ public class Example2
     }
 }
 ```
-Note that this is **Dependency Injection**, but it is **not** Dependency Inversion. **Example2**, like **Example1**, violates the **DIP**, but it does **not** violate the **SRP** because it uses **IoC** (inversion of control) for its volatile dependency management.
+
+Note that this is **Dependency Injection**, but it is **not** Dependency Inversion. **Example2**, like **Example1**,
+violates the **DIP** (as it still depends on the concrete `VolatileDependency` class), but it does **not** violate the *
+*SRP** because it uses **IoC** (inversion of control) for its volatile dependency management.
 
 The `Test1` method creates the dependencies and injects them into **Example2**.
 
@@ -65,7 +68,7 @@ public void Test1()
 }
 ```
 
-Finally, `Example3`  does not violate any of the SOLID principles:
+Finally, `Example3` does not violate any of the SOLID principles:
 
 ```C#
 public class Example3
@@ -87,12 +90,15 @@ public class Example3
 }
 ```
 
-Note that **Example3** no longer depends on the concrete `VolatileDependency` class but now depends on the `IVolatileDependency` interface.
+Note that **Example3** no longer depends on the concrete `VolatileDependency` class but now depends on the
+`IVolatileDependency` interface.
 
-In summary, **Dependency Inversion**, **Dependency Injection**, and **Inversion of Control** are distinct but related concepts, and we can explain them in terms of the **SOLID** design principles.
+In summary, **Dependency Inversion**, **Dependency Injection**, and **Inversion of Control** are distinct but related
+concepts, and we can explain them in terms of the **SOLID** design principles.
 
 ---
 See Also:
+
 - [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
 - [Dependency Injection (DI)](Dependency-Injection-DI.md)
 - [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
