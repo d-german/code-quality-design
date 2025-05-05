@@ -160,7 +160,9 @@ private WeatherForecast BuildErrorResponse(string errorMessage)
 ````
 
 Now it looks like a **Calculation**, but if `WeatherForecast` is mutable, then it’s still an Action! Mutable data
-can cause implicit side effects. This concept is known as "mutability leaks purity"—even if a function appears pure
+can cause implicit side effects. This concept is can be thought of
+as [mutability leaks purity](https://www.compositional-it.com/news-blog/pure-functions/#:~:text=Note%20that%20isolation%20is%20stronger,the%20rest%20of%20the%20program)
+—even if a function appears pure
 from its signature, passing mutable objects can compromise its purity because these objects could be modified elsewhere,
 leading to unexpected behavior. True functional purity requires both pure function signatures and immutable data
 structures.
