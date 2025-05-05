@@ -24,7 +24,12 @@ the classic problem of "too many cooks in the kitchen spoil the broth."
 
 Tasks in .NET represent asynchronous operations. They are a higher-level abstraction over threads and thread pools,
 designed to simplify writing asynchronous code. Imagine Tasks as the various orders or requests for dishes that come
-into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (threads). Each Task details what needs to be done, similar to how an order specifies what dish to prepare.
+into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (
+threads).
+Each Task details what needs to be done, similar to how an order specifies what dish to prepare.
+
+For a fuller explanation of why Tasks don't always consume a thread and how `async/await` works, see the Concurrency
+article.
 
 ## The Kitchen Analogy Expanded
 
@@ -37,6 +42,20 @@ Tasks are immediate, requiring active engagement from the chefs, akin to CPU-bou
 threads busy. Other Tasks, like marinating or waiting for a delivery, are asynchronous and don't need constant
 attention, similar to asynchronous I/O operations in programming.
 
+## Concurrency vs. Parallelism
+
+Concurrency is about dealing with many things at once, while parallelism is about literally doing many things at the
+same time. In the restaurant, concurrency is the chef preparing multiple dishes by switching between them, while
+parallelism is having multiple chefs working on different dishes simultaneously.
+
+## Async Doesn't Always Mean New Thread
+
+It's important to understand that asynchronous operations don't always run on a separate thread. For example, when a
+chef puts a dish in the oven and sets a timer (async I/O), they're free to work on other tasks while waiting—no need
+for another chef (thread). For more details, see Stephen
+Cleary's ["There Is No Thread"](https://blog.stephencleary.com/2013/11/there-is-no-thread.html) explanation referenced
+in Concurrency.md.
+
 ## Efficiency and Performance
 
 Just as having too many chefs can lead to inefficiencies, overly threading a program can cause performance issues.
@@ -47,7 +66,7 @@ In this well-managed kitchen, it's essential to balance the number of chefs (thr
 maximize efficiency. The restaurant manager (.NET Thread Pool) is crucial in this, smartly assigning tasks based on
 their nature and current workload.
 
-Modern Programming and High-Level Abstractions
+## Modern Programming and High-Level Abstractions
 
 Modern C# programming leverages high-level abstractions like PLINQ and the async-await model to manage tasks
 efficiently. These abstractions allow for tasks to be handled much like a chef managing multiple dishes, some requiring
@@ -55,5 +74,6 @@ immediate attention, others simmering in the background, but all converging to c
 
 ---
 See Also:
+
 - [Concurrency](Concurrency.md)
 - [Understanding the Thread Pool in .NET](Understanding-the-Thread-Pool-in-NET.md)
