@@ -82,7 +82,7 @@ struct example, the entire object is copied, so `a()` and `b()` are independent.
 ### Class
 
 ```C#
-public class Person {                     ❶
+public class Person {                      ❶
   public int Id { get; private set; }
   public string FirstName { get; private set; }
   public string LastName { get; private set; }
@@ -102,7 +102,7 @@ public class Person {                     ❶
 ### Struct
 
 ```C#
-public struct Person {                    ❶
+public struct Person {                     ❶
   public int Id { get; private set; }
   public string FirstName { get; private set; }
   public string LastName { get; private set; }
@@ -172,11 +172,9 @@ Actual layout of an array in memory
 
 ## Linked List
 
-A linked list is a collection of heterogeneous elements where each element, called a node, contains a value and a
-reference (or pointer) to the next node in the sequence. Unlike arrays, the elements of a linked list are not stored
-contiguously in memory; instead, each element can be located anywhere in memory, with the references connecting them. By
-heterogeneous, we mean that the memory locations of the elements (nodes) are scattered, not necessarily next to one
-another, though the data type of the value within the nodes is homogeneous.
+A linked list is a collection of nodes, where each node stores a value (of a homogeneous data type) and a reference
+(or pointer) to the next node. Unlike arrays, nodes are stored non-contiguously in memory; their locations may be
+scattered, with the references connecting them.
 
 ![Linked List](linkedlist1.png)
 
@@ -202,6 +200,7 @@ void DemonstrateLinkedList()
 ## Exceptions: Misleading Simplifications
 
 Note the following exceptions:
+
 - Value-type fields within reference-type objects are allocated on the heap.
 - Captured locals in closures might be moved to the heap.
 
@@ -253,9 +252,29 @@ implementations.
 Similar to Queue, an array-based implementation of Stack would face the same challenges with pre-allocated size and
 array resizing.
 
+## Garbage Collection Performance Summary (Optional)
+
+From C# 12 in a Nutshell by Joseph Albahari (2024, pp. 593-597):
+
+| Generation                  | Object Size/Type                                | Collection Time         | When It Occurs                              | 
+|-----------------------------|-------------------------------------------------|-------------------------|---------------------------------------------|
+| **Gen 0**                   | Newest objects, typically small and short-lived | Less than 1 millisecond | Most frequent, typically unnoticeable       |
+| **Gen 1**                   | Objects that survived a Gen 0 collection        | A few milliseconds      | Intermediate frequency                      |
+| **Gen 2**                   | Long-lived objects that survived Gen 1          | Part of full collection | Least frequent                              |
+| **LOH** (Large Object Heap) | Large objects ≥ 85,000 bytes                    | Part of full collection | Infrequent, special rules apply             |
+| **Full collection**         | All generations (0, 1, 2, and LOH)              | Up to 100 milliseconds  | Least frequent, can cause noticeable pauses |
+
+The generational design significantly improves performance by focusing collection efforts on the newest objects, which
+are the most likely to become garbage. Each generation gets collected at different frequencies, creating an efficient
+balance between memory reclamation and application performance.
+
+
 
 ---
 See Also:
-- [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (mentions `Span<T>`)
-- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (struct performance)
-`
+
+- [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (
+  mentions `Span<T>`)
+- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (
+  struct performance)
+  `
