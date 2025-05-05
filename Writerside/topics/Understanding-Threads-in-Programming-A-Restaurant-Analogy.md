@@ -14,7 +14,7 @@ preparing specific dishes, much like each thread executes a particular sequence 
 
 ## Thread Pool
 
-A thread pool is a collection of pre-initialized threads ready to execute tasks. Every .NET application has a thread
+A thread pool is a collection of pre-initialized threads ready-to-execute tasks. Every .NET application has a thread
 pool, which maintains a number of worker threads waiting to execute tasks. The thread pool, much like the restaurant
 manager, oversees the kitchen, assigning chefs to different tasks based on their availability and the workload. The
 manager ensures there are enough chefs to handle the orders but not so many that they get in each other's way, avoiding
@@ -24,8 +24,7 @@ the classic problem of "too many cooks in the kitchen spoil the broth."
 
 Tasks in .NET represent asynchronous operations. They are a higher-level abstraction over threads and thread pools,
 designed to simplify writing asynchronous code. Imagine Tasks as the various orders or requests for dishes that come
-into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (
-threads). Each Task details what needs to be done, similar to how an order specifies what dish to prepare.
+into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (threads). Each Task details what needs to be done, similar to how an order specifies what dish to prepare.
 
 ## The Kitchen Analogy Expanded
 
@@ -34,7 +33,7 @@ preparing dishes (executing instructions), while the restaurant manager (Thread 
 allocation.
 
 Tasks (orders) come into the kitchen and are managed by the restaurant manager, who delegates these to the chefs. Some
-Tasks are immediate, requiring active engagement from the chefs, akin to CPU bound tasks in programming that keep
+Tasks are immediate, requiring active engagement from the chefs, akin to CPU-bound tasks in programming that keep
 threads busy. Other Tasks, like marinating or waiting for a delivery, are asynchronous and don't need constant
 attention, similar to asynchronous I/O operations in programming.
 
