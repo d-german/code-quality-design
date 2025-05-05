@@ -82,7 +82,7 @@ struct example, the entire object is copied, so `a()` and `b()` are independent.
 ### Class
 
 ```C#
-public class Person {                    ❶
+public class Person {                     ❶
   public int Id { get; private set; }
   public string FirstName { get; private set; }
   public string LastName { get; private set; }
@@ -199,6 +199,23 @@ void DemonstrateLinkedList()
 }
 ```
 
+## Exceptions: Misleading Simplifications
+
+Note the following exceptions:
+- Value-type fields within reference-type objects are allocated on the heap.
+- Captured locals in closures might be moved to the heap.
+
+Example of a closure capturing a local variable:
+
+```C#
+void DemonstrateClosure()
+{
+    int localValue = 42; // local created on the stack
+    Func<int> getValue = () => localValue; // closure captures localValue, moving it to the heap
+    Console.WriteLine(getValue());
+}
+``` 
+
 ## Garbage Collection in .NET
 
 In .NET, garbage collection (GC) is responsible for automatically managing memory. The GC monitors which objects in the
@@ -241,3 +258,4 @@ array resizing.
 See Also:
 - [Exploring Performance with New Collection Expression Syntax in C# 12](Exploring-Performance-with-New-Collection-Expression-Syntax-in-C-12.md) (mentions `Span<T>`)
 - [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (struct performance)
+`
