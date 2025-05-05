@@ -268,7 +268,7 @@ The generational design significantly improves performance by focusing collectio
 are the most likely to become garbage. Each generation gets collected at different frequencies, creating an efficient
 balance between memory reclamation and application performance.
 
-
+![Garbage Collection](gc.png)
 
 ---
 See Also:
