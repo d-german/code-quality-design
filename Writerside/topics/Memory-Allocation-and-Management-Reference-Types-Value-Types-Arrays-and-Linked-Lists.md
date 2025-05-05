@@ -277,4 +277,3 @@ See Also:
   mentions `Span<T>`)
 - [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (
   struct performance)
-  `
