@@ -16,6 +16,9 @@ sending an email, launching a rocket, or altering global state. These can create
 each time the function is executed. This can result in unintended consequences if the purpose of the function is only to
 return a value and not to produce side effects.
 
+In contrast, a **pure function** is a function that always produces the same output for the same input and has no side
+effects. Pure functions rely only on their input parameters and don't modify any external state.
+
 Functional programming is often reduced to the idea of *"No side effects!"*, but this is an oversimplification.
 Functional programming is not just about avoiding side effects, but rather controlling and managing them.
 
@@ -263,6 +266,7 @@ IEnumerable<int> Add2(IEnumerable<int> numbers)
     }
 
     return result;
+
 }
 ]]>
 </code-block>
@@ -280,6 +284,7 @@ IEnumerable<string> IntToString(IEnumerable<int> numbers)
     }
 
     return result;
+
 }
 ]]>
 </code-block>
@@ -484,10 +489,12 @@ var finalPoint = ints.Reduce(
 );
 Assert.That(finalPoint.X, Is.EqualTo(55));
 ````
+
 ---
 
 ---
 See Also:
+
 - [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md)
 - [Higher-Order Function Examples](Higher-Order-Function-Examples.md)
 - [Function composition and method chaining](Function-composition-and-method-chaining.md)

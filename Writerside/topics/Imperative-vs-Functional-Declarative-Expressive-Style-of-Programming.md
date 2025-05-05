@@ -14,7 +14,7 @@ for (var counter = 0; counter < _values.Count; counter++)
 
 This loop clearly outlines the process of adding each element's value to the sum using a for loop that iterates through
 each element one at a time. This approach is referred to as **external iteration** because you dictate how the iteration
-occurs rather than relying on the library. It necessitates sequential access to the elements from start to finish within
+occurs rather than relying on the library. It requires sequential access to the elements from start to finish within
 a single execution thread. In this case, two mutable variables (`sum` and `counter`) are created, which change their
 values throughout the iteration. (Detiel 868)
 
