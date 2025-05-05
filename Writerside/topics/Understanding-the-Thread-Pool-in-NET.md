@@ -25,8 +25,9 @@ for the CLR's strategy to work best:
    If a task is blocked (e.g., waiting for an I/O operation to complete), then the CLR may interpret this as the CPU
    being busy. It might respond by injecting more threads into the pool, leading to potential oversubscription and
    degraded performance.
- 
-TODO: this needs to be rephrased
+
+In short, the CLR’s heuristics shine when individual tasks complete quickly and when threads are not left idling in a
+blocked state.
 
 ## Handling Long-Running Tasks
 
@@ -52,12 +53,12 @@ var evenNums = source.AsParallel().Where(num => num % 2 == 0).ToArray();
 PLINQ uses the .NET thread pool for its operations, leveraging multiple threads to execute the parallel queries.
 
 If a CPU-bound task cannot be effectively broken down into smaller tasks, consider running it on a separate, dedicated
-thread outside of the thread pool to avoid interfering with the CLR's management of the thread pool. This will help
+thread outside the thread pool to avoid interfering with the CLR's management of the thread pool. This will help
 maintain optimal performance across all your application's threads.
 
 ### Handling Long-Running Tasks Outside the Thread Pool
 
-If a task cannot be broken down, consider running it on a separate, dedicated thread outside of the thread pool.
+If a task cannot be broken down, consider running it on a separate, dedicated thread outside the thread pool.
 
 #### Example: Creating a Dedicated Thread
 
@@ -89,7 +90,7 @@ class Program
 ### I/O-bound Tasks
 
 For long-running I/O-bound tasks such as network requests, file I/O, and database calls, it's highly recommended to
-employ asynchronous programming. The async/await pattern in .NET allows a thread to be freed up while an I/O operation
+use asynchronous programming. The async/await pattern in .NET allows a thread to be freed up while an I/O operation
 is in progress. This strategy prevents thread blocking and improves the utilization of the thread pool.
 
 #### Example: Asynchronous File Read
@@ -106,9 +107,10 @@ In this example, `ReadToEndAsync` is an asynchronous operation that does not blo
 
 However, if an asynchronous method is not available for your long-running I/O-bound operation, you can offload the
 operation to a separate thread from the thread pool using `Task.Run`. This method doesn't actively process; it mostly
-keeps the thread in a waiting state, which is less resource-intensive. 
+keeps the thread in a waiting state, which is less resource-intensive.
 
-TODO: rephrase
+Use this technique only when no asynchronous API is available. Prefer a genuinely asynchronous alternative whenever
+possible. For more information, refer to [**here**](Concurrency.md#proper-usage-of-task-run).
 
 #### Example: Offloading Blocking I/O
 
