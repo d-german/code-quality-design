@@ -24,8 +24,7 @@ the classic problem of "too many cooks in the kitchen spoil the broth."
 
 Tasks in .NET represent asynchronous operations. They are a higher-level abstraction over threads and thread pools,
 designed to simplify writing asynchronous code. Imagine Tasks as the various orders or requests for dishes that come
-into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (
-threads).
+into the kitchen. The restaurant manager (.NET Thread Pool) receives these Tasks and assigns them to available chefs (threads).
 Each Task details what needs to be done, similar to how an order specifies what dish to prepare.
 
 For a fuller explanation of why Tasks don't always consume a thread and how `async/await` works, see the Concurrency
