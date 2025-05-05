@@ -107,9 +107,64 @@ can lead to deadlocks.
 For more details on async programming, refer to resources such as "Async in C# 5.0" by Alex Davies and Microsoft's async
 programming documentation.
 
+### Cancellation in Asynchronous Operations
+
+In real-world applications, long-running operations often need to be cancellable. .NET provides the `CancellationToken`
+system to enable cooperative cancellation of asynchronous operations. Cancellation is cooperative, meaning operations
+check if cancellation has been requested rather than being forcibly terminated.
+
+```C#
+// Basic async method that supports cancellation
+async Task ProcessDataAsync(CancellationToken cancellationToken = default)
+{
+    // Check for cancellation before starting work
+    cancellationToken.ThrowIfCancellationRequested();
+    
+    // Simulate long-running work with cancellation support
+    await Task.Delay(1000, cancellationToken);
+    
+    // More processing with periodic cancellation checks
+    for (int i = 0; i < 10; i++)
+    {
+        // Check if cancellation was requested
+        if (cancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine("Operation cancelled");
+            return; // Early exit
+        }
+        
+        // Do some work
+        await Task.Delay(100);
+    }
+}
+
+// Usage example
+async Task RunWithCancellationAsync()
+{
+    // Create a cancellation token source
+    using var cts = new CancellationTokenSource();
+    
+    // Set it to cancel after 2 seconds
+    cts.CancelAfter(TimeSpan.FromSeconds(2));
+    
+    try
+    {
+        // Start the operation with the token
+        await ProcessDataAsync(cts.Token);
+        Console.WriteLine("Operation completed successfully");
+    }
+    catch (OperationCanceledException)
+    {
+        Console.WriteLine("Operation was cancelled");
+    }
+}
+```
+
+A `CancellationToken` is created from a `CancellationTokenSource` and passed to methods that support cancellation:
+
 ---
 
-## Introduction to Parallel Programming
+## Parallel Programming
 
 Parallel programming is used when there is significant computational work that can be divided into independent chunks.
 It increases CPU usage to improve throughput, which is beneficial for client systems with idle CPUs but less so for
@@ -221,7 +276,8 @@ These models allow developers to write asynchronous code without manually managi
 **Task.Run** should be used only for CPU-bound operations. Avoid wrapping synchronous methods in Task.Run merely to
 simulate asynchrony, as this can lead to "fake-asynchronous" methods that confuse consumers and reduce scalability,
 particularly in ASP.NET Core applications. Instead, use Task.Run externally to call the method when necessary, rather
-than incorporating it into reusable library code.
+than incorporating it into reusable library code. Let library consumers apply Task.Run when needed based on their
+specific use case and threading requirements.
 
 ---
 
