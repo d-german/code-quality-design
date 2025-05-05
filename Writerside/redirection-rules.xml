@@ -27,4 +27,9 @@
         <description>Created after removal of "bla" from Code Quality Design</description>
         <accepts>bla.html</accepts>
     </rule>
+    <rule id="d21729f">
+        <description>
+            <![CDATA[Created after removal of "Introduction to Maybe<T>" from Code Quality Design]]></description>
+        <accepts>Introduction-to-Maybe-T.html</accepts>
+    </rule>
 </rules>

@@ -62,9 +62,9 @@
         <toc-element toc-title="Functional Programming">
             <toc-element topic="Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md"/>
             <toc-element topic="Functional-in-the-Small-and-Object-Oriented-in-the-Large.md"/>
+            <toc-element topic="Introduction-To-Result-T.md"/>
             <toc-element topic="Prefer-Dictionary-over-Switch-Statement.md"/>
             <toc-element topic="Using-SelectMany.md"/>
-            <toc-element topic="Introduction-to-Maybe-T.md"/>
             <toc-element topic="Higher-Order-Function-Examples.md"/>
             <toc-element topic="Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md"/>
             <toc-element topic="Function-composition-and-method-chaining.md"/>

@@ -63,7 +63,7 @@ Many ideas here come from books and articles I have read (you will see the sourc
         *   [Functional in the Small and Object Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md)
         *   [Prefer Dictionary over Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
         *   [Using SelectMany](Using-SelectMany.md)
-        *   [Introduction to Maybe T](Introduction-to-Maybe-T.md)
+        *   [Introduction to Result T](Introduction-To-Result-T.md)
         *   [Higher Order Function Examples](Higher-Order-Function-Examples.md)
         *   [Transitioning from Classes to Records and Adopting IImmutableList in C](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
         *   [Function composition and method chaining](Function-composition-and-method-chaining.md)

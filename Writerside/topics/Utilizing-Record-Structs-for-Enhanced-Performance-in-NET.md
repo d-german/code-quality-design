@@ -1,4 +1,4 @@
-# Utilizing Record Structs for Enhanced Performance in .NET
+# Using Record Structs for Enhanced Performance in .NET
 
 When developing DTOs or Value Objects in .NET, consider the adoption of
 `record struct`s instead of traditional `record`s (which are classes).
