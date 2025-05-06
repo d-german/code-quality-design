@@ -59,7 +59,7 @@ building web APIs.
 instead of implementing your own solution. The `ProblemDetails` approach used here is just one implementation choice
 that may not be appropriate for all scenarios. This inheritance-based implementation will incur heap allocations for
 each `Result<T>` instance, which may impact performance in high-throughput scenarios.
-See **[](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md)**
+See **[Memory Allocation and Management](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md)**
 
 ---
 
@@ -128,16 +128,6 @@ public async Task<IActionResult> HandleProcessingRequestAsync(
             "An unexpected result type was returned.")
     };
 }
-
-// Placeholder types for the example
-public record InputData(string Id);
-public record ProcessedData(string Content);
-public record ProcessedDataViewModel(string DisplayContent);
-public partial record ProcessedDataViewModel {
-    public ProcessedDataViewModel(ProcessedData data) : this(data.Content) { }
-}
-// Assume _service is an instance of ISomeService and controller
-// has using Microsoft.AspNetCore.Mvc; and Microsoft.AspNetCore.Http;
 ```
 
 In this flow:
