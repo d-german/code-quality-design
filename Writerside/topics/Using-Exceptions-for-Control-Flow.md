@@ -48,10 +48,6 @@ public class DataController : ControllerBase
         {
             return UnprocessableEntity($"Operation failed: {ofe.Message}");
         }
-        // catch (AuthenticationException aex)
-        // {
-        //     return Unauthorized();
-        // }
         catch (Exception ex) // Catch-all for unexpected errors
         {
             // Log the generic exception: _logger.LogError(ex, "...");
@@ -242,7 +238,7 @@ public class DataProcessingService
     always yields the same output with no side effects. This leads to
     more predictable code. A pure method that can't compute a result due to invalid input
     can return `Result.Fail` rather than throwing an exception, maintaining its truthfulness
-    about the operation outcome.
+    about the operation outcome. See:**[](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md#side-effects)**
 
 By using `Result<T>` with embedded `ProblemDetails`, the service layer takes
 responsibility for crafting detailed error responses, simplifying the
@@ -263,8 +259,6 @@ Exceptions come with significant performance costs due to several factors:
 For these reasons, exceptions should be used for truly exceptional,
 unexpected conditions rather than expected error cases that are part of
 normal program flow.
-
-### When to Throw an Exception
 
 ### Testing
 
