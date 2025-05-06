@@ -6,6 +6,11 @@ fail with an error. This pattern promotes clearer, more robust code
 compared to relying solely on exceptions for expected failure scenarios or
 returning nulls.
 
+> **Note:** This implementation is for educational purposes only. For production use, 
+> consider using established libraries instead of implementing your own solution.
+> The `ProblemDetails` approach used here is just one implementation choice
+> that may not be appropriate for all scenarios.
+
 ---
 
 ## Defining the `Result<T>` Concept
@@ -55,6 +60,10 @@ carries a `ProblemDetails` object (from `Microsoft.AspNetCore.Mvc`).
 This object standardizes error reporting, allowing for an HTTP status code,
 a title, detailed messages, and even extension members to convey rich error
 information. This approach aligns well with building web APIs.
+
+Note that this inheritance-based implementation will incur heap allocations
+for each `Result<T>` instance, which may impact performance in
+high-throughput scenarios.
 
 ---
 
@@ -335,3 +344,7 @@ failure outcomes in C#. Key points include:
   operations.
 - Leveraging built-in error handling (exception-to-`Failure` conversion)
   and short-circuiting within the pipeline methods.
+
+For production systems, consider using established libraries such as
+OneOf, FluentResults, or LanguageExt that provide optimized, well-tested
+implementations of this pattern.
