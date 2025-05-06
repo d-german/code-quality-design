@@ -6,10 +6,10 @@ fail with an error. This pattern promotes clearer, more robust code
 compared to relying solely on exceptions for expected failure scenarios or
 returning nulls.
 
-> **Note:** This implementation is for educational purposes only. For production use, 
-> consider using established libraries instead of implementing your own solution.
-> The `ProblemDetails` approach used here is just one implementation choice
-> that may not be appropriate for all scenarios.
+**Note:** This implementation is for educational purposes only. For production use,
+consider using established libraries instead of implementing your own solution.
+The `ProblemDetails` approach used here is just one implementation choice
+that may not be appropriate for all scenarios.
 
 ---
 
