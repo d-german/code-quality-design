@@ -1,6 +1,6 @@
 # Using Exceptions for Control Flow
 
-Using exceptions as a means of controlling program flow is generally considered an anti-pattern in software development.
+Using exceptions as a means of controlling program flow is generally considered an antipattern in software development.
 Exceptions are intended to handle "exceptional" conditions that a program should not expect to occur frequently. Relying
 on them for regular control flow can lead to code that is more difficult to read, debug, and maintain. Moreover,
 exceptions can be expensive in terms of system resources, as the process of creating, throwing, and catching exceptions
@@ -99,7 +99,7 @@ public async Task<IActionResult> ProductSearch(
 ```
 
 This method uses exceptions to handle various error cases and return the appropriate HTTP status codes. Although this
-approach works, it relies heavily on throwing exceptions as part of normal control flow.
+approach works, it relies heavily on throwing exceptions as part of a normal control flow.
 
 ### Additional Service Method
 
@@ -179,7 +179,8 @@ public async Task<IProductCollection> ProductSearch(
 ## A Better Alternative: Result Object Pattern
 
 Instead of using exceptions for control flow, a better approach is to use a result object that encapsulates the success
-or failure outcome along with any relevant data. (See `Maybe<T>`) Here's how we can refactor the above example:
+or failure outcome along with any relevant data. (See [**Introduction to `Result<T>`**](Introduction-To-Result-T.md))
+Here's how we can refactor the above example:
 
 ```C#
 public class SearchResult<T>
@@ -443,7 +444,7 @@ part of normal program flow.
 ### Testing
 
 - **Easier to test**
-  Returning values or results can simplify tests, because you no longer need to handle or expect thrown exceptions.
+  Returning values or results can simplify tests because you no longer need to handle or expect thrown exceptions.
 - **Example**
   Instead of:
 
@@ -470,8 +471,9 @@ you could return an error code or a result object, making the test straightforwa
   If a required service is not provided, throwing can signal the error early.
 
 Exceptions should be reserved for truly exceptional circumstances that prevent the normal operation of your application,
-not for handling expected error conditions that can be anticipated and managed through return values or result objects.
+not for handling expected error conditions that can be expected and managed through return values or result objects.
 
 ---
 See Also:
-- [Introduction to Maybe T](Introduction-to-Maybe-T.md) (Result object alternative)
+
+- [Introduction to `Result<T>`](Introduction-To-Result-T.md) (Result object alternative)
