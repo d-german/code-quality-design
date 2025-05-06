@@ -1,479 +1,345 @@
 # Using Exceptions for Control Flow
 
-Using exceptions as a means of controlling program flow is generally considered an antipattern in software development.
-Exceptions are intended to handle "exceptional" conditions that a program should not expect to occur frequently. Relying
-on them for regular control flow can lead to code that is more difficult to read, debug, and maintain. Moreover,
-exceptions can be expensive in terms of system resources, as the process of creating, throwing, and catching exceptions
-involves significant overhead. Instead of using exceptions for control flow, consider using specialized result types to
-handle expected conditions.
+Using exceptions as a means of controlling program flow is generally
+considered an antipattern in software development. Exceptions are intended
+to handle "exceptional" conditions that a program should not expect to
+occur frequently. Relying on them for regular control flow can lead to
+code that is more difficult to read, debug, and maintain. Moreover,
+exceptions can be expensive in terms of system resources, as the process
+of creating, throwing, and catching exceptions involves significant
+overhead. Instead of using exceptions for control flow, consider using
+specialized result types to handle expected conditions.
 
 ## Example: Throwing Exceptions for Control Flow
 
-Below is an example of an ASP.NET Core controller method that uses exceptions for handling different outcomes in a
-search operation:
+Below is an example of an ASP.NET Core controller method that calls a
+service. The service method uses exceptions for handling different
+outcomes in a user input processing operation.
 
 ```C#
-public async Task<IActionResult> ProductSearch(
-    [FromQuery(Name = "filter")] string base64EncodedFilter,
-    [FromQuery(Name = "includeDiscontinued")] string discontinuedFilter)
+// In your controller:
+public class DataController : ControllerBase
 {
-    try
+    private readonly DataProcessingService _processingService;
+
+    public DataController(DataProcessingService processingService)
     {
-        Guard.VerifyArgumentNotNull(base64EncodedFilter);
-        Guard.AuthTokenIsNotNullOrWhitespace(Request?.Headers);
-        var products = await _productAdapter.ProductSearch(
-            base64EncodedFilter, 
-            discontinuedFilter);        
-        return new OkObjectResult(products);
+        _processingService = processingService;
     }
-    catch (NotSuccessfulException nse)
+
+    public IActionResult ProcessUserData([FromQuery] string userInput)
     {
-        if (nse.StatusCode == StatusCodes.Status400BadRequest)
+        try
         {
-            return new BadRequestObjectResult(
-                ProblemDetailsHelper.BadRequestProblemDetails(
-                    nse.Content));
+            // Assume Guard.AuthTokenIsValid() checks auth
+            // Guard.AuthTokenIsValid(Request?.Headers);
+
+            var processedData = _processingService.ProcessInput(userInput);
+            return Ok(processedData);
         }
-        else
+        catch (ArgumentNullException ane)
         {
-            return new ContentResult
-            {
-                StatusCode = nse.StatusCode,
-                Content = nse.Content,
-                ContentType = Constants.ApplicationJson
-            };
+            return BadRequest($"Input error: {ane.ParamName} is required.");
         }
-    }
-    catch (ArgumentException ae)
-    {
-        var problem = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat,
-            DiagnosticConstants.IncompatibleProductFilter);        
-        return BadRequest(problem);
-    }
-    catch (GatewayTimeoutException gte)
-    {
-        var problemDetails = ProblemDetailsHelper.GatewayProblemDetails();
-        return new ObjectResult(problemDetails)
+        catch (FormatException fe)
         {
-            StatusCode = StatusCodes.Status504GatewayTimeout
-        };
-    }
-    catch (InvalidFilterException ife)
-    {
-        if (!string.IsNullOrWhiteSpace(ife.DetailedMessage))
-        {
-            logging.AddLogDatum(
-                DiagnosticConstants.DetailedException, 
-                ife.DetailedMessage);
+            return BadRequest($"Invalid format: {fe.Message}");
         }
-        var problemDetails = ProblemDetailsHelper
-            .BadRequestProblemDetails(ife.Message);
-        return new BadRequestObjectResult(problemDetails);
-    }
-    catch (UnsupportedFilterException ufe)
-    {
-        return new OkObjectResult(null);
-    }
-    catch (AuthorizationException ahe)
-    {
-        return Unauthorized();
-    }
-    catch (NotImplementedException nie)
-    {
-        return StatusCode(StatusCodes.Status501NotImplemented);
-    }
-    catch (Exception ex) when (
-        ex is FormatException || 
-        ex is Newtonsoft.Json.JsonException)
-    {
-        var problemDetails = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat);
-        return new BadRequestObjectResult(problemDetails);
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(StatusCodes.Status500InternalServerError);
+        catch (ArgumentOutOfRangeException aoore)
+        {
+            return BadRequest($"Invalid value: {aoore.Message}");
+        }
+        catch (OperationFailedException ofe)
+        {
+            // Custom exception for specific business rule failures
+            return UnprocessableEntity($"Operation failed: {ofe.Message}");
+        }
+        // catch (AuthenticationException aex)
+        // {
+        //     return Unauthorized();
+        // }
+        catch (Exception ex)
+        {
+            // Log the generic exception: _logger.LogError(ex, "...");
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                "An unexpected error occurred.");
+        }
     }
 }
 ```
 
-This method uses exceptions to handle various error cases and return the appropriate HTTP status codes. Although this
-approach works, it relies heavily on throwing exceptions as part of a normal control flow.
+This controller method uses a `try-catch` block to handle various
+exceptions thrown by the service method.
 
-### Additional Service Method
+### Service Method Using Exceptions
 
-The service method below also uses exceptions to signal different outcomes (e.g., HTTP 400, 404, 501). Each case throws
-an exception to indicate the result, which is then caught and translated into an appropriate response:
+The service method below also uses exceptions to signal different outcomes
+(e.g., invalid input, processing errors). Each case throws an exception
+to indicate the result, which is then caught by the controller.
 
 ```C#
-public async Task<IProductCollection> ProductSearch(
-    string filter, 
-    string discontinuedFilter)
+public class ProcessedData
 {
-    if (string.IsNullOrEmpty(filter))
-    {
-        throw new ArgumentException("Filter cannot be null or empty");
-    }
+    public string Value { get; set; }
+}
 
-    string decodedFilter;
-    try
+// Custom exception for example
+public class OperationFailedException : Exception
+{
+    public OperationFailedException(string message) : base(message) { }
+}
+
+public class DataProcessingService
+{
+    public ProcessedData ProcessInput(string rawInput)
     {
-        decodedFilter = DecodeBase64(filter);
-    }
-    catch (FormatException)
-    {
-        throw new InvalidFilterException("Invalid filter format") 
-        { 
-            DetailedMessage = "Base64 encoding format is invalid" 
-        };
-    }
-    
-    var searchCriteria = JsonConvert.DeserializeObject<SearchCriteria>(
-        decodedFilter);
-    
-    if (!IsSearchCriteriaValid(searchCriteria))
-    {
-        throw new InvalidFilterException(
-            "Search criteria validation failed");
-    }
-    
-    if (searchCriteria.UseAdvancedFeatures && 
-        !_featureFlags.AdvancedSearchEnabled)
-    {
-        throw new UnsupportedFilterException(
-            "Advanced search is not supported");
-    }
-    
-    try
-    {
-        var result = await _repository.SearchProducts(
-            searchCriteria, 
-            discontinuedFilter == "true");
-            
-        if (result == null || !result.Any())
+        if (string.IsNullOrWhiteSpace(rawInput))
         {
-            return new ProductCollection { 
-                Items = new List<Product>(), 
-                TotalCount = 0 
-            };
+            throw new ArgumentNullException(nameof(rawInput),
+                "Input cannot be null or empty.");
         }
-        
-        return new ProductCollection { 
-            Items = result, 
-            TotalCount = result.Count 
-        };
-    }
-    catch (TimeoutException)
-    {
-        throw new GatewayTimeoutException("Repository search timed out");
-    }
-    catch (NotSupportedException)
-    {
-        throw new NotImplementedException(
-            "Search feature not implemented for this repository");
+
+        int number;
+        try
+        {
+            number = int.Parse(rawInput);
+        }
+        catch (FormatException fe)
+        {
+            // Re-throw or wrap if adding more context,
+            // or let original exception propagate.
+            throw new FormatException("Input must be a valid integer.", fe);
+        }
+
+        if (number <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(rawInput),
+                "Input number must be positive.");
+        }
+
+        if (number == 99) // Simulate a specific business rule failure
+        {
+            throw new OperationFailedException(
+                "Processing for number 99 is not allowed.");
+        }
+
+        // Simulate a successful operation
+        return new ProcessedData { Value = $"Processed: {number}" };
     }
 }
 ```
 
 ## A Better Alternative: Result Object Pattern
 
-Instead of using exceptions for control flow, a better approach is to use a result object that encapsulates the success
-or failure outcome along with any relevant data. (See [**Introduction to `Result<T>`**](Introduction-To-Result-T.md))
+Instead of using exceptions for control flow, a better approach is to
+use a result object that encapsulates the success or failure outcome along
+with any relevant data or error details.
+
+(See [**Introduction to `Result<T>`**](Introduction-To-Result-T.md)
+for the definition of `Result<T>`, `Success<T>`, `Failure<T>`,
+`ErrorDetails`, and the `Result.Ok()`, `Result.Fail()` helpers used below.)
+
 Here's how we can refactor the above example:
 
 ```C#
-public class SearchResult<T>
+// In your controller:
+public class DataController : ControllerBase
 {
-    public bool IsSuccess { get; private set; }
-    public T Data { get; private set; }
-    public int StatusCode { get; private set; }
-    public string ErrorMessage { get; private set; }
-    public ProblemDetails ProblemDetails { get; private set; }
+    private readonly DataProcessingService _processingService;
 
-    public static SearchResult<T> Success(T data)
+    public DataController(DataProcessingService processingService)
     {
-        return new SearchResult<T>
+        _processingService = processingService;
+    }
+
+    public IActionResult ProcessUserData([FromQuery] string userInput)
+    {
+        // Example: Basic input check before service call
+        if (userInput == null) // Controller level check
         {
-            IsSuccess = true,
-            Data = data,
-            StatusCode = StatusCodes.Status200OK
-        };
-    }
+            return BadRequest("Query parameter 'userInput' is missing.");
+        }
+        // Assume AuthHelper.IsValid(Request?.Headers) -> Result<AuthInfo>
+        // var authResult = AuthHelper.IsValid(Request?.Headers);
+        // if (authResult is Failure<AuthInfo> authFailure)
+        //     return Unauthorized(authFailure.Error.Message);
 
-    public static SearchResult<T> Failure(
-        int statusCode, 
-        string errorMessage, 
-        ProblemDetails problemDetails = null)
-    {
-        return new SearchResult<T>
+        var result = _processingService.ProcessInput(userInput);
+
+        return result switch
         {
-            IsSuccess = false,
-            StatusCode = statusCode,
-            ErrorMessage = errorMessage,
-            ProblemDetails = problemDetails
-        };
-    }
-}
-
-public async Task<IActionResult> ProductSearch(
-    [FromQuery(Name = "filter")] string base64EncodedFilter,
-    [FromQuery(Name = "includeDiscontinued")] string discontinuedFilter)
-{
-    // Validate inputs
-    if (string.IsNullOrEmpty(base64EncodedFilter))
-    {
-        var problem = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat);
-        return BadRequest(problem);
-    }
-    
-    if (!AuthHelper.HasValidToken(Request?.Headers))
-    {
-        return Unauthorized();
-    }
-
-    // Perform the search operation
-    var result = await _productAdapter.ProductSearch(
-        base64EncodedFilter, 
-        discontinuedFilter);
-    
-    // Handle the result based on success/failure
-    if (result.IsSuccess)
-    {
-        return new OkObjectResult(result.Data);
-    }
-    
-    // Handle different types of failures
-    switch (result.StatusCode)
-    {
-        case StatusCodes.Status400BadRequest:
-            return new BadRequestObjectResult(result.ProblemDetails);
-            
-        case StatusCodes.Status401Unauthorized:
-            return Unauthorized();
-            
-        case StatusCodes.Status404NotFound:
-            return NotFound();
-            
-        case StatusCodes.Status504GatewayTimeout:
-            return new ObjectResult(result.ProblemDetails)
+            Success<ProcessedData> s => Ok(s.Value),
+            Failure<ProcessedData> f => f.Error.Message switch
             {
-                StatusCode = StatusCodes.Status504GatewayTimeout
-            };
-            
-        case StatusCodes.Status501NotImplemented:
-            return StatusCode(StatusCodes.Status501NotImplemented);
-            
-        default:
-            return StatusCode(StatusCodes.Status500InternalServerError);
+                // Match specific error messages or add error codes
+                // to ErrorDetails for more robust matching.
+                var msg when msg.Contains("null or empty") =>
+                    BadRequest(f.Error.Message),
+                var msg when msg.Contains("valid integer") =>
+                    BadRequest(f.Error.Message),
+                var msg when msg.Contains("must be positive") =>
+                    BadRequest(f.Error.Message),
+                var msg when msg.Contains("not allowed") =>
+                    UnprocessableEntity(f.Error.Message),
+                _ => StatusCode(StatusCodes.Status500InternalServerError,
+                                f.Error.Message) // Default failure
+            },
+            _ => StatusCode(StatusCodes.Status500InternalServerError,
+                            "An unexpected result type was returned.")
+        };
     }
 }
 ```
 
-And here's how the service method would be refactored:
+And here's how the service method would be refactored to return `Result<T>`:
 
 ```C#
-public async Task<SearchResult<IProductCollection>> ProductSearch(
-    string filter, 
-    string discontinuedFilter)
-{
-    // Validate filter
-    if (string.IsNullOrEmpty(filter))
-    {
-        var problemDetails = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat);
-            
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status400BadRequest, 
-            "Filter cannot be null or empty", 
-            problemDetails);
-    }
+// ProcessedData class remains the same.
+// No custom OperationFailedException needed if using Result<T>.
 
-    // Decode base64 filter
-    string decodedFilter;
-    try
+public class DataProcessingService
+{
+    public Result<ProcessedData> ProcessInput(string rawInput)
     {
-        decodedFilter = DecodeBase64(filter);
-    }
-    catch (FormatException)
-    {
-        var problemDetails = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat);
-            
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status400BadRequest, 
-            "Invalid filter format", 
-            problemDetails);
-    }
-    
-    // Parse the search criteria
-    SearchCriteria searchCriteria;
-    try
-    {
-        searchCriteria = JsonConvert.DeserializeObject<SearchCriteria>(
-            decodedFilter);
-    }
-    catch (JsonException)
-    {
-        var problemDetails = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.ProductFilterInvalidFormat);
-            
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status400BadRequest, 
-            "Invalid search criteria JSON", 
-            problemDetails);
-    }
-    
-    // Validate search criteria
-    if (!IsSearchCriteriaValid(searchCriteria))
-    {
-        var problemDetails = ProblemDetailsHelper.BadRequestProblemDetails(
-            DiagnosticConstants.IncompatibleProductFilter);
-            
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status400BadRequest, 
-            "Search criteria validation failed", 
-            problemDetails);
-    }
-    
-    // Check for unsupported features
-    if (searchCriteria.UseAdvancedFeatures && 
-        !_featureFlags.AdvancedSearchEnabled)
-    {
-        return SearchResult<IProductCollection>.Success(null);
-    }
-    
-    try
-    {
-        // Perform the actual search
-        var result = await _repository.SearchProducts(
-            searchCriteria, 
-            discontinuedFilter == "true");
-        
-        // Return search results
-        if (result == null || !result.Any())
+        if (string.IsNullOrWhiteSpace(rawInput))
         {
-            return SearchResult<IProductCollection>.Success(
-                new ProductCollection { 
-                    Items = new List<Product>(), 
-                    TotalCount = 0 
-                }
-            );
+            return Result.Fail<ProcessedData>(
+                "Input cannot be null or empty.");
         }
-        
-        return SearchResult<IProductCollection>.Success(
-            new ProductCollection { 
-                Items = result, 
-                TotalCount = result.Count 
-            }
+
+        int number;
+        if (!int.TryParse(rawInput, out number))
+        {
+            return Result.Fail<ProcessedData>(
+                "Input must be a valid integer.");
+        }
+
+        if (number <= 0)
+        {
+            return Result.Fail<ProcessedData>(
+                "Input number must be positive.");
+        }
+
+        if (number == 99) // Simulate a specific business rule failure
+        {
+            return Result.Fail<ProcessedData>(
+                "Processing for number 99 is not allowed.");
+        }
+
+        // Simulate a successful operation
+        return Result.Ok(
+            new ProcessedData { Value = $"Processed: {number}" }
         );
-    }
-    catch (TimeoutException)
-    {
-        var problemDetails = ProblemDetailsHelper.GatewayProblemDetails();
-        
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status504GatewayTimeout, 
-            "Repository search timed out", 
-            problemDetails);
-    }
-    catch (NotSupportedException)
-    {
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status501NotImplemented, 
-            "Search feature not implemented for this repository");
-    }
-    catch (Exception ex)
-    {
-        // Log the unexpected exception
-        _logger.LogError(ex, "Unexpected error during product search");
-        
-        return SearchResult<IProductCollection>.Failure(
-            StatusCodes.Status500InternalServerError, 
-            "An unexpected error occurred");
     }
 }
 ```
 
 ## Benefits of the Result Object Pattern
 
-1. **Explicit flow control**: The code clearly shows the possible outcomes and how they're handled.
-2. **Better performance**: Avoids the overhead of creating and handling exceptions for expected conditions.
-3. **Improved readability**: Makes it easier to understand the different possible outcomes and how they're handled.
-4. **More maintainable**: Changes to result handling can be made in isolation without disrupting the try-catch
-   structure.
-5. **Better testability**: Easier to test different outcomes without having to simulate exceptions.
+1.  **Explicit flow control**: The code clearly shows the possible outcomes
+    and how they're handled by returning and inspecting the `Result<T>`.
+2.  **Better performance**: Avoids the overhead of creating and handling
+    exceptions for expected, non-exceptional failure conditions.
+3.  **Improved readability**: Makes it easier to understand the different
+    possible outcomes of a method by looking at its signature and how
+    the `Result<T>` is constructed and consumed.
+4.  **More maintainable**: Changes to result handling can often be made by
+    modifying the `Result<T>` construction or the consuming pattern
+    matching, without restructuring large `try-catch` blocks.
+5.  **Better testability**: Easier to test different outcomes by checking
+    the returned `Result<T>` state and value/error.
 
-By using result objects instead of exceptions for control flow, we create code that is more intention-revealing,
-performs better, and is easier to maintain and test.
+By using result objects instead of exceptions for *expected* control flow,
+we create code that is more intention-revealing, performs better for
+common failure paths, and is easier to maintain and test.
 
 ## Throwing Exceptions Alternatives
 
 ### Returning Errors as Values
 
-1. **Return a value**
-   When appropriate, return a nullable type, an empty collection, or an empty string rather than throwing an exception.
-2. **Use a `Result` type**
-   Consider returning a specialized "either" type that indicates success or failure without throwing.
+1.  **Return a value**:
+    When appropriate, return a nullable type (e.g., `int?`), an empty
+    collection, or an empty string rather than throwing an exception for
+    "not found" or "no data" scenarios.
+2.  **Use a `Result` type**:
+    Consider returning a specialized type like `Result<T>` that
+    indicates success or failure without throwing for predictable errors.
 
 ### Why Exceptions are Expensive
 
 Exceptions come with significant performance costs due to several factors:
 
-- **Call Stack Unwinding**: When an exception is thrown, the runtime must unwind the call stack, searching for an
-  appropriate exception handler. This process involves walking back through potentially dozens or hundreds of stack
-  frames.
-- **Stack Trace Generation**: Creating the stack trace for an exception requires capturing the entire call stack, which
-  is computationally expensive.
-- **Memory Allocation**: Exceptions are objects that need to be allocated on the heap.
-- **Just-In-Time Compilation**: Throwing exceptions can cause the JIT compiler to generate less optimized code in
-  methods that might throw.
-- **Thread Coordination**: In multi-threaded applications, exception handling may require additional thread
-  synchronization mechanisms.
+-   **Call Stack Unwinding**: When an exception is thrown, the runtime
+    must unwind the call stack, searching for an appropriate handler.
+-   **Stack Trace Generation**: Creating the stack trace for an exception
+    requires capturing the call stack, which is computationally expensive.
+-   **Memory Allocation**: Exceptions are objects allocated on the heap.
+-   **Just-In-Time Compilation**: Throwing can cause the JIT compiler to
+    generate less optimized code in methods that might throw.
 
-For these reasons, exceptions should be used for truly exceptional conditions rather than expected error cases that are
-part of normal program flow.
+For these reasons, exceptions should be used for truly exceptional,
+unexpected conditions rather than expected error cases that are part of
+normal program flow.
 
 ### When to Throw an Exception
 
-- **Pure methods**
-  If possible, design methods to be "pure," meaning the same input always yields the same output with no side effects.
-  This leads to more predictable code.
+-   **Pure methods**:
+    If possible, design methods to be "pure," where the same input
+    always yields the same output with no side effects. This leads to
+    more predictable code. If a pure method cannot compute its result
+    due to invalid input not caught by preconditions, `Result.Fail` is
+    often better than throwing.
 
 ### Testing
 
-- **Easier to test**
-  Returning values or results can simplify tests because you no longer need to handle or expect thrown exceptions.
-- **Example**
-  Instead of:
+-   **Easier to test**:
+    Returning values or `Result<T>` objects can simplify tests because
+    you no longer need to set up tests to expect specific exceptions
+    for predictable failures.
+-   **Example**:
+    Instead of (exception-based):
 
-```C#
-  Assert.Throws<NegativeNumberException>(() => 
-      GetMilesPerGallon(1.0, 5.0));
-```
+    ```C#
+    // Assume _service.ProcessInput throws ArgumentOutOfRangeException
+    // for non-positive numbers.
+    Assert.Throws<ArgumentOutOfRangeException>(() => 
+        _service.ProcessInput("0"));
+    ```
 
-you could return an error code or a result object, making the test straightforward:
+    You could test the `Result<T>` version like this:
 
-```C#
-  var result = GetMilesPerGallon(1.0, 5.0);
-  Assert.False(result.IsSuccess);
-  Assert.Equal(ErrorCode.NegativeValue, result.Error);
-```
+    ```C#
+    var result = _service.ProcessInput("0"); // Uses Result-based service
+    Assert.True(result is Failure<ProcessedData>);
+    var failure = result as Failure<ProcessedData>;
+    // Check specific error message or code in failure.Error
+    Assert.Equal("Input number must be positive.", failure.Error.Message);
+    ```
 
 ### When Are Exceptions Appropriate?
 
-- **Ensuring a valid application object graph**
-  During application startup or dependency injection, throwing may be necessary if a critical component is missing.
-- **Constructor failures**
-  If an object cannot be safely constructed in a valid state, throwing an exception is often justified.
-- **Service injection**
-  If a required service is not provided, throwing can signal the error early.
+-   **Ensuring a valid application object graph**:
+    During application startup or dependency injection, throwing may be
+    necessary if a critical component is missing or misconfigured.
+-   **Constructor failures**:
+    If an object cannot be safely constructed in a valid state (violating
+    its invariants), throwing an exception is often justified.
+-   **Unrecoverable system errors**:
+    For issues like `OutOfMemoryException` or critical I/O failures
+    where the application cannot reasonably continue.
+-   **Violations of method contracts in unexpected ways**:
+    If a method receives parameters that should have been impossible
+    given the calling context (e.g., a null passed to a private helper
+    that assumes non-null after public checks), an `ArgumentNullException`
+    might still be appropriate to signal a programming error.
 
-Exceptions should be reserved for truly exceptional circumstances that prevent the normal operation of your application,
-not for handling expected error conditions that can be expected and managed through return values or result objects.
+Exceptions should be reserved for truly exceptional circumstances that
+prevent the normal operation of your application, not for handling
+predictable error conditions that can be managed through return values or
+`Result<T>` objects.
 
 ---
 See Also:
 
-- [Introduction to `Result<T>`](Introduction-To-Result-T.md) (Result object alternative)
+- [Introduction to `Result<T>`](Introduction-To-Result-T.md)
+  (Result object alternative)
