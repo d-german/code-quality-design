@@ -6,11 +6,6 @@ fail with an error. This pattern promotes clearer, more robust code
 compared to relying solely on exceptions for expected failure scenarios or
 returning nulls.
 
-**Note:** This implementation is for educational purposes only. For production use,
-consider using established libraries instead of implementing your own solution.
-The `ProblemDetails` approach used here is just one implementation choice
-that may not be appropriate for all scenarios.
-
 ---
 
 ## Defining the `Result<T>` Concept
@@ -55,15 +50,16 @@ public static class Result
 
 ### The Failure State
 
-The `Failure<T>` state indicates that the operation did not succeed. It
-carries a `ProblemDetails` object (from `Microsoft.AspNetCore.Mvc`).
-This object standardizes error reporting, allowing for an HTTP status code,
-a title, detailed messages, and even extension members to convey rich error
-information. This approach aligns well with building web APIs.
+The `Failure<T>` state indicates that the operation did not succeed. It carries a `ProblemDetails` object (from
+`Microsoft.AspNetCore.Mvc`). This object standardizes error reporting, allowing for an HTTP status code,
+a title, detailed messages, and even extension members to convey rich error information. This approach aligns well with
+building web APIs.
 
-Note that this inheritance-based implementation will incur heap allocations
-for each `Result<T>` instance, which may impact performance in
-high-throughput scenarios.
+**Note:** This implementation is for educational purposes only. For production use,consider using established libraries
+instead of implementing your own solution. The `ProblemDetails` approach used here is just one implementation choice
+that may not be appropriate for all scenarios. This inheritance-based implementation will incur heap allocations for
+each `Result<T>` instance, which may impact performance in high-throughput scenarios.
+See **[](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md)**
 
 ---
 
