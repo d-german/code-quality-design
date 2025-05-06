@@ -33,8 +33,10 @@ public record ErrorDetails(string Message);
 public static class Result
 {
     public static Result<T> Ok<T>(T value) => new Success<T>(value);
-    public static Result<T> Fail<T>(string errorMessage) => new Failure<T>(new ErrorDetails(errorMessage));
-    public static Result<T> Fail<T>(ErrorDetails errorDetails) => new Failure<T>(errorDetails);
+    public static Result<T> Fail<T>(string errorMessage) => 
+        new Failure<T>(new ErrorDetails(errorMessage));
+    public static Result<T> Fail<T>(ErrorDetails errorDetails) => 
+        new Failure<T>(errorDetails);
 }
 ```
 
@@ -96,7 +98,8 @@ public async Task<IActionResult> HandleProcessingRequestAsync(InputData requestD
     return finalResult switch
     {
         Success<ProcessedDataViewModel> success => Ok(success.Value),
-        Failure<ProcessedDataViewModel> failure => BadRequest(failure.Error.Message), // Use error info
+        Failure<ProcessedDataViewModel> failure => 
+            BadRequest(failure.Error.Message), // Use error info
         _ => StatusCode(500) // Should not happen with sealed types if handled properly
     };
 }
@@ -129,7 +132,9 @@ implementations:
 ```C#
 public static class ResultExtensions
 {
-    public static Result<U> Map<T, U>(this Result<T> result, Func<T, U> transformFunc)
+    public static Result<U> Map<T, U>(
+        this Result<T> result, 
+        Func<T, U> transformFunc)
     {
         return result switch
         {
@@ -139,13 +144,17 @@ public static class ResultExtensions
         };
     }
 
-    public static async Task<Result<U>> MapAsync<T, U>(this Task<Result<T>> resultTask, Func<T, U> transformFunc)
+    public static async Task<Result<U>> MapAsync<T, U>(
+        this Task<Result<T>> resultTask, 
+        Func<T, U> transformFunc)
     {
         var result = await resultTask;
         return result.Map(transformFunc); // Reuse synchronous Map logic
     }
         
-    public static Result<U> FlatMap<T, U>(this Result<T> result, Func<T, Result<U>> nextOperationFunc)
+    public static Result<U> FlatMap<T, U>(
+        this Result<T> result, 
+        Func<T, Result<U>> nextOperationFunc)
     {
         return result switch
         {
@@ -155,12 +164,15 @@ public static class ResultExtensions
         };
     }
     
-    public static async Task<Result<U>> FlatMapAsync<T, U>(this Task<Result<T>> resultTask, Func<T, Task<Result<U>>> nextOperationFunc)
+    public static async Task<Result<U>> FlatMapAsync<T, U>(
+        this Task<Result<T>> resultTask, 
+        Func<T, Task<Result<U>>> nextOperationFunc)
     {
         var result = await resultTask;
         return result switch
         {
-            Success<T> s => await SafeExecuteAsync(async () => await nextOperationFunc(s.Value)),
+            Success<T> s => await SafeExecuteAsync(
+                async () => await nextOperationFunc(s.Value)),
             Failure<T> f => Result.Fail<U>(f.Error), // Propagate failure
             _ => Result.Fail<U>("Unknown result type") // Handle unexpected cases
         };
@@ -178,7 +190,8 @@ public static class ResultExtensions
         }
     }
       
-     private static async Task<Result<T>> SafeExecuteAsync<T>(Func<Task<Result<T>>> asyncFunc)
+    private static async Task<Result<T>> SafeExecuteAsync<T>(
+        Func<Task<Result<T>>> asyncFunc)
     {
         try
         {

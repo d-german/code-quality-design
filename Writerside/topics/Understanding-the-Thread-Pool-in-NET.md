@@ -16,7 +16,7 @@ Language Runtime (CLR) in .NET manages the thread pool and employs strategies to
 Maintaining good hygiene in the thread pool is critical for maximizing CPU utilization. There are two primary conditions
 for the CLR's strategy to work best:
 
-1. **Work items are mostly short-running:**  
+1. **Work items are mostly short-running: **  
    Tasks delegated to the thread pool should ideally complete within 100 milliseconds, or at least, within 250
    milliseconds. The CLR uses these short bursts of execution to measure the CPU's performance and adjust the number of
    concurrent tasks it allows.
@@ -36,10 +36,10 @@ The nature of the long-running task (CPU-bound vs. I/O-bound) dictates the optim
 ### CPU-bound Tasks
 
 For long-running CPU-bound tasks (e.g., intensive calculations), consider breaking them into smaller tasks that can be
-executed concurrently, if feasible. This way, each individual task is short-running, and you can still leverage the
+executed concurrently, if possible. This way, each task is short-running, and you can still leverage the
 parallel processing power of the CPU.
 
-In .NET, you can utilize the Parallel LINQ (PLINQ) library, a parallel implementation of LINQ to Objects. PLINQ can
+In .NET, you can use the Parallel LINQ (PLINQ) library, a parallel implementation of LINQ to Objects. PLINQ can
 automatically handle task decomposition and concurrent execution for you, making it easier to parallelize complex
 operations.
 
