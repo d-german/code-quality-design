@@ -315,12 +315,14 @@ values within a container - but `Map` and `FlatMap` include specific handling fo
 
 ### Key Features of the Implementations
 
-- **Error Handling: **The `try-catch` blocks in `MapAsync`,
+- **Error Handling :** The `try-catch` blocks in `MapAsync`,
   `FlatMapAsync`, and the `SafeExecute` helpers ensure that exceptions
-  (whether from awaiting the input task or from executing the provided
-  functions) are caught and converted into `Failure` results containing
-  `ProblemDetails`.
-- **Short-Circuiting: **The `switch` expressions naturally implement
+  are caught and converted into `Failure` results containing
+  `ProblemDetails`. Note that we're using `catch (Exception ex)` to catch all exceptions, which is often considered a
+  bad practice in traditional exception handling. However, in this context, it's appropriate because the explicit goal
+  of the Result pattern is to convert any unexpected failures into structured `Failure` objects rather than letting
+  exceptions propagate. This ensures the pipeline remains robust and all errors are properly encapsulated.
+- **Short-Circuiting :** The `switch` expressions naturally implement
   short-circuiting. If a `Failure` is encountered, the later
   transformation/operation function is not called, and the `Failure` is
   passed along the chain.
