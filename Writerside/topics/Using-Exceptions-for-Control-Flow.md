@@ -5,10 +5,9 @@ considered an antipattern in software development. Exceptions are intended
 to handle "exceptional" conditions that a program should not expect to
 occur frequently. Relying on them for regular control flow can lead to
 code that is more difficult to read, debug, and maintain. Moreover,
-exceptions can be expensive in terms of system resources, as the process
-of creating, throwing, and catching exceptions involves significant
-overhead. Instead of using exceptions for control flow, consider using
-specialized result types to handle expected conditions.
+exceptions can be expensive in terms of system resources. Instead,
+consider using specialized result types like `Result<T>` to handle
+expected conditions.
 
 ## Example: Throwing Exceptions for Control Flow
 
@@ -17,7 +16,6 @@ service. The service method uses exceptions for handling different
 outcomes in a user input processing operation.
 
 ```C#
-// In your controller:
 public class DataController : ControllerBase
 {
     private readonly DataProcessingService _processingService;
@@ -31,34 +29,30 @@ public class DataController : ControllerBase
     {
         try
         {
-            // Assume Guard.AuthTokenIsValid() checks auth
-            // Guard.AuthTokenIsValid(Request?.Headers);
-
             var processedData = _processingService.ProcessInput(userInput);
             return Ok(processedData);
         }
-        catch (ArgumentNullException ane)
+        catch (ArgumentNullException ane) // From service
         {
             return BadRequest($"Input error: {ane.ParamName} is required.");
         }
-        catch (FormatException fe)
+        catch (FormatException fe) // From service
         {
             return BadRequest($"Invalid format: {fe.Message}");
         }
-        catch (ArgumentOutOfRangeException aoore)
+        catch (ArgumentOutOfRangeException aoore) // From service
         {
             return BadRequest($"Invalid value: {aoore.Message}");
         }
-        catch (OperationFailedException ofe)
+        catch (OperationFailedException ofe) // From service
         {
-            // Custom exception for specific business rule failures
             return UnprocessableEntity($"Operation failed: {ofe.Message}");
         }
         // catch (AuthenticationException aex)
         // {
         //     return Unauthorized();
         // }
-        catch (Exception ex)
+        catch (Exception ex) // Catch-all for unexpected errors
         {
             // Log the generic exception: _logger.LogError(ex, "...");
             return StatusCode(StatusCodes.Status500InternalServerError,
@@ -73,9 +67,7 @@ exceptions thrown by the service method.
 
 ### Service Method Using Exceptions
 
-The service method below also uses exceptions to signal different outcomes
-(e.g., invalid input, processing errors). Each case throws an exception
-to indicate the result, which is then caught by the controller.
+The service method below uses exceptions to signal different outcomes.
 
 ```C#
 public class ProcessedData
@@ -106,8 +98,6 @@ public class DataProcessingService
         }
         catch (FormatException fe)
         {
-            // Re-throw or wrap if adding more context,
-            // or let original exception propagate.
             throw new FormatException("Input must be a valid integer.", fe);
         }
 
@@ -122,8 +112,6 @@ public class DataProcessingService
             throw new OperationFailedException(
                 "Processing for number 99 is not allowed.");
         }
-
-        // Simulate a successful operation
         return new ProcessedData { Value = $"Processed: {number}" };
     }
 }
@@ -136,13 +124,12 @@ use a result object that encapsulates the success or failure outcome along
 with any relevant data or error details.
 
 (See [**Introduction to `Result<T>`**](Introduction-To-Result-T.md)
-for the definition of `Result<T>`, `Success<T>`, `Failure<T>`,
-`ErrorDetails`, and the `Result.Ok()`, `Result.Fail()` helpers used below.)
+for the definition of `Result<T>`, `Success<T>`, `Failure<T>`, and the
+`Result.Ok()`, `Result.Fail()` helpers used below.)
 
 Here's how we can refactor the above example:
 
 ```C#
-// In your controller:
 public class DataController : ControllerBase
 {
     private readonly DataProcessingService _processingService;
@@ -154,56 +141,52 @@ public class DataController : ControllerBase
 
     public IActionResult ProcessUserData([FromQuery] string userInput)
     {
-        // Example: Basic input check before service call
-        if (userInput == null) // Controller level check
+        if (userInput == null) // Controller level input check
         {
-            return BadRequest("Query parameter 'userInput' is missing.");
+            // Directly create ProblemDetails or use a helper
+            var problemDetails = new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Missing Input",
+                Detail = "Query parameter 'userInput' is missing."
+            };
+            return new ObjectResult(problemDetails)
+            {
+                StatusCode = problemDetails.Status
+            };
         }
-        // Assume AuthHelper.IsValid(Request?.Headers) -> Result<AuthInfo>
-        // var authResult = AuthHelper.IsValid(Request?.Headers);
-        // if (authResult is Failure<AuthInfo> authFailure)
-        //     return Unauthorized(authFailure.Error.Message);
-
+        
         var result = _processingService.ProcessInput(userInput);
 
         return result switch
         {
             Success<ProcessedData> s => Ok(s.Value),
-            Failure<ProcessedData> f => f.Error.Message switch
+            Failure<ProcessedData> f => new ObjectResult(f.Problem)
             {
-                // Match specific error messages or add error codes
-                // to ErrorDetails for more robust matching.
-                var msg when msg.Contains("null or empty") =>
-                    BadRequest(f.Error.Message),
-                var msg when msg.Contains("valid integer") =>
-                    BadRequest(f.Error.Message),
-                var msg when msg.Contains("must be positive") =>
-                    BadRequest(f.Error.Message),
-                var msg when msg.Contains("not allowed") =>
-                    UnprocessableEntity(f.Error.Message),
-                _ => StatusCode(StatusCodes.Status500InternalServerError,
-                                f.Error.Message) // Default failure
+                // Ensure status code from ProblemDetails is used
+                StatusCode = f.Problem.Status ??
+                             StatusCodes.Status500InternalServerError
             },
             _ => StatusCode(StatusCodes.Status500InternalServerError,
-                            "An unexpected result type was returned.")
+                "An unexpected result type was returned.")
         };
     }
 }
 ```
 
-And here's how the service method would be refactored to return `Result<T>`:
+And here's how the service method would be refactored to return `Result<T>`
+with `ProblemDetails`:
 
 ```C#
-// ProcessedData class remains the same.
-// No custom OperationFailedException needed if using Result<T>.
-
 public class DataProcessingService
 {
     public Result<ProcessedData> ProcessInput(string rawInput)
     {
         if (string.IsNullOrWhiteSpace(rawInput))
-        {
+        {          
             return Result.Fail<ProcessedData>(
+                StatusCodes.Status400BadRequest,
+                "Invalid Input",
                 "Input cannot be null or empty.");
         }
 
@@ -211,18 +194,24 @@ public class DataProcessingService
         if (!int.TryParse(rawInput, out number))
         {
             return Result.Fail<ProcessedData>(
+                StatusCodes.Status400BadRequest,
+                "Invalid Format",
                 "Input must be a valid integer.");
         }
 
         if (number <= 0)
         {
             return Result.Fail<ProcessedData>(
+                StatusCodes.Status400BadRequest,
+                "Invalid Value",
                 "Input number must be positive.");
         }
 
         if (number == 99) // Simulate a specific business rule failure
         {
             return Result.Fail<ProcessedData>(
+                StatusCodes.Status422UnprocessableEntity,
+                "Business Rule Violation",
                 "Processing for number 99 is not allowed.");
         }
 
@@ -234,36 +223,30 @@ public class DataProcessingService
 }
 ```
 
-## Benefits of the Result Object Pattern
+## Benefits of the Result Object Pattern (with ProblemDetails)
 
-1.  **Explicit flow control**: The code clearly shows the possible outcomes
-    and how they're handled by returning and inspecting the `Result<T>`.
-2.  **Better performance**: Avoids the overhead of creating and handling
-    exceptions for expected, non-exceptional failure conditions.
-3.  **Improved readability**: Makes it easier to understand the different
-    possible outcomes of a method by looking at its signature and how
-    the `Result<T>` is constructed and consumed.
-4.  **More maintainable**: Changes to result handling can often be made by
-    modifying the `Result<T>` construction or the consuming pattern
-    matching, without restructuring large `try-catch` blocks.
-5.  **Better testability**: Easier to test different outcomes by checking
-    the returned `Result<T>` state and value/error.
+1.  **Explicit flow control**: The `Result<T>` signature clearly indicates
+    that an operation can succeed or fail with structured error details.
+2.  **Better performance**: Avoids exception overhead for predictable
+    failures.
+3.  **Improved readability**: The service method defines the exact HTTP
+    response characteristics (`StatusCode`, `Title`, `Detail`) for failures
+    via `ProblemDetails`. The controller transparently uses this.
+4.  **More maintainable**: API error responses are defined closer to the
+    logic that determines them (in the service). The controller's role
+    in error handling is minimized to simply passing through the
+    `ProblemDetails` from a `Failure<T>`.
+5.  **Better testability**: Service methods can be tested to ensure they
+    return the correct `ProblemDetails` for various failure scenarios.
+6.  **Supports pure methods**: Enables methods to be "pure," where the same input
+    always yields the same output with no side effects. This leads to
+    more predictable code. A pure method that can't compute a result due to invalid input
+    can return `Result.Fail` rather than throwing an exception, maintaining its truthfulness
+    about the operation outcome.
 
-By using result objects instead of exceptions for *expected* control flow,
-we create code that is more intention-revealing, performs better for
-common failure paths, and is easier to maintain and test.
-
-## Throwing Exceptions Alternatives
-
-### Returning Errors as Values
-
-1.  **Return a value**:
-    When appropriate, return a nullable type (e.g., `int?`), an empty
-    collection, or an empty string rather than throwing an exception for
-    "not found" or "no data" scenarios.
-2.  **Use a `Result` type**:
-    Consider returning a specialized type like `Result<T>` that
-    indicates success or failure without throwing for predictable errors.
+By using `Result<T>` with embedded `ProblemDetails`, the service layer takes
+responsibility for crafting detailed error responses, simplifying the
+controller and leading to a cleaner separation of concerns.
 
 ### Why Exceptions are Expensive
 
@@ -282,13 +265,6 @@ unexpected conditions rather than expected error cases that are part of
 normal program flow.
 
 ### When to Throw an Exception
-
--   **Pure methods**:
-    If possible, design methods to be "pure," where the same input
-    always yields the same output with no side effects. This leads to
-    more predictable code. If a pure method cannot compute its result
-    due to invalid input not caught by preconditions, `Result.Fail` is
-    often better than throwing.
 
 ### Testing
 
@@ -312,8 +288,10 @@ normal program flow.
     var result = _service.ProcessInput("0"); // Uses Result-based service
     Assert.True(result is Failure<ProcessedData>);
     var failure = result as Failure<ProcessedData>;
-    // Check specific error message or code in failure.Error
-    Assert.Equal("Input number must be positive.", failure.Error.Message);
+    Assert.NotNull(failure.Problem); // Check that ProblemDetails exists
+    Assert.Equal(StatusCodes.Status400BadRequest, failure.Problem.Status);
+    Assert.Equal("Invalid Value", failure.Problem.Title);
+    // Optionally check failure.Problem.Detail if set
     ```
 
 ### When Are Exceptions Appropriate?
