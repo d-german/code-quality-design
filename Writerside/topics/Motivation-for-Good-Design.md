@@ -14,9 +14,13 @@ This tendency towards disorder can be visualized with a simple analogy: dump a b
 a wall. Why? **Because there are vastly more ways for bricks to be arranged in a disordered pile (a high-entropy state)
 than in the precise structure of a wall (a low-entropy state).** Randomness favors disorder simply due to probability.
 
-<img alt="high entropy" src="bricks-high-entropy.png" width="256"/>
+<img alt="A disorganized pile of bricks representing high entropy and disorder in software systems" src="bricks-high-entropy.png" width="256"/>
 
-<img alt="low entropy" src="bricks-low-entropy.png" width="256"/>
+<img alt="A neatly arranged brick wall representing low entropy and well-structured software design" src="bricks-low-entropy.png" width="256"/>
+
+> **Note:** Of course, software isn’t produced by random keystrokes. Developers often create code that *works today*,
+> but there are **vastly more** ways to write “works-now” code that is **hard to evolve** than to craft a clean,
+> low-entropy design.
 
 Software is similar. Without the deliberate energy spent on applying design principles and refactoring (like carefully
 stacking bricks), code naturally drifts towards complexity and disorganization (the pile). **There are far more ways to
