@@ -67,6 +67,46 @@ isolation. For testing `DocumentProcessor`, a mock implementation of `IMyDocumen
 tests to run without relying on `RealDocDataProvider` and its complex dependencies. Ideally, `RealDocDataProvider` might
 have had its own interface, but the Seam Interface pattern addresses scenarios where this is not the case.
 
+### Test Example (NUnit & Moq)
+
+The following demonstrates how `DocumentProcessor` can be tested by providing a mock implementation of
+`IMyDocumentDataService`:
+
+```C#
+using NUnit.Framework;
+using Moq;
+// Assuming other necessary using statements for IContext, MyRendition, MyPageData etc.
+
+[TestFixture]
+public class DocumentProcessorTests
+{
+    [Test]
+    public void GetProcessedDocumentTitle_WithValidData_ReturnsFormattedTitle()
+    {       
+        var mockDataService = new Mock<IMyDocumentDataService>();
+        var fakePageData = new MyPageData { Title = "Test Document" };
+
+        // Setup the mock to return fakePageData when GetData is called with any arguments
+        mockDataService.Setup(s => s.GetData(
+            It.IsAny<IContext>(),
+            It.IsAny<MyRendition>(),
+            It.IsAny<int>(),
+            It.IsAny<GetDataProps>()))
+            .Returns(fakePageData);
+
+        IContext nullContext = null;
+        MyRendition nullRendition = null;
+
+        var processor = new DocumentProcessor(mockDataService.Object);
+       
+        string result = processor.GetProcessedDocumentTitle(nullContext, nullRendition, 0);
+        
+        Assert.AreEqual("Title: Test Document", result);
+        mockDataService.Verify(s => s.GetData(nullContext, nullRendition, 0, It.IsAny<GetDataProps>()), Times.Once());
+    }
+}
+```
+
 ---
 See Also:
 
