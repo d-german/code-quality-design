@@ -7,9 +7,12 @@ What's Wrong with Switch Statements? It Depends.
 - **Explicit case analysis on the type of an object is usually an error.** (Riel 98)
 - **Explicit case analysis on the value of an attribute is often an error.** (Riel 105)
 
-The problem with switch statements is essentially one of duplication. Often you find the same switch statement scattered throughout a program. If you add a new clause to the switch, you have to find all these instances and change them. In most cases, seeing a switch statement should prompt you to consider using polymorphism instead. (Fowler 82)
+The problem with switch statements is essentially one of duplication. Often you find the same switch statement scattered
+throughout a program. If you add a new clause to the switch, you have to find all these instances and change them. In
+most cases, seeing a switch statement should prompt you to consider using polymorphism instead. (Fowler 82)
 
-Often a switch statement indicates misplaced responsibilities. Instead, consider giving the responsibility to other objects. (Shalloway 195)
+Often a switch statement indicates misplaced responsibilities. Instead, consider giving the responsibility to other
+objects. (Shalloway 195)
 
 ---
 
@@ -39,22 +42,67 @@ private static void DoSomething(Shape shape)
 **Use Polymorphism Instead**
 
 If you have a switch statement, ask yourself these three questions:
+
 1. Does it cause a lot of tight coupling?
 2. Does it violate the Open-Closed Principle (OCP)?
 3. Does it violate the Single Responsibility Principle (SRP)?
 
 If you answer **yes** to any of these, then consider using polymorphism.
 
-### Explanation
+Regarding the `DoSomething(Shape shape)` example above:
 
 - **Tight Coupling:**  
-  If a new `Shape` is added, multiple parts of the program might need to be updated (e.g., both `fill()` and `rotate()` methods), even though they are unrelated.
+  If a new `Shape` is added, multiple parts of the program might need to be updated (e.g., both `fill()` and `rotate()`
+  methods), even though they are unrelated.
 
 - **Violation of OCP:**  
-  Every time you add a new `Shape`, you must modify existing code (e.g., `DisplayArea()`), which goes against the idea of being open for extension but closed for modification.
+  Every time you add a new `Shape`, you must modify existing code (e.g., `DisplayArea()`), which goes against the idea
+  of being open for extension but closed for modification.
 
 - **Violation of SRP:**  
-  A switch statement that handles multiple responsibilities suggests that the class is doing too much, which might be a sign of misplaced responsibilities.
+  A switch statement that handles multiple responsibilities suggests that the class is doing too much, which might be a
+  sign of misplaced responsibilities.
+
+For example, instead of the switch statement above, we can use an object hierarchy:
+
+```C#
+public abstract class Shape
+{
+    // Common interface method all shapes will implement
+    public abstract void DoSomething();
+}
+
+public class Square : Shape
+{
+    public override void DoSomething()
+    {
+        Console.WriteLine("Do something Square related");
+    }
+}
+
+public class Rectangle : Shape
+{
+    public override void DoSomething()
+    {
+        Console.WriteLine("Do something Rectangle related");
+    }
+}
+
+public class Circle : Shape
+{
+    public override void DoSomething()
+    {
+        Console.WriteLine("Do something Circle related");
+    }
+}
+
+public static void ProcessShape(Shape shape)
+{
+    // No switch needed - let polymorphism do the work
+    shape.DoSomething();
+}
+
+```
 
 ---
 
@@ -81,14 +129,18 @@ public void RecordEntry(LogEntry entry)
 ```
 
 For this logging example:
+
 - **Tight Coupling:**  
-  Currently, this is the only place where the switch on `LogLevel` occurs. If you later need to add similar switches elsewhere, you should consider polymorphism.
+  Currently, this is the only place where the switch on `LogLevel` occurs. If you later need to add similar switches
+  elsewhere, you should consider polymorphism.
 
 - **Open-Closed Principle (OCP):**  
-  Logging levels are standardized and unlikely to change, so modifying the switch statement is less problematic. However, if logging requirements change, the OCP might be violated.
+  Logging levels are standardized and less likely to change, reducing modification risk. However, if logging
+  requirements do evolve, the switch would still violate OCP.
 
 - **Single Responsibility Principle (SRP):**  
-  In this example, the responsibility for error handling is properly delegated to the `ErrorReportingService`, so the SRP is maintained.
+  In this example, the responsibility for error handling is properly delegated to the `ErrorReportingService`, so the
+  SRP is maintained.
 
 ---
 
@@ -105,7 +157,7 @@ Utility.formatValue = function (val, type, format) {
             result = Utility.formatTimeSpan(val);
             break;
         case Utility.DATA_TYPE.INTEGER:
-            // fallthrough
+        // fallthrough
         case Utility.DATA_TYPE.NUMBER:
             result = Utility.formatNumber(val, format);
             break;
@@ -117,6 +169,7 @@ Utility.formatValue = function (val, type, format) {
 ```
 
 A good switch statement is one where:
+
 - It is centralized in one location.
 - It switches on a limited, stable set of values.
 - The actions performed demonstrate good cohesion.
@@ -126,15 +179,18 @@ A good switch statement is one where:
 ## Summary
 
 Switch statements can be problematic because they:
+
 - Encourage code duplication.
 - Increase tight coupling.
 - Violate the Open-Closed Principle (OCP) and Single Responsibility Principle (SRP) if overused.
 - Often indicate misplaced responsibilities.
 
-When possible, consider using polymorphism to replace switch statements, unless the set of possible values is both limited and stable (as in the logging example).
+When possible, consider using polymorphism to replace switch statements, unless the set of possible values is both
+limited and stable (as in the logging example).
 
 ---
 See Also:
+
 - [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
 - [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
@@ -142,3 +198,4 @@ See Also:
 - [Polymorphism](Polymorphism.md)
 - [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (type sniffing violates LSP)
 - [Code Review Checklist](Code-Review-Checklist.md) (mentions refactoring switch)
+
