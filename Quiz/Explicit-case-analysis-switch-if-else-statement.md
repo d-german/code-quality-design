@@ -1,57 +1,52 @@
-**1. What is a primary drawback of using explicit case analysis (switch statements) in code?**
+**1. Which principle is directly violated when you must modify existing switch-based code every time a new case is added?**
 
-- [ ] It reduces coupling between unrelated classes.
-- [x] It encourages code duplication across multiple locations.
-- [ ] It ensures classes remain closed for modification.
-- [ ] It automatically delegates responsibilities to relevant objects.
+- [ ] Single Responsibility Principle  
+- [ ] Liskov Substitution Principle  
+- [x] Open-Closed Principle  
+- [ ] DRY (Don’t Repeat Yourself)  
 
-**2. Which principle is directly violated when adding a new case to an existing switch requires modifying existing code?**
+**2. What common problem do switch statements introduce, according to the discussion on explicit case analysis?**
 
-- [ ] Single Responsibility Principle (one class, one reason to change)
-- [x] Open-Closed Principle (open for extension, closed for modification)
-- [ ] Liskov Substitution Principle (subtypes must replace supertypes)
-- [ ] Dependency Inversion Principle (depend on abstractions, not concretions)
+- [ ] They obscure the program’s control flow.  
+- [x] They encourage code duplication across the codebase.  
+- [ ] They degrade runtime performance significantly.  
+- [ ] They increase memory usage unpredictably.  
 
-**3. Under which scenario is using a switch statement considered acceptable?**
+**3. When might a switch statement be considered acceptable practice?**
 
-- [ ] When cases are scattered across multiple modules.
-- [ ] When it switches on a large, evolving set of values.
-- [x] When it’s centralized, uses a stable set, and shows cohesion.
-- [ ] When responsibilities are split across different classes.
+- [x] When it’s centralized in one location and the set of values is stable.  
+- [ ] When it is spread across many modules and values change frequently.  
+- [ ] When performance is critical and method calls must be avoided.  
+- [ ] When it handles only error-reporting responsibilities.  
 
-**4. In the logging example, the switch on log level maintains Single Responsibility because:**
+**4. Which technique is recommended as an alternative to using switch statements for handling different behaviors?**
 
-- [x] Error handling is delegated to an external reporting service.
-- [ ] Logging levels are defined in a central configuration file.
-- [ ] Only one switch exists, so coupling remains low.
-- [ ] Each case prints messages without any method calls.
+- [ ] Using a global lookup table  
+- [ ] Embedding conditional logic in a configuration file  
+- [x] Applying polymorphism via subclass overrides  
+- [ ] Relying on exception-based control flow  
 
-**5. Which question helps determine if a switch should be replaced by polymorphism?**
+**5. Which question is *not* one of the three you should ask yourself before replacing a switch with polymorphism?**
 
-- [ ] Does it improve execution performance under load?
-- [x] Does it introduce tight coupling between components?
-- [ ] Does it use descriptive names for all cases?
-- [ ] Does it handle errors consistently across all branches?
+- [ ] Does it cause a lot of tight coupling?  
+- [ ] Does it violate the Open-Closed Principle (OCP)?  
+- [x] Does it improve runtime performance?  
+- [ ] Does it violate the Single Responsibility Principle (SRP)?  
 
-**6. Which of the following are common issues associated with explicit case analysis (switch statements)?**
+**6. Which of the following are consequences of overusing switch statements?**
 
-- [x] Code duplication, violation of the Open-Closed Principle, and increased coupling.
-- [ ] Code duplication and violation of the Open-Closed Principle only.
-- [ ] Violation of the Open-Closed Principle and increased coupling only.
-- [ ] None of the above issues are associated with switch statements.
+- [ ] They encourage code duplication.  
+- [ ] They increase tight coupling.  
+- [ ] They violate the Single Responsibility Principle.  
+- [x] All of the above.  
 
 ---
 
-**Open-Response Questions**
+### Open-Response Questions
 
-**1. How can polymorphism replace a switch statement to reduce coupling, and what are the benefits?**
-- **Bare minimum example response:**  
-  Polymorphism moves behavior into subclasses; adding new types requires no change to existing code, reducing coupling and improving Open-Closed Principle compliance.
+**7. Describe how polymorphism replaces the switch-based shape example.**  
+*Bare minimum response:* Define an abstract `DoSomething()` method in `Shape` and have each subclass (`Square`, `Rectangle`, `Circle`) override it; then call `shape.DoSomething()` instead of using a switch.
 
-**2. Explain the role of the Open-Closed Principle in deciding whether to refactor a switch statement.**
-- **Bare minimum example response:**  
-  If adding new cases forces modification of the switch, it violates OCP; refactoring into extensible classes preserves OCP and prevents repeated changes.
+**8. Explain why a switch in a logging method might still violate the Open-Closed Principle if logging requirements evolve.**  
+*Bare minimum response:* Because adding new log levels or behaviors requires modifying the switch block rather than extending via new subclasses or handlers, which violates OCP.  
 
-**3. Describe the criteria that make a switch statement “good” according to the utility function example.**
-- **Bare minimum example response:**  
-  A good switch is centralized, operates on a limited stable set of values, and performs cohesive actions in a single location.
