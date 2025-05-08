@@ -36,13 +36,32 @@ internal sealed class MyDocumentDataService
     }
 }
 
+// A class consuming the service
+public class DocumentProcessor
+{
+    private readonly IMyDocumentDataService _dataService;
+
+    public DocumentProcessor(IMyDocumentDataService dataService)
+    {
+        _dataService = dataService;
+    }
+
+    public string GetProcessedDocumentTitle(IContext ctx, MyRendition rend, int index)
+    {       
+        //...
+        MyPageData pageData = _dataService.GetData(ctx, rend, index, props);       
+        return $"Title: {pageData?.Title ?? "N/A"}";
+    }
+}
 ```
 
-The `RealDocDataProvider` class is a dependency that is often difficult or even impossible to mock in a test
+The `RealDocDataProvider` class (used internally by `MyDocumentDataService`) is a dependency that is often difficult or
+even impossible to mock in a test
 environment. By wrapping it in an interface, `IMyDocumentDataService`, and providing a concrete implementation in the
-form of `MyDocumentDataService`, you can test the `GetData()` method in isolation by substituting a mock implementation
-of the interface. This approach allows you to test the classes that depend on the document data service without relying
-on the real implementation and its complex dependencies.
+form of `MyDocumentDataService`, client classes like `DocumentProcessor` can be tested in isolation. For testing
+`DocumentProcessor`, a mock implementation
+of `IMyDocumentDataService` can be injected, allowing tests to run without relying
+on `RealDocDataProvider` and its complex dependencies.
 
 ---
 See Also:
