@@ -23,20 +23,21 @@ public interface IMyDocumentDataService
 internal sealed class MyDocumentDataService
     : IMyDocumentDataService
 {
-    // Test wrapper for a complex dependency
-    // that is already tested elsewhere.
+    // This service acts as a seam, wrapping the RealDocDataProvider.
+    // RealDocDataProvider might be a legacy class without an interface.
     public MyPageData GetData(
         IContext ctx,
         MyRendition rend,
         int index,
         GetDataProps props)
     {
+        // RealDocDataProvider is the concrete, hard-to-test dependency.
         return new RealDocDataProvider(ctx as RealContext)
             .FetchData(rend, index, props);
     }
 }
 
-// A class consuming the service
+// A class consuming the service via constructor injection
 public class DocumentProcessor
 {
     private readonly IMyDocumentDataService _dataService;
@@ -47,21 +48,24 @@ public class DocumentProcessor
     }
 
     public string GetProcessedDocumentTitle(IContext ctx, MyRendition rend, int index)
-    {       
-        //...
-        MyPageData pageData = _dataService.GetData(ctx, rend, index, props);       
+    {
+        // Props can be created or passed in
+        var props = new GetDataProps { /* ... initialize properties ... */ };
+        MyPageData pageData = _dataService.GetData(ctx, rend, index, props);
+        // Example processing
         return $"Title: {pageData?.Title ?? "N/A"}";
     }
 }
 ```
 
-The `RealDocDataProvider` class (used internally by `MyDocumentDataService`) is a dependency that is often difficult or
-even impossible to mock in a test
-environment. By wrapping it in an interface, `IMyDocumentDataService`, and providing a concrete implementation in the
-form of `MyDocumentDataService`, client classes like `DocumentProcessor` can be tested in isolation. For testing
-`DocumentProcessor`, a mock implementation
-of `IMyDocumentDataService` can be injected, allowing tests to run without relying
-on `RealDocDataProvider` and its complex dependencies.
+The `RealDocDataProvider` class (used internally by `MyDocumentDataService`) often represents a concrete legacy
+component or a third-party library that does not implement a suitable interface itself, making it difficult or even
+impossible to mock directly in a test environment. The `IMyDocumentDataService` interface is created as a seam
+specifically to wrap this `RealDocDataProvider`. By providing this interface and a concrete implementation (
+`MyDocumentDataService`) that uses the problematic class, client classes like `DocumentProcessor` can be tested in
+isolation. For testing `DocumentProcessor`, a mock implementation of `IMyDocumentDataService` can be injected, allowing
+tests to run without relying on `RealDocDataProvider` and its complex dependencies. Ideally, `RealDocDataProvider` might
+have had its own interface, but the Seam Interface pattern addresses scenarios where this is not the case.
 
 ---
 See Also:
