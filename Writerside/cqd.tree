@@ -94,6 +94,9 @@
             <toc-element topic="High-Complexity.md"/>
             <toc-element topic="Explicit-case-analysis-switch-if-else-statement.md"/>
         </toc-element>
+        <toc-element toc-title="Game Development">
+            <toc-element topic="Unity-Case-Study-–-Refactoring-“Tanks-”-with-SOLID-Principles-and-Design-Patterns.md"/>
+        </toc-element>
         <toc-element toc-title="Testing">
             <toc-element topic="Finding-Test-Cases.md"/>
             <toc-element topic="Code-Coverage.md"/>
