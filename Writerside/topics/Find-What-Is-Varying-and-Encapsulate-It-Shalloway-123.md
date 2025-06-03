@@ -40,7 +40,7 @@ consequences from code changes and more flexibility in your systems! (Freeman 9)
           }
           ```
         * It's interesting that Generic Methods/classes and function overloading are also considered polymorphism. We
-          call this static or compile time polymorphism. Also referred to as early binding. Thats why for example
+          call this static or compile time polymorphism. Also referred to as early binding. That's why, for example,
           `Foo("Hello");` would cause a compile error. But "true" polymorphism, the kind we normally use the term for,
           we call runtime or dynamic polymorphism. Which is also referred to as late binding. That's why improper usage
           causes errors during program execution. (TBD find a source for this paragraph)
