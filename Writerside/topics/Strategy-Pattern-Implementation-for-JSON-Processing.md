@@ -33,7 +33,7 @@ public class UserPreferencesJsonConverter : JsonConverter<IContextItem>
 }
 ```
 
-This approach violates the Open Closed Principle (OPC) because the class must be modified every time a new JSON format
+This approach violates the Open Closed Principle (OCP) because the class must be modified every time a new JSON format
 needs to be supported. Adding a new format requires changing the existing code, increasing the risk of regression bugs.
 
 ## After: Strategy Pattern Implementation
