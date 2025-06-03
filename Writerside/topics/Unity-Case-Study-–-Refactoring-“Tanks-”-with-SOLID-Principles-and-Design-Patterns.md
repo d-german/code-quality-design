@@ -1,39 +1,40 @@
 # Unity Case Study – Refactoring “Tanks!” with SOLID Principles and Design Patterns
 
-The starting point was the `GameManager` class from Unity's **“Tanks!”** tutorial. This class initially handled numerous
-responsibilities: the game loop, tank spawning, win‑condition checks, UI updates, and camera control.
+The refactor began with the `GameManager` class from Unity’s **“Tanks!”** tutorial.  
+Originally it shouldered many duties at once: driving the game loop, spawning tanks, evaluating win conditions,
+updating the HUD and manipulating the camera.
 
 ---
 
-## Phase 1 – Single Responsibility Principle (SRP) & Testability
+## Phase 1 – Single-Responsibility Principle (SRP) & Testability
 
-* **Problem** – `GameManager` mixed unrelated concerns, blocking unit tests.
-* **UI Extraction** – moved HUD message logic into `GameMessageUIService` behind an `IGameMessageUIService` interface.
-* **Rules Extraction** – extracted round‑end rules behind the `IGameRulesStrategy` abstraction.
+* **Problem** – `GameManager` intermixed unrelated concerns, making unit tests impractical.
+* **UI Extraction** – HUD-message behaviour was moved to `GameMessageUIService`, accessed only through the
+  `IGameMessageUIService` interface.
+* **Rules Extraction** – round-completion rules were relocated behind an `IGameRulesStrategy` abstraction.
 
-### Key Code Snippet
+### Representative Code
 
-```C#
+```
+csharp
 public interface IGameMessageUIService
 {
-    void DisplayRoundStart(int round);
-    void ClearMessage();
-    void DisplayRoundEndResults(
-        TankManager roundWinner,
-        TankManager gameWinner,
-        TankManager[] allTanks);
+void DisplayRoundStart(int round);
+void ClearMessage();
+void DisplayRoundEndResults(
+TankManager roundWinner,
+TankManager gameWinner,
+TankManager[] allTanks);
 }
 
-public class GameMessageUIService : IGameMessageUIService
+public sealed class GameMessageUIService : IGameMessageUIService
 {
-    private readonly Text _msg;
-    public GameMessageUIService(Text msg)
-    {
-        _msg = msg ?? throw new ArgumentNullException(nameof(msg));
-    }
+private readonly Text _msg;
 
-    public void DisplayRoundStart(int round) =>
-        _msg.text = $"ROUND {round}";
+    public GameMessageUIService(Text msg) =>
+        _msg = msg ?? throw new ArgumentNullException(nameof(msg));
+
+    public void DisplayRoundStart(int round) => _msg.text = $"ROUND {round}";
 
     public void ClearMessage() => _msg.text = string.Empty;
 }
@@ -41,41 +42,48 @@ public class GameMessageUIService : IGameMessageUIService
 
 ---
 
-## Phase 2 – Design‑Pattern Flexibility
+## Phase 2 – Design-Pattern Flexibility
 
-With responsibilities isolated, classic patterns were layered on:
+With individual responsibilities separated, traditional patterns could be added cleanly:
 
-* **Decorator** – `LoggingGameMessageUIServiceDecorator` adds logging without touching tested code.
-* **Strategy** – `IGameRulesStrategy` allows pluggable game modes.
+* **Decorator** – `LoggingGameMessageUIServiceDecorator` injects logging without altering already-verified classes.
+* **Strategy** – `IGameRulesStrategy` enables drop-in game-mode algorithms:
 
     * `ClassicDeathmatchRulesStrategy`
     * `TimedRoundRulesStrategy`
 
-### Strategy & Decorator Excerpts
+### Strategy / Decorator Sketch
 
-```C#
+```
+csharp
 public interface IGameRulesStrategy
 {
-    void StartRound();
-    bool IsRoundOver(TankManager[] tanks);
-    TankManager DetermineRoundWinner(TankManager[] tanks);
-    TankManager DetermineGameWinner(TankManager[] tanks);
+void StartRound();
+bool IsRoundOver(TankManager[] tanks);
+TankManager DetermineRoundWinner(TankManager[] tanks);
+TankManager DetermineGameWinner(TankManager[] tanks);
 }
 
-public class LoggingGameMessageUIServiceDecorator : IGameMessageUIService
+public sealed class LoggingGameMessageUIServiceDecorator : IGameMessageUIService
 {
-    private readonly IGameMessageUIService _inner;
-    private readonly ILogger _log;
+private readonly IGameMessageUIService _inner;
+private readonly ILogger _log;
 
     public LoggingGameMessageUIServiceDecorator(
         IGameMessageUIService inner,
         ILogger log)
     {
         _inner = inner;
-        _log = log;
+        _log  = log;
     }
 
-    // Methods delegate then log…
+    public void DisplayRoundStart(int round)
+    {
+        _inner.DisplayRoundStart(round);
+        _log.Info($"Round {round} started");
+    }
+
+    // Remaining members delegate then log…
 }
 ```
 
@@ -83,42 +91,47 @@ public class LoggingGameMessageUIServiceDecorator : IGameMessageUIService
 
 ## Phase 3 – Abstraction of External Dependencies
 
-`TimedRoundRulesStrategy` depended on `Time.time` and live `GameObject` state. Two thin interfaces removed those Unity
-ties:
+`TimedRoundRulesStrategy` referenced `Time.time` and live `GameObject` state.  
+Two purpose-built interfaces removed those direct Unity dependencies:
 
-```C#
+```
+csharp
 public interface ITimeProvider
 {
-    float Time { get; }
-    float DeltaTime { get; }
+float Time     { get; }
+float DeltaTime { get; }
 }
 
 public class UnityTimeProvider : ITimeProvider
 {
-    public float Time => UnityEngine.Time.time;
-    public float DeltaTime => UnityEngine.Time.deltaTime;
+public float Time      => UnityEngine.Time.time;
+public float DeltaTime => UnityEngine.Time.deltaTime;
 }
 
 public interface IHealthProvider
 {
-    float CurrentHealth { get; }
+float CurrentHealth { get; }
 }
 ```
 
-Unit tests inject `MockTimeProvider` and `MockHealthProvider`, letting all rules run under plain .NET test runners.
+Tests inject `MockTimeProvider` / `MockHealthProvider`, allowing every rule to execute under a standard .NET test
+runner.
 
 ---
 
-## Wiring – Manual Composition in `GameManager`
+## Wiring – Manual Composition inside `GameManager`
 
-No DI container was used. Dependencies are instantiated once in `Start()` and passed to the strategies/services:
+No DI container is required; dependencies are created once in `Start()` and then handed to the strategies/services:
 
-```C#
+```
+csharp
 private void Start()
 {
-    ILogger log = new UnityLogger();
-    var baseSrv = new GameMessageUIService(m_MessageTextComponent);
-    m_GameMessageUIService = new LoggingGameMessageUIServiceDecorator(baseSrv, log);
+ILogger log = new UnityLogger();
+
+    var baseUi   = new GameMessageUIService(m_MessageTextComponent);
+    m_GameMessageUIService =
+        new LoggingGameMessageUIServiceDecorator(baseUi, log);
 
     m_GameRulesStrategy = m_SelectedGameMode switch
     {
@@ -132,14 +145,15 @@ private void Start()
 }
 ```
 
-This **begins** treating `GameManager` (a `MonoBehaviour`) as a **composition root** – it wires pure C# services
-together, then forwards Unity lifecycle events.
+`GameManager` therefore becomes a **composition root**—it assembles pure C# building blocks and
+then funnels Unity lifecycle events into them.
 
 ---
 
 ## UML Overview
 
-```plantuml
+```
+plantuml
 @startuml
 interface IGameMessageUIService
 class GameMessageUIService
@@ -171,10 +185,13 @@ GameManager --> IGameRulesStrategy
 
 ## Summary
 
-1. **SRP Foundation** – UI and rule logic separated from `GameManager`.
-2. **Design Patterns** – Decorator adds logging; Strategy allows new game modes.
-3. **Test‑Friendly Abstractions** – time & health wrapped.
-4. **Path to Thin Roots** – current manual wiring shows the first step toward true composition‑root `MonoBehaviour`s.
+1. **SRP Implementation** – UI and rule logic were separated from `GameManager`.
+2. **Design Patterns Applied** – Decorator supplies logging; Strategy supports additional game modes.
+3. **Test-Oriented Abstractions** – Time and health access were wrapped in interfaces.
+4. **Toward Dedicated Roots** – Manual wiring is now a stepping-stone to fully-fledged composition-root `MonoBehaviour`
+   s.
 
-> **Recommended reading:** Unite 2016 “Overthrowing the MonoBehaviour Tyranny”; **Unity in Action** (2018) Ch. 9; Unity
-> e‑book *Level Up Your Code with SOLID*.
+> **Further reading:** Unite 2016 “Overthrowing the MonoBehaviour Tyranny”; **Unity in Action** (2nd ed.) Ch. 9;  
+> Unity e-book *Level Up Your Code with SOLID*.
+
+
