@@ -46,6 +46,7 @@ Many ideas here come from books and articles I have read (you will see the sourc
             *   [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
             *   [Decorator Pattern](Decorator-Pattern.md)
             *   [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md)
+            *   [Template Method](Template-Method.md)
         *   Dependencies and Coupling
             *   [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
             *   [The Dependency Rule](The-Dependency-Rule.md)
@@ -88,6 +89,9 @@ Many ideas here come from books and articles I have read (you will see the sourc
         *   [Using Exceptions for Control Flow](Using-Exceptions-for-Control-Flow.md)
         *   [High Complexity](High-Complexity.md)
         *   [Explicit case analysis switch if else statement](Explicit-case-analysis-switch-if-else-statement.md)
+    *   Game Development
+        *   [Unity Case Study – Refactoring “Tanks” with SOLID Principles and Design Patterns](Unity-Case-Study-–-Refactoring-“Tanks-”-with-SOLID-Principles-and-Design-Patterns.md)
+        *   [Dependency Inversion Principle in Unity (DIP)](Dependency-Inversion-Principle-in-Unity-DIP.md)
     *   Testing
         *   [Finding Test Cases](Finding-Test-Cases.md)
         *   [Code Coverage](Code-Coverage.md)
