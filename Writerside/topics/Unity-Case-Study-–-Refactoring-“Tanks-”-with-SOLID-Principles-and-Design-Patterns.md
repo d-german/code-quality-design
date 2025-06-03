@@ -1,96 +1,180 @@
 # Unity Case Study – Refactoring “Tanks!” with SOLID Principles and Design Patterns
 
-The starting point was the `GameManager` class from Unity's "Tanks!" tutorial. This class initially handled numerous
-responsibilities, including game loop management, tank spawning, win condition determination, UI message updates, and
-camera control.
+The starting point was the `GameManager` class from Unity's **“Tanks!”** tutorial. This class initially handled numerous
+responsibilities: the game loop, tank spawning, win‑condition checks, UI updates, and camera control.
 
-**Phase 1: Applying the Single Responsibility Principle (SRP) & Establishing Testability**
+---
 
-* **Core Problem Identified:** The original `GameManager` violated the Single Responsibility Principle, concentrating
-  too many distinct concerns in one place. This made the class large, difficult to understand, challenging to modify
-  without unintended side effects, and hard to unit test effectively.
-* **First Key Refactoring - UI Responsibility Extraction:**
-    * The logic and state related to displaying UI messages were identified as a distinct responsibility.
-    * This responsibility was extracted from `GameManager` into a new, focused class: `GameMessageUIService`.
-    * Unit tests were written for `GameMessageUIService` to verify its message formatting and display logic, ensuring
-      this extracted component behaved correctly in isolation. This established a baseline for testable code.
-* **Second Key Refactoring - Game Rules Responsibility Extraction:**
-    * Similarly, the logic for determining round end conditions and identifying winners (e.g., `OneTankLeft`,
-      `GetRoundWinner`, `GetGameWinner`) was recognized as another distinct responsibility.
-    * This rules logic was extracted from `GameManager` into a new, dedicated class (initially, this might have been a
-      single `GameRulesManager` or similar).
-    * Unit tests were written for this extracted rules logic to ensure its correctness independently of the
-      `GameManager`'s orchestration.
+## Phase 1 – Single Responsibility Principle (SRP) & Testability
 
-  *(At this juncture, even without further design patterns, the codebase was significantly improved. `GameManager` was
-  simpler, and two core pieces of functionality—UI messaging and game rules determination—were now isolated, better
-  organized, and independently testable. This adherence to SRP provided a more maintainable and understandable
-  foundation.)*
+* **Problem** – `GameManager` mixed unrelated concerns, blocking unit tests.
+* **UI Extraction** – moved HUD message logic into `GameMessageUIService` behind an `IGameMessageUIService` interface.
+* **Rules Extraction** – extracted round‑end rules behind the `IGameRulesStrategy` abstraction.
 
-**Phase 2: Leveraging Decoupling to Introduce Design Patterns for Flexibility and Extensibility**
+### Key Code Snippet
 
-With key responsibilities now encapsulated in their own classes, the design became more amenable to advanced software
-design patterns, enabling greater flexibility and cleaner extension.
+```C#
+public interface IGameMessageUIService
+{
+    void DisplayRoundStart(int round);
+    void ClearMessage();
+    void DisplayRoundEndResults(
+        TankManager roundWinner,
+        TankManager gameWinner,
+        TankManager[] allTanks);
+}
 
-* **Enhancing UI Service with the Decorator Pattern:**
-    * **Requirement:** Add logging to UI message interactions without modifying the existing, tested
-      `GameMessageUIService`.
-    * **Solution:** An `IGameMessageUIService` interface was introduced, with `GameMessageUIService` implementing it.
-    * The **Decorator pattern** was applied by creating `LoggingGameMessageUIServiceDecorator`, which also implemented
-      `IGameMessageUIService`. This decorator wrapped an instance of `IGameMessageUIService`, added logging behavior
-      around the method calls, and then delegated the actual work to the wrapped service. An `ILogger` interface (with
-      `UnityLogger` as a concrete implementation) was used by the decorator.
-    * `GameManager` was updated to use the decorated `IGameMessageUIService`.
+public class GameMessageUIService : IGameMessageUIService
+{
+    private readonly Text _msg;
+    public GameMessageUIService(Text msg)
+    {
+        _msg = msg ?? throw new ArgumentNullException(nameof(msg));
+    }
 
-* **Implementing Multiple Game Modes with the Strategy Pattern:**
-    * **Requirement:** Support different game modes (e.g., classic deathmatch, timed rounds) with varying rules for
-      round completion and winner determination.
-    * **Solution:** The previously extracted game rules class was further evolved by applying the **Strategy pattern**.
-    * An `IGameRulesStrategy` interface was defined, establishing a contract for how game rules are applied (
-      `StartRound`, `IsRoundOver`, `DetermineRoundWinner`, `DetermineGameWinner`).
-    * Concrete strategy classes were created:
-        * `ClassicDeathmatchRulesStrategy`: Encapsulated the original "last tank standing" logic.
-        * `TimedRoundRulesStrategy`: Implemented rules for rounds ending either by a timer or by a single tank
-          remaining, with winner determination logic including health comparison if time expired.
-    * `GameManager` was modified to select and hold an instance of `IGameRulesStrategy` based on a configurable
-      `GameMode` enum, delegating rule-based decisions to the active strategy.
+    public void DisplayRoundStart(int round) =>
+        _msg.text = $"ROUND {round}";
 
-**Phase 3: Deepening Testability for Complex Strategies by Abstracting External Dependencies**
+    public void ClearMessage() => _msg.text = string.Empty;
+}
+```
 
-* **Problem:** The `TimedRoundRulesStrategy`, while now a separate strategy, still contained direct dependencies on
-  `UnityEngine.Time.time` and relied on `TankManager`'s `m_Instance` (a `GameObject`) for health and activity status,
-  making pure unit testing of its specific logic challenging.
-* **Solution - Abstracting Time:**
-    * An `ITimeProvider` interface was introduced to abstract away `UnityEngine.Time`.
-    * `UnityTimeProvider` was created as the production implementation.
-    * `TimedRoundRulesStrategy` was refactored to accept an `ITimeProvider` via its constructor, allowing a
-      `MockTimeProvider` to be used in tests for precise control over time.
-* **Solution - Abstracting Health Data Access:**
-    * An `IHealthProvider` interface was introduced.
-    * The existing `TankHealth` component was made to implement `IHealthProvider`.
-    * `TankManager` was updated to cache a reference to `IHealthProvider` (obtained from its tank instance's
-      `TankHealth` component) in a field named `m_HealthProvider`.
-    * `TimedRoundRulesStrategy` was updated to access health data through `tankManager.m_HealthProvider.CurrentHealth`,
-      enabling the use of mock health providers in tests by controlling the `m_HealthProvider` on test `TankManager`
-      instances.
-* **Testing the Strategies:**
-    * Unit tests for `ClassicDeathmatchRulesStrategy` were straightforward due to its simpler logic.
-    * Unit tests for `TimedRoundRulesStrategy` now effectively utilized `MockTimeProvider` and `MockHealthProvider` (via
-      test `TankManager` instances whose `m_Instance` was a dummy `GameObject` to control `activeSelf`). This allowed
-      for thorough verification of its time-dependent and health-dependent logic.
+---
 
-**Summary of Applied Principles and Outcomes:**
+## Phase 2 – Design‑Pattern Flexibility
 
-This refactoring journey demonstrates a progression:
+With responsibilities isolated, classic patterns were layered on:
 
-1. **Foundation via SRP:** First, key responsibilities were extracted from the monolithic `GameManager` into separate,
-   testable classes. This was a critical prerequisite for further improvements.
-2. **Flexibility via Design Patterns:** Once responsibilities were well-defined and encapsulated, design patterns like
-   Decorator and Strategy were applied to introduce flexibility (logging, multiple game modes) in a clean, maintainable
-   way.
-3. **Enhanced Testability via Abstraction:** For more complex components like the `TimedRoundRulesStrategy`, further
-   abstraction of external dependencies (like Unity's time and component system access) was necessary to achieve robust,
-   isolated unit tests.
+* **Decorator** – `LoggingGameMessageUIServiceDecorator` adds logging without touching tested code.
+* **Strategy** – `IGameRulesStrategy` allows pluggable game modes.
 
-This approach led to a codebase that is more modular, easier to understand, more flexible to extend with new features or
-behaviors, and significantly more testable than the original implementation.
+    * `ClassicDeathmatchRulesStrategy`
+    * `TimedRoundRulesStrategy`
+
+### Strategy & Decorator Excerpts
+
+```C#
+public interface IGameRulesStrategy
+{
+    void StartRound();
+    bool IsRoundOver(TankManager[] tanks);
+    TankManager DetermineRoundWinner(TankManager[] tanks);
+    TankManager DetermineGameWinner(TankManager[] tanks);
+}
+
+public class LoggingGameMessageUIServiceDecorator : IGameMessageUIService
+{
+    private readonly IGameMessageUIService _inner;
+    private readonly ILogger _log;
+
+    public LoggingGameMessageUIServiceDecorator(
+        IGameMessageUIService inner,
+        ILogger log)
+    {
+        _inner = inner;
+        _log = log;
+    }
+
+    // Methods delegate then log…
+}
+```
+
+---
+
+## Phase 3 – Abstraction of External Dependencies
+
+`TimedRoundRulesStrategy` depended on `Time.time` and live `GameObject` state. Two thin interfaces removed those Unity
+ties:
+
+```C#
+public interface ITimeProvider
+{
+    float Time { get; }
+    float DeltaTime { get; }
+}
+
+public class UnityTimeProvider : ITimeProvider
+{
+    public float Time => UnityEngine.Time.time;
+    public float DeltaTime => UnityEngine.Time.deltaTime;
+}
+
+public interface IHealthProvider
+{
+    float CurrentHealth { get; }
+}
+```
+
+Unit tests inject `MockTimeProvider` and `MockHealthProvider`, letting all rules run under plain .NET test runners.
+
+---
+
+## Wiring – Manual Composition in `GameManager`
+
+No DI container was used. Dependencies are instantiated once in `Start()` and passed to the strategies/services:
+
+```C#
+private void Start()
+{
+    ILogger log = new UnityLogger();
+    var baseSrv = new GameMessageUIService(m_MessageTextComponent);
+    m_GameMessageUIService = new LoggingGameMessageUIServiceDecorator(baseSrv, log);
+
+    m_GameRulesStrategy = m_SelectedGameMode switch
+    {
+        GameMode.TimedRounds =>
+            new TimedRoundRulesStrategy(
+                m_RoundDurationSeconds,
+                m_NumRoundsToWin,
+                new UnityTimeProvider()),
+        _ => new ClassicDeathmatchRulesStrategy(m_NumRoundsToWin)
+    };
+}
+```
+
+This **begins** treating `GameManager` (a `MonoBehaviour`) as a **composition root** – it wires pure C# services
+together, then forwards Unity lifecycle events.
+
+---
+
+## UML Overview
+
+```plantuml
+@startuml
+interface IGameMessageUIService
+class GameMessageUIService
+class LoggingGameMessageUIServiceDecorator
+
+interface IGameRulesStrategy
+class ClassicDeathmatchRulesStrategy
+class TimedRoundRulesStrategy
+
+interface ITimeProvider
+class UnityTimeProvider
+
+class GameManager
+
+IGameMessageUIService <|.. GameMessageUIService
+IGameMessageUIService <|.. LoggingGameMessageUIServiceDecorator
+
+IGameRulesStrategy <|.. ClassicDeathmatchRulesStrategy
+IGameRulesStrategy <|.. TimedRoundRulesStrategy
+
+ITimeProvider <|.. UnityTimeProvider
+
+GameManager --> IGameMessageUIService
+GameManager --> IGameRulesStrategy
+@enduml
+```
+
+---
+
+## Summary
+
+1. **SRP Foundation** – UI and rule logic separated from `GameManager`.
+2. **Design Patterns** – Decorator adds logging; Strategy allows new game modes.
+3. **Test‑Friendly Abstractions** – time & health wrapped.
+4. **Path to Thin Roots** – current manual wiring shows the first step toward true composition‑root `MonoBehaviour`s.
+
+> **Recommended reading:** Unite 2016 “Overthrowing the MonoBehaviour Tyranny”; **Unity in Action** (2018) Ch. 9; Unity
+> e‑book *Level Up Your Code with SOLID*.
