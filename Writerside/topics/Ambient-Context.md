@@ -115,4 +115,3 @@ While Ambient Context might offer superficial convenience, it introduces hidden 
 *   [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md) (Related via Constructor Over-injection)
 *   [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md) (Ambient Context typically involves Volatile Dependencies)
 *   [Static Methods](Static-Methods.md)
-*   [Testing](Testing.md)

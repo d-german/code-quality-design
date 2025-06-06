@@ -73,4 +73,3 @@ See Also:
 - [Testing](Testing.md)
 - [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
 - [Using Required Members in C# 11](Using-Required-Members-in-C-11.md)
-- [var keyword](var-keyword.md)

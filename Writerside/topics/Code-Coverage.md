@@ -51,4 +51,3 @@ See Also:
 - [Code Review Checklist](Code-Review-Checklist.md)
 - [Explicit case analysis (switch/if-else statement)](Explicit-case-analysis-switch-if-else-statement.md)
 - [Finding Test Cases](Finding-Test-Cases.md)
-- [Testing](Testing.md)
