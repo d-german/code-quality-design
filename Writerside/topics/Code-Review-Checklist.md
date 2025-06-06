@@ -70,6 +70,5 @@ See Also:
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
 - [Static Methods](Static-Methods.md)
-- [Testing](Testing.md)
 - [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
 - [Using Required Members in C# 11](Using-Required-Members-in-C-11.md)
