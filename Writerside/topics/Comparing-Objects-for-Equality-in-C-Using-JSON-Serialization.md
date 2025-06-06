@@ -171,5 +171,8 @@ assuming JSON serialization accurately reflects the desired state for comparison
 See Also:
 
 - [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md)
 - [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
+- [Self-Validating-Value-Objects-in-C](Self-Validating-Value-Objects-in-C.md)
+- [Testing](Testing.md)
 - [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)

@@ -55,12 +55,13 @@ parameters that could easily be transposed.
 ---
 See Also:
 
-- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
-- [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
-- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
-- [Avoiding Liskov Substitution Principal Violations in Type Hierarchies](Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md) (
-  uses DTO example)
-- [Comparing Objects for Equality in C# Using JSON Serialization](Comparing-Objects-for-Equality-in-C-Using-JSON-Serialization.md) (
-  good for DTOs)
+- [Avoiding Liskov Substitution Principal Violations in Type Hierarchies](Avoiding-Liskov-Substitution-Principal-Violations-in-Type-Hierarchies.md) (uses DTO example)
+- [Comparing Objects for Equality in C# Using JSON Serialization](Comparing-Objects-for-Equality-in-C-Using-JSON-Serialization.md) (good for DTOs)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
 - [Immutable DTOs in Python](Immutable-DTOs-in-Python.md)
+- [Pillars of OOP (Encapsulation, Abstraction)](Pillars-of-OOP-Encapsulation-Abstraction.md)
+- [POCO - Plain Old CLR Objects](POCO-Plain-Old-CLR-Objects.md)
 - [Self-Validating Value Objects in C#](Self-Validating-Value-Objects-in-C.md) (related concept)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
+- [Using the new keyword](Using-the-new-keyword.md)

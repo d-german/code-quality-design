@@ -272,9 +272,15 @@ capability to handle read-only form controls and properly render text areas with
 ---
 See Also:
 
-- [The Facade Pattern with the Single Responsibility Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
-- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
-- [Composition](Composition.md)
 - [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Composition](Composition.md)
 - [Dependency Injection (DI)](Dependency-Injection-DI.md) (for how decorators are wired)
+- [Facade-Pattern-with-the-Single-Responsibility-Principle](Facade-Pattern-with-the-Single-Responsibility-Principle.md)
 - [Interception](Interception.md)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Pillars of OOP (Encapsulation, Abstraction)](Pillars-of-OOP-Encapsulation-Abstraction.md)
+- [Polymorphism](Polymorphism.md)
+- [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

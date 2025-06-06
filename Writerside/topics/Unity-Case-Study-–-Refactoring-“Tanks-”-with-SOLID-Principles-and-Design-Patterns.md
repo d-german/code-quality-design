@@ -194,4 +194,14 @@ GameManager --> IGameRulesStrategy
 > **Further reading:** Unite 2016 “Overthrowing the MonoBehaviour Tyranny”; **Unity in Action** (2nd ed.) Ch. 9;  
 > Unity e-book *Level Up Your Code with SOLID*.
 
+---
 
+## See also
+
+- [Single-Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [Open-Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Decorator Pattern](Decorator-Pattern.md)
+- [Strategy Pattern Implementation for JSON Processing](Strategy-Pattern-Implementation-for-JSON-Processing.md)
+- [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control, and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)

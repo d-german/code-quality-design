@@ -67,3 +67,10 @@ public class Switch : MonoBehaviour
 * Easily extendable with new ISwitchable types.
 
 ---
+
+See Also:
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Polymorphism](Polymorphism.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Unity Case Study – Refactoring “Tanks” with SOLID Principles and Design Patterns](Unity-Case-Study-–-Refactoring-“Tanks-”-with-SOLID-Principles-and-Design-Patterns.md)

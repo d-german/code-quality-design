@@ -191,11 +191,12 @@ limited and stable (as in the logging example).
 ---
 See Also:
 
-- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
-- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
-- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
-- [DRY Principle](DRY-Principle.md)
-- [Polymorphism](Polymorphism.md)
-- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (type sniffing violates LSP)
+- [Code Coverage](Code-Coverage.md)
 - [Code Review Checklist](Code-Review-Checklist.md) (mentions refactoring switch)
-
+- [DRY Principle](DRY-Principle.md)
+- [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md) (type sniffing violates LSP)
+- [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
+- [Polymorphism](Polymorphism.md)
+- [Prefer Dictionary to Switch Statement](Prefer-Dictionary-over-Switch-Statement.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

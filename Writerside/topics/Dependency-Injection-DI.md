@@ -22,10 +22,12 @@ McLean Hall, Gary
 
 ---
 See Also:
-- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
-- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Ambient Context](Ambient-Context.md)
 - [Composition Root](Composition-Root.md)
-- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
-- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Decorator-Pattern](Decorator-Pattern.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
 - [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)
 - [Seam Interface](Seam-Interface.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)

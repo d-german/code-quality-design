@@ -11,8 +11,11 @@ Should strive for a value less than 10.
 ---
 See Also:
 
+- [Big Ball of Mud](Big-Ball-of-Mud.md)
+- [Code Review Checklist](Code-Review-Checklist.md)
 - [Cognitive Complexity](Cognitive-Complexity.md)
 - [High Complexity](High-Complexity.md) <!-- Example -->
-- [Code Review Checklist](Code-Review-Checklist.md)
 - [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (
   mentions CC reduction)
+- [Motivation for Good Design](Motivation-for-Good-Design.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

@@ -104,8 +104,8 @@ D) The atomic bombs weren’t dropped on Hiroshima and Nagasaki to end the war. 
 
 ---
 See Also:
-- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
 - [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
-- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)
 - [Code Review Checklist](Code-Review-Checklist.md) (mentions splitting boolean param functions)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
+- [Pillars of OOP (Encapsulation, Abstraction)](Pillars-of-OOP-Encapsulation-Abstraction.md)
 - [SOLID Design Principles](SOLID-Design-Principles.md)

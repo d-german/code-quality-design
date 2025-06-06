@@ -233,12 +233,17 @@ If your public interface contains more than a few members (don’t know how many
 
 ---
 See Also:
-- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
-- [Inheritance](Inheritance.md)
-- [Polymorphism](Polymorphism.md)
-- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Cohesion](Cohesion.md)
 - [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [Inheritance vs Composition Analogy](Inheritance-vs-Composition-Analogy.md)
+- [Inheritance](Inheritance.md)
+- [Interface Segregation Principle (ISP)](Interface-Segregation-Principle-ISP.md)
 - [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
-- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Pillars of OOP](Pillars-of-OOP.md)
+- [Polymorphism](Polymorphism.md)
 - [Prefer Composition over Class Inheritance](Prefer-Composition-over-Class-Inheritance.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control, and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

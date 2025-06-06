@@ -15,10 +15,12 @@ tend to be loosely coupled.
 
 ---
 See Also:
+- [Ambient Context](Ambient-Context.md)
+- [Big Ball of Mud](Big-Ball-of-Mud.md)
+- [Code Review Checklist](Code-Review-Checklist.md)
 - [Cohesion](Cohesion.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
 - [Modularity, Module](Modularity-Module.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
-- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
 - [SOLID Design Principles](SOLID-Design-Principles.md)
 - [The Dependency Rule](The-Dependency-Rule.md)
-- [Big Ball of Mud](Big-Ball-of-Mud.md)

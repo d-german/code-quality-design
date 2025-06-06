@@ -125,6 +125,7 @@ Both `static readonly` and `const` are useful for declaring constants in C#, but
 
 ---
 See Also:
-- [Maximizing Performance and Readability with const Variables in C#](Maximizing-Performance-and-Readability-with-const-Variables-in-C.md)
 - [Code Review Checklist](Code-Review-Checklist.md) (mentions const/readonly)
+- [Maximizing Performance and Readability with const Variables in C#](Maximizing-Performance-and-Readability-with-const-Variables-in-C.md)
 - [Static Methods](Static-Methods.md) (related 'static' concept)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (related to immutability)

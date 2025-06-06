@@ -86,5 +86,6 @@ This ensures that the `ProblemDetails` object exposed by the `ProblemDetailsResu
 ---
 See Also:
 - [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (discusses immutability techniques)
+- [Introduction-To-Result-T](Introduction-To-Result-T.md)
+- [Pillars of OOP (Encapsulation, Abstraction)](Pillars-of-OOP-Encapsulation-Abstraction.md)
 - [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
-- [Pillars of OOP Encapsulation Abstraction](Pillars-of-OOP-Encapsulation-Abstraction.md)

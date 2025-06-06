@@ -348,14 +348,18 @@ polymorphism.
 ---
 See Also:
 
+- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
+- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (for immutability)
+- [Inheritance](Inheritance.md)
 - [Liskov Substitution Principle (LSP)](Liskov-Substitution-Principle-LSP.md)
 - [Open Closed Principle (OCP)](Open-Closed-Principle-OCP.md)
-- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
-- [SOLID Design Principles](SOLID-Design-Principles.md)
+- [Pillars of OOP (Encapsulation, Abstraction)](Pillars-of-OOP-Encapsulation-Abstraction.md)
 - [Polymorphism](Polymorphism.md)
-- [Abstract Classes vs Interfaces](Abstract-Classes-vs-Interfaces.md)
-- [DTO - Data Transfer Object](DTO-Data-Transfer-Object.md)
+- [Program to an interface; not an Implementation (GOF 18)](Program-to-an-interface-not-an-Implementation-GOF-18.md)
+- [Single Responsibility Principle (SRP)](Single-Responsibility-Principle-SRP.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
 - [Stable vs Volatile Dependencies](Stable-vs-Volatile-Dependencies.md)
 - [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md)
-- [Functional in the Small and Object-Oriented in the Large](Functional-in-the-Small-and-Object-Oriented-in-the-Large.md) (
-  for immutability)
+

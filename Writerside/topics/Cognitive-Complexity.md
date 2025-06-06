@@ -11,6 +11,8 @@ code will be to read and understand.
 ---
 See Also:
 
+- [Code Review Checklist](Code-Review-Checklist.md)
 - [Cyclomatic Complexity](Cyclomatic-Complexity.md)
 - [High Complexity](High-Complexity.md) <!-- Example -->
-- [Code Review Checklist](Code-Review-Checklist.md)
+- [Motivation for Good Design](Motivation-for-Good-Design.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)

@@ -12,7 +12,10 @@ McLean Hall, Gary
 
 ---
 See Also:
+- [Ambient Context](Ambient-Context.md)
 - [Dependency Injection (DI)](Dependency-Injection-DI.md)
+- [Dependency Inversion Principle (DIP)](Dependency-Inversion-Principle-DIP.md)
 - [Inversion of Control (IoC)](Inversion-of-Control-IoC.md)
 - [Relationship between Dependency Inversion, Dependency Injection, Inversion of Control and SOLID](Relationship-between-Dependency-Inversion-Dependency-Injection-Inversion-of-Control-and-SOLID.md)
+- [SOLID Design Principles](SOLID-Design-Principles.md)
 - [The Dependency Rule](The-Dependency-Rule.md)

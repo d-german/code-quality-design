@@ -4,6 +4,7 @@
 
 ---
 See Also:
-- [Inheritance](Inheritance.md)
 - [Composition](Composition.md)
 - [Coupling](Coupling.md)
+- [Inheritance](Inheritance.md)
+- [Pillars of OOP](Pillars-of-OOP.md)

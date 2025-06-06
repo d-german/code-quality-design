@@ -155,9 +155,7 @@ the efficiency of modern C# capabilities in handling complex and large-scale dat
 ---
 See Also:
 
-- [Memory Allocation and Management](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md) (
-  mentions `Span<T>`)
-- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (
-  declarative style)
-- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (
-  collections focus)
+- [Imperative vs Functional (Declarative, Expressive) Style of Programming](Imperative-vs-Functional-Declarative-Expressive-Style-of-Programming.md) (declarative style)
+- [Memory Allocation and Management](Memory-Allocation-and-Management-Reference-Types-Value-Types-Arrays-and-Linked-Lists.md) (mentions `Span<T>`)
+- [Transitioning from Classes to Records and Adopting Immutable Collections in C#](Transitioning-from-Classes-to-Records-and-Adopting-IImmutableList-in-C.md) (collections focus)
+- [Utilizing Record Structs for Enhanced Performance in .NET](Utilizing-Record-Structs-for-Enhanced-Performance-in-NET.md) (performance focus)

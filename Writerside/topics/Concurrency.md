@@ -285,5 +285,5 @@ specific use case and threading requirements.
 ---
 See Also:
 
-- [Understanding Threads in Programming: A Restaurant Analogy](Understanding-Threads-in-Programming-A-Restaurant-Analogy.md)
 - [Understanding the Thread Pool in .NET](Understanding-the-Thread-Pool-in-NET.md)
+- [Understanding Threads in Programming: A Restaurant Analogy](Understanding-Threads-in-Programming-A-Restaurant-Analogy.md)
